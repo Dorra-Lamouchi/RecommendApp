@@ -1,0 +1,68 @@
+.test{
+    margin-left: '20px';
+    width: '23rem';
+}
+.test:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 253);
+}
+.search-form{
+    margin-left: 300px;
+    margin-top: 10px;
+    padding-left: 50px;
+    max-width: 1000px;
+   
+}
+.container-form{
+    border-width: 100px;
+    border-bottom: magenta;
+    border-radius: 50px;
+    max-width: max-content;
+}
+.search-marg{
+   margin-left : 320px;
+}
+.label-style{
+    margin-left: 500px;
+    
+}
+.mylabel{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 21px;
+    color: darkblue;
+}
+.myinput{
+border-radius: 2rem;
+    outline : none ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(169, 169, 238);
+    color: rgb(0, 0, 0);
+    text-align-last: center;
+    font-size: 15px;
+    width: 100px;
+    border-width: 0em;
+    margin-left:5px;
+    text-decoration: underline;
+    
+}
+.myinput:hover{
+ background-color: rgb(42, 193, 243);
+}
+.inscription-btn{
+ color: white;
+   border: none;
+   background-color: rgb(74, 141, 141);
+   padding:0.2rem;
+   width:120px;
+   margin-top:30px;
+   margin-left:120px;
+   border-radius : 12px;
+   
+}
+.inscription-btn:hover{
+     background-color: rgb(42, 193, 243);
+}
+.title{
+    font-size:30px;
+    font-family : Verdana, Geneva, Tahoma, sans-serif ;
+    
+}

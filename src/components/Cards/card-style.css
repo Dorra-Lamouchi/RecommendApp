@@ -1,0 +1,31 @@
+
+.card{
+    width: 20rem;
+    margin-top: 30px;
+ 
+}
+.card:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 253);
+    
+}
+.card-body{
+    padding:1rem 0 ;
+}
+.card-text{
+    font-size: 0.9rem;
+    padding: 0.4em 1.9rem;
+    margin-top: -10px;
+}
+.container-fluid.row{
+    padding-top:6rem;
+}
+.overflow{
+    overflow: hidden;
+}
+.card-img-top{
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+.card-img-top:hover{
+    transform: scale(1.8);
+}

@@ -1,0 +1,23 @@
+
+.stylelink:hover {
+   color: yellowgreen;
+    }
+.btnn{
+   background-color:darkslategrey ;
+   border: none;
+   color: white;
+  
+}
+.btnn:hover{
+   color: rgb(42, 193, 243);
+}
+.btn2:hover{
+   background-color: rgb(42, 193, 243);
+}
+.btn2{
+   color: white;
+   border: none;
+   background-color: rgb(74, 141, 141);
+}
+
+ 
