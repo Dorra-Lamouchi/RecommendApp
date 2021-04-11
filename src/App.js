@@ -17,40 +17,49 @@ import Accueil from './components/accueil'
 import Affichemploi from './components/categories/afficheemploi'
 import Affichestage from './components/categories/affichestage'
 import Affichedetail from './components/categories/afficheformation'
+import addemploi from './components/Emploi/Emploi'
+import addformation from './components/Formations/Formation'
+import affichercandidature from './components/Candidatures/Afficher'
+
+
 import {
   BrowserRouter as Router,
   Route
- 
+
 } from "react-router-dom";
 
 class App extends React.Component {
- 
-render(){
-  return (
-    <Router>
-    <div className="App">
-       <div class="app-main__outer">
-        <div class="app-main__inner"></div>
-        <div class="tab-content">
-        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
-          <div class="row-9" >
-    <NavBar />
-    <Route path="/" exact component={Accueil}></Route>
-    <Route path="/emploi" exact component={Emploi}></Route>
-    <Route path="/Formations" exact component={Formations}></Route>
-    <Route path="/Stages" exact component={Stages}></Route>
-    <Route path="/contact" exact component={Contact}></Route>
-    <Route path="/afficheformation/:id" exact component={Affichedetail}></Route>
-    <Route path="/affichestage/:id" exact component={Affichestage}></Route>
-    <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-  </Router>
-  );
-}
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <div class="app-main__outer">
+            <div class="app-main__inner"></div>
+            <div class="tab-content">
+              <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                <div class="row-9" >
+                  <NavBar />
+                  <Route path="/" exact component={Accueil}></Route>
+                  <Route path="/emploi" exact component={Emploi}></Route>
+                  <Route path="/Formations" exact component={Formations}></Route>
+                  <Route path="/Stages" exact component={Stages}></Route>
+                  {/* <Route path="/contact" exact component={Contact}></Route> */}
+                  <Route path="/afficheformation/:id" exact component={Affichedetail}></Route>
+                  <Route path="/affichestage/:id" exact component={Affichestage}></Route>
+                  <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
+                  <Route path="/ajoutemploi" exact component={addemploi}></Route>
+                  <Route path="/ajoutformation" exact component={addformation}></Route>
+                  <Route path="/affichecondidature" exact component={affichercandidature}></Route>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
