@@ -3,7 +3,8 @@ import './App.css';
 //import firebasedb from './firebase';
 //import Listpub from './listepublication'
 //import Appp from './components/test'
-import NavBar from './headers/nav'
+import NavBar from './headers/nav';
+import Footer from './headers/foot'
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import Search from './components/search'
@@ -22,6 +23,8 @@ import {
   Route
  
 } from "react-router-dom";
+import SignUp from './components/SignUp/signUp';
+import SignIn from './components/SignIn/signIn';
 
 class App extends React.Component {
  
@@ -35,7 +38,9 @@ render(){
         <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
           <div class="row-9" >
     <NavBar />
-    <Route path="/" exact component={Accueil}></Route>
+    <Route path="/" exact component={SignUp}></Route>
+    <Route path="/signin" exact component={SignIn}></Route>
+    <Route path="/accueil" exact component={Accueil}></Route>
     <Route path="/emploi" exact component={Emploi}></Route>
     <Route path="/Formations" exact component={Formations}></Route>
     <Route path="/Stages" exact component={Stages}></Route>
@@ -43,6 +48,7 @@ render(){
     <Route path="/afficheformation/:id" exact component={Affichedetail}></Route>
     <Route path="/affichestage/:id" exact component={Affichestage}></Route>
     <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
+    <Footer />
     </div>
     </div>
     </div>

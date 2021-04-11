@@ -1,4 +1,3 @@
-
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -22,8 +21,8 @@ const NavBar = () => {
       <Nav.Link><Link  style={stylelink} to="/contact">Contact</Link></Nav.Link>
     </Nav>
     <Form inline>
-      <button className="btnn " >Se connecter</button> &nbsp;
-      <button className="btn2 " >S'inscrire</button>
+      <Nav.Link ><Link style={stylelink} to="/signin"><button className="btnn "> Se connecter</button></Link></Nav.Link> &nbsp;
+      <Nav.Link ><Link style={stylelink} to="/signup"><button className="btn2 "> S'inscrire </button></Link></Nav.Link>
     </Form>
   </Navbar>
  </div>
