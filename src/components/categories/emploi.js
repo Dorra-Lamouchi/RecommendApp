@@ -1,12 +1,15 @@
-import Card from '../Cards/CardsIU'
+//import Card from '../Cards/CardsIU'
 import React, { useEffect ,useState} from 'react'
 import dev from "../../assets/devper.jpg";
 import firebase from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
+import {Link} from 'react-router-dom'
 const Emploi = () =>  {
-    
+  const linkstyle = {
+    color : 'black',
+}
   
     const [Emplois, setEmplois] = useState([]);
     const [filtre, setfiltre] = useState("");
@@ -44,8 +47,27 @@ const Emploi = () =>  {
                <div className="row">
                { filterrst.map(data => { 
                    return(
-               <div className="col-md-6">
-                   <Card title={data.Title} lien="afficheemploi" img={dev} description={data.entreprise} date={new Date(data.DateDebut.seconds * 1000).toLocaleDateString()}/>   
+                   <div className="col-md-4" key={data.id}>
+                  <div className="card text-center shadow" >
+        <div className="overflow">
+        <Link to={"/afficheemploi/"+data.id} ><img src={dev} alt="logo" className="card-img-top" /></Link>
+        </div>
+        <div className="card-body text-dark">
+            <h4 className="card-title"> <Link to={"/afficheemploi/"+data.id} style={linkstyle}>{data.Title} , {data.Domaine}</Link></h4>
+            <p className="card-text text-dark">
+             à <strong>{data.entreprise.toUpperCase()}</strong><br/>
+             <hr/>
+             {data.tags.map(t =>{
+               return (
+                <><input type="button" className="myinput" value={'#'+t} key={t.id} /> </>);
+             })}
+            </p>
+            <p className="card-text"></p>
+           
+           
+        </div>
+    </div>
+                 {/* <Card title={data.Title.toUpperCase()} lien="afficheemploi" id={data.id} img={dev} description={data.entreprise} date={new Date(data.DateDebut.seconds * 1000).toLocaleDateString()}/>   */}
                 </div>
                    );
                })} 
