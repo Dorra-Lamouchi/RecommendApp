@@ -2,12 +2,13 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './nav.css'
 const NavBar = () => {
- const stylelink = {
-   textDecoration : 'none',
-   color : 'white ',
+  const stylelink = {
+    textDecoration: 'none',
+    color: 'white ',
+
 
  }
     return(
@@ -20,6 +21,9 @@ const NavBar = () => {
       <Nav.Link><Link style={stylelink} to="/formations">Formations</Link></Nav.Link>
       <Nav.Link ><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></Nav.Link>
       <Nav.Link><Link  style={stylelink} to="/contact">Contact</Link></Nav.Link>
+       <Nav.Link><Link style={stylelink} to="/ajoutemploi">Ajouter Offre de travail</Link></Nav.Link>
+          <Nav.Link><Link style={stylelink} to="/ajoutformation">Ajouter Formation</Link></Nav.Link>
+          <Nav.Link><Link style={stylelink} to="/affichecondidature">Afficher les candidatures</Link></Nav.Link>
     </Nav>
     <Form inline>
       <Nav.Link ><Link style={stylelink} to="/signin"><button className="btnn "> Se connecter</button></Link></Nav.Link> &nbsp;
@@ -28,7 +32,8 @@ const NavBar = () => {
   </Navbar>
  </div>
 
-    );
+  );
 }
+
 export default NavBar; 
 
