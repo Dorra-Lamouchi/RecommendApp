@@ -1,0 +1,12 @@
+#formpage  {
+    background-image: url("./../../assets/back.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 80vh;
+  }
+
+#bouton {
+  background-color: #4ca3f5;
+  color: #000000;
+}
