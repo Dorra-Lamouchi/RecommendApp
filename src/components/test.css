@@ -38,9 +38,12 @@ border-radius: 2rem;
     color: rgb(0, 0, 0);
     text-align-last: center;
     font-size: 15px;
-    width: 100px;
+    width:auto;
+    padding: auto;
+    padding-inline-end: 0em;
+    margin-bottom: 6px;
     border-width: 0em;
-    margin-left:5px;
+    margin-left:1px;
     text-decoration: underline;
     
 }
