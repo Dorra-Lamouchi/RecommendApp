@@ -12,12 +12,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import firebaseDb from "../../firebase";
-
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
-import EditIcon from '@material-ui/icons/Edit';
 import "./Formation.css"
 function Formation(props) {
     const useStyles = makeStyles((theme) => ({
@@ -134,9 +130,9 @@ function Formation(props) {
         { title: 'Bicycle Thieves', year: 1948 },
         { title: 'The Kid', year: 1921 },
         { title: 'Inglourious Basterds', year: 2009 },
-        { title: 'Learn', year: 2000 },
-        { title: 'Formation', year: 2009 },
-        { title: 'Training', year: 1975 },
+        { title: 'Snatch', year: 2000 },
+        { title: '3 Idiots', year: 2009 },
+        { title: 'Monty Python and the Holy Grail', year: 1975 },
     ];
     const initialFieldValues = {
         Nom: '',
@@ -262,37 +258,13 @@ function Formation(props) {
 
 
     }
-
-    const [FormId, setFormId] = useState('')
     const addOrEdit = obj => {
-        if (FormId === '') {
-            // firebaseDb.database().ref().child('Formations').push(
-            //     obj,
-            //     err => {
-            //         if (err) {
-            //             console.log(err)
-            //         } else {
-            //             setFormId('')
-            //         }
-            //     }
-            // )
-            const db = firebaseDb.firestore();
-            db.collection("Formations").add({
-                obj,
-            });
-        } else {
-            firebaseDb.database().ref().child(`Formations/${FormId}`).set(
-                obj,
-                err => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        setFormId('')
-                    }
-                }
 
-            )
-        }
+        const db = firebaseDb.firestore();
+        db.collection("Formations").add({
+            obj,
+        });
+
     }
     function handleFormSubmit(e) {
         e.preventDefault();
@@ -306,61 +278,7 @@ function Formation(props) {
             Tags: values
         });
     }
-    const [Formations, setFormations] = useState({});
 
-    useEffect(() => {
-        firebaseDb.database().ref().child('Formations').on('value', snapshot => {
-            if (snapshot.val() != null) {
-                setFormations({
-                    ...snapshot.val()
-                })
-            } else
-                setFormations({
-
-                })
-        })
-        // console.log(.tags)
-
-    }, [])
-
-    const [btnValue, setbtnValue] = useState("Postuler")
-
-
-    const OnUpdate = (id) => {
-        console.log(Formations[id].Type)
-        setFormId(id)
-        setbtnValue("Editer")
-        // console.log(Values.Tags)
-
-        setValues({
-
-            Nom: Formations[id].Nom,
-            Domaine: Formations[id].Domaine,
-            Type: Formations[id].Type,
-            Duree: Formations[id].Duree,
-            NbPlaces: Formations[id].NbPlaces,
-            DateDebut: Formations[id].DateDebut,
-            Prix: Formations[id].Prix,
-            others: Formations[id].others,
-            Tags: Object.assign({}, Formations[id].Tags)
-
-        })
-        // console.log(Values.Tags)
-
-    }
-    const OnDelete = id => {
-
-        if (window.confirm("etes vous sure de supprimer ce item?")) {
-            firebaseDb.database().ref().child(`Formations/${id}`).remove(
-                err => {
-                    if (err)
-                        console.log(err)
-                    else
-                        setFormId('')
-                }
-            )
-        }
-    }
     return (
         <div >
             <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} >
@@ -523,8 +441,8 @@ function Formation(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" alignItems="center" >
                                 <Grid item xs={4} >
-                                    <Button variant="contained" color="primary" style={{ 'marginTop': '50px', 'backgroundColor': "#0047c1", 'color': 'white' }} type="submit" value='Postuler' title="Postuler" >
-                                        {btnValue} <AiOutlineSend fontSize="large" className='icon' style={{ 'marginLeft': '10px' }} />
+                                    <Button variant="contained" color="primary" style={{ 'marginTop': '50px' }} type="submit" value='Postuler' title="Postuler" >
+                                        Postuler <AiOutlineSend fontSize="large" className='icon' style={{ 'marginLeft': '10px' }} />
                                     </Button>
                                 </Grid>
 
@@ -533,166 +451,7 @@ function Formation(props) {
                     </fieldset>
                 </Grid>
             </form>
-            {/* <fieldset style={{ "width": '100%', 'padding': '10px', 'border': '1px black' }}>
-                <h1>Liste Des Formations</h1>
-                <Grid container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "backgroundColor": 'red', 'color': 'white' }}>
 
-                    <Grid item container xs={1} justify="space-evenly" alignItems="center" >
-                        <Grid item xs={12} >
-                            <h3  >Nom</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12}>
-                            <h3 >Domaine</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Type</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Date Debut</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Durée</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Prix</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 style={{ 'padding': '0px' }}>Places disponibles</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Image</h3>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item container xs={2} >
-                        <Grid item xs={12} >
-                            <h3 style={{ "textAlign": "center" }}>Tags</h3>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Actions</h3>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                {
-                    Object.keys(Formations).map(id => {
-                        return (
-                            <Grid key={id} container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "marginTop": '10px' }} key={id}>
-
-                                <Grid item container xs={1} justify="space-evenly" alignItems="center" >
-                                    <Grid item xs={12} >
-                                        <h4 >{Formations[id].Nom}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12}>
-                                        <h4 >{Formations[id].Domaine}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Formations[id].Type}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Formations[id].DateDebut}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Formations[id].Duree}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Formations[id].Prix}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Formations[id].NbPlaces}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <GridList className={classes.gridList} cols={1} cellHeight={30}>
-                                            <h4 >{Formations[id].Image}</h4>
-                                        </GridList>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid item container xs={2} justify="space-evenly" >
-
-                                    <Grid item container direction='column' xs={12}>
-                                        <GridList cellHeight={30} cols={1}>
-                                            {Formations[id].Tags.map(num => {
-                                                return (
-                                                    <Grid item xs={12} key={num.id}>
-                                                        <h4 style={{ "textAlign": "center" }}>{num.title}</h4>
-                                                    </Grid>
-                                                )
-                                            })}
-                                        </GridList>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid item container xs={1} justify="space-evenly" alignItems="center">
-                                    <Grid item spacing={2} container>
-                                        <Grid item>
-                                            <Button
-                                                onClick={() => { OnUpdate(id) }}
-                                                size='large'
-                                                variant="outlined"
-                                                color='default'
-                                                className={classes.button2}
-                                                startIcon={<EditIcon />}
-                                            >
-
-                                            </Button>
-                                        </Grid>
-                                        <Grid item >
-                                            <Button
-                                                onClick={() => { OnDelete(id) }}
-                                                size='large'
-                                                variant="outlined"
-                                                color="secondary"
-                                                className={classes.button}
-                                                style={{ 'fontSize': '30px' }}
-                                                startIcon={<DeleteIcon />}
-                                            // style={{ 'color': 'red'  }}
-                                            >
-
-                                            </Button>
-                                        </Grid>
-
-
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-
-                        )
-
-
-                    })
-                }
-            </fieldset> */}
         </div>
     )
 }
