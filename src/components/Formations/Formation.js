@@ -162,6 +162,7 @@ function Formation(props) {
         };
     });
 
+
     const handleInputChange = e => {
         var { name, value } = e.target
         if (e.target === 'DateDebut') {
@@ -178,6 +179,21 @@ function Formation(props) {
             })
 
     }
+    const [file, setfile] = useState(null)
+
+    const handleFileChange = e => {
+        var { name, value } = e.target
+
+
+        setfile(e.target.files[0]);
+        const f = e.target.files[0].name;
+        setValues({
+            ...Values,
+            Image: f,
+        })
+    }
+
+
     function nombre_occurences_tags(texte) {
         var div = texte.toLowerCase()
 
@@ -259,7 +275,13 @@ function Formation(props) {
 
     }
     const addOrEdit = obj => {
-
+        const filename = Values.Image;
+        const storageRef = firebaseDb.storage().ref("images Formations");
+        const fileRef = storageRef.child(filename);
+        console.log("uploading..");
+        fileRef.put(file).then(() => {
+            console.log("uploaded successfuly");
+        });
         const db = firebaseDb.firestore();
         db.collection("Formations").add({
             obj,
@@ -340,15 +362,19 @@ function Formation(props) {
                                 <Grid item xs={3} >
                                     <label>Importer une image:</label>
                                 </Grid>
-                                <Grid item xs={7}>
-                                    <TextField
+                                <Grid item xs={7} style={{ 'paddingTop': '25px' }}>
+
+                                    <input
                                         required
-                                        focused
-                                        name="Image"
-                                        type="file"
+                                        // focused
                                         label="image"
-                                        // value={Values.Image}
-                                        onChange={handleInputChange}
+                                        type="file"
+                                        accept="image/*"
+                                        name="Image"
+                                        onChange={handleFileChange}
+
+
+
                                     />
 
                                 </Grid>
@@ -452,7 +478,7 @@ function Formation(props) {
                 </Grid>
             </form>
 
-        </div>
+        </div >
     )
 }
 
