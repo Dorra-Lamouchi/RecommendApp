@@ -25,11 +25,13 @@ import {
 } from "react-router-dom";
 import SignUp from './components/SignUp/signUp';
 import SignIn from './components/SignIn/signIn';
+import { AuthProvider } from './components/SignUp/AuthContext';
 
 class App extends React.Component {
  
 render(){
   return (
+    <AuthProvider>
     <Router>
     <div className="App">
        <div class="app-main__outer">
@@ -55,6 +57,7 @@ render(){
     </div>
     </div>
   </Router>
+  </AuthProvider>
   );
 }
 }

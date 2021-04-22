@@ -1,12 +1,23 @@
-#formpage  {
+#container  {
     background-image: url("./../../assets/back.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    height: 80vh;
+    height: 110vh;
+    padding-left: 80px;
+    padding-top: 20px;
   }
+#Card {
+  min-width: 320px;
+  height: 670px;
+}
 
-#bouton {
-  background-color: #4ca3f5;
-  color: #000000;
+#Form{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#Button{
+  position: relative;
+  margin-left: 80px;
 }
