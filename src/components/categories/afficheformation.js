@@ -13,24 +13,30 @@ import '../test.css'
         fontFamily: "Arial, Helvetica, sans-serif",
         textDecoration : 'Bold',
         fontSize: '20px',
-        
-     
-     
       }
-    const [tags, settags] = useState({});
+    const [tags, settags] = useState([]);
+    const [datedeb, setdatedeb] = useState()
     const [formation, setformation] = useState({});
     useEffect(() => {
     const fetchData = async () => {
         const db = firebase.firestore();
         const data = db.collection("Formation").doc(id.match.params.id);
+        var messageRef = db.collection("Formation").doc(id.match.params.id)
+                .collection('tags').get();
+        console.log("le message du tags:", messageRef);
         data.get().then((doc) => {
             if (doc.exists) {
                 setformation(doc.data());
-                settags(doc.data().tags);
+                //console(formation.tags[0]);
+                //settags(doc.data().tags.map(tag => ({ ...tag.data()})));
+                //settags(doc.data().tags);
+                
                 console.log("Document data:", doc.data());
+                console.log(doc.data());
+                console.log('le date est:' ,new Date(doc.data().DateDebut.seconds * 1000).toLocaleDateString());
+                setdatedeb(new Date(doc.data().DateDebut.seconds * 1000).toLocaleDateString());
                 //console.log("Document image:", doc.data().getDownloadURL())
-              console.log(doc.data());
-    console.log('le date est:' ,new Date(doc.data().DateDebut.seconds * 1000).toLocaleDateString());
+          
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -42,6 +48,7 @@ import '../test.css'
       };
       fetchData();
     }, []);
+    
       return(
         <div >
             <MDBCol md="6" className="search-marg">
@@ -67,23 +74,25 @@ import '../test.css'
         <br/>
         <label className="mylabel"> Formateur : </label> <strong>{formation.formateur}</strong>
         <br/>
+        <label className="mylabel"> Date : </label> <strong>{datedeb}</strong>
+        <br/>
         <label className="mylabel"> Durée : </label> <strong>{formation.duree}</strong>
         <br/>
         <label className="mylabel"> Nombre de place Disponible : </label> <strong>{formation.nombreplace}</strong>
         <br/>
         <label className="mylabel"> Prix : </label> <strong>{formation.prix}</strong><br/>
         <label className="mylabel">Tags </label> 
-
+        <input type="button" className="myinput" value={formation.tags}  />
         {/*tags.map((tag) => 
         <input type="button" className="myinput" value={'#'+tag} key={tag.id} />
         )}
-        {/*console.log(formation.tags[0])*/}
+        {/*console.log('hi :',formation.tags[0])*/}
    
     </Col>
     <Col style={stylecol}>
           <label className="mylabel">Description</label><br/>
          <strong> {formation.description}</strong>
-
+          
         </Col>
         
         <Col>

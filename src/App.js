@@ -1,17 +1,19 @@
 //import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 //import firebasedb from './firebase';
 //import Listpub from './listepublication'
 //import Appp from './components/test'
+
 import NavBar from './headers/nav';
 import Footer from './headers/foot'
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 //import Search from './components/search'
-import Formations from "./components/categories/formations"
+import Formations from "./components/categories/formations";
 //import Cards from "./components/Cards/Cards"
-import Stages from './components/categories/stages'
-import Emploi from './components/categories/emploi'
+import Stages from "./components/categories/stages";
+import Emploi from "./components/categories/emploi";
 //import Form from 'react-bootstrap/Form'
 import Contact from './components/contact'
 import Accueil from './components/accueil'
@@ -60,6 +62,7 @@ render(){
   </AuthProvider>
   );
 }
+
 }
 
 export default App;

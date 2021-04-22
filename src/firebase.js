@@ -1,3 +1,4 @@
+
 //require("firebase/firestore");
 import firebase from 'firebase';
 
@@ -20,3 +21,4 @@ var firebaseConfig = {
   //export const firestore = firebase.firestore
   export default firebase;
   //export default db;
+
