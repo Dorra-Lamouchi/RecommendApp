@@ -36,10 +36,10 @@ function Emploi(props) {
     const classes = useStyles();
     const top100Films = [
         { title: 'Artificial Intelligence', year: 1994 },
-        { title: 'The Godfather', year: 1972 },
+        { title: 'Mecaniq', year: 1972 },
         { title: 'Formation', year: 1974 },
         { title: 'training', year: 2008 },
-        { title: '12 Angry Men', year: 1957 },
+        { title: 'fixer', year: 1957 },
         { title: "Schindler's List", year: 1993 },
         { title: 'Pulp Fiction', year: 1994 },
         { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
@@ -241,8 +241,6 @@ function Emploi(props) {
                     }
                     else return top100Films[3].title;
                 });
-                //  console.log(max)
-                //  console.log(max2)
                 setValues({
                     ...Values,
                     [name]: value,
@@ -261,9 +259,6 @@ function Emploi(props) {
     const [file, setfile] = useState(null)
 
     const handleFileChange = e => {
-        var { name, value } = e.target
-
-
         setfile(e.target.files[0]);
         const f = e.target.files[0].name;
         setValues({
@@ -469,7 +464,7 @@ function Emploi(props) {
                                         <Autocomplete
 
                                             multiple
-                                            limitTags={2}
+                                            // limitTags={2}
                                             id="multiple-limit-tags"
                                             name="Tags"
                                             options={top100Films}
@@ -480,7 +475,7 @@ function Emploi(props) {
                                             getOptionLabel={(option) => option.title}
                                             value={Object.values(Values.Tags)}
                                             renderInput={(params) => (
-                                                <TextField required={Object.values(Values.Tags).length === 0} {...params} label="Tags" placeholder="Ajouter Tags" style={{ "width": '400px' }} />
+                                                <TextField required={Object.values(Values.Tags).length === 0} value={Object.values(Values.Tags)} {...params} label="Tags" placeholder="Ajouter Tags" style={{ "width": '400px' }} />
                                             )}
 
                                         />

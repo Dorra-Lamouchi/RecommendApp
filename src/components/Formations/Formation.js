@@ -457,7 +457,7 @@ function Formation(props) {
                                             getOptionLabel={(option) => option.title}
                                             value={Object.values(Values.Tags)}
                                             renderInput={(params) => (
-                                                <TextField {...params} required={Object.values(Values.Tags).length === 0} label="Tags" placeholder="Ajouter Tags" style={{ "width": '400px' }} />
+                                                <TextField {...params} required={Object.values(Values.Tags).length === 0} value={Object.values(Values.Tags)} label="Tags" placeholder="Ajouter Tags" style={{ "width": '400px' }} />
                                             )}
 
                                         />

@@ -15,17 +15,22 @@ function Afficher() {
         },
         delete: {
             backgroundColor: '#F70B0B'
-        }, h1: {
+        },
+        cv: {
+            backgroundColor: 'rgb(42, 193, 243)',
+            width: '100%',
+        },
+        h1: {
             color: 'rgb(42, 193, 243)'
         },
     }));
     const classes = useStyles();
-    const [Formations, setFormations] = useState([]);
+    const [Candidatures, setCandidatures] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             const db = firebasedb.firestore();
             const data = await db.collection("Candidature").get();
-            setFormations(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+            setCandidatures(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
 
         fetchData();
@@ -62,52 +67,52 @@ function Afficher() {
         <div>
             <fieldset style={{ "width": '100%', 'padding': '10px', 'border': '1px black' }}>
                 <h1 className={classes.h1}>Liste Des candidats</h1>
-                <Grid container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "backgroundColor": 'rgb(42, 193, 243)', 'color': 'white' }}>
+                <Grid container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "backgroundColor": 'rgb(42, 193, 243)', 'color': 'white', 'border': '2px solid rgb(42, 193, 243)' }}>
 
                     <Grid item container xs={2} justify="space-evenly" alignItems="center" >
                         <Grid item xs={12} >
-                            <h3  >Nom</h3>
+                            <h2  >Nom</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12}>
-                            <h3 >prenom</h3>
+                            <h2 >Prénom</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12} >
-                            <h3 >niveau d'etude</h3>
+                            <h2 >Niveau d'etude</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12} >
-                            <h3 >CV</h3>
+                            <h2 >CV</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12} >
-                            <h3 >Actions</h3>
+                            <h2 >Actions</h2>
                         </Grid>
                     </Grid>
                 </Grid>
                 {
-                    Object.keys(Formations).map(id => {
+                    Object.keys(Candidatures).map(id => {
                         return (
-                            <Grid key={id} container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "marginTop": '10px' }} >
+                            <Grid key={id} container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "marginTop": '10px', 'borderBottom': '2px solid rgb(42, 193, 243)', 'color': 'blue' }} >
 
                                 <Grid item container xs={2} justify="space-evenly" alignItems="center" >
                                     <Grid item xs={12} >
-                                        <h4 >{Formations[id].Nom}</h4>
+                                        <h3 >{Candidatures[id].Nom}</h3>
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={2} justify="space-evenly">
                                     <Grid item xs={12}>
-                                        <h4 >{Formations[id].Prenom}</h4>
+                                        <h3 >{Candidatures[id].Prenom}</h3>
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={2} justify="space-evenly">
                                     <Grid item xs={12} >
-                                        <h4 >{Formations[id].Niveau}</h4>
+                                        <h3 >{Candidatures[id].Niveau}</h3>
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={2} justify="space-evenly">
@@ -115,12 +120,12 @@ function Afficher() {
                                         <Button
                                             onClick={(e) => { handlepdfshow(e) }}
                                             size='medium'
-                                            value={Formations[id].CV}
+                                            value={Candidatures[id].CV}
                                             // variant="outlined"
-                                            // className={classes.edit}
+                                            className={classes.cv}
                                             startIcon={<VisibilityIcon />}
                                         >
-                                            {Formations[id].CV}
+                                            {Candidatures[id].CV}
                                         </Button>
 
                                     </Grid>
