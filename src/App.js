@@ -27,11 +27,18 @@ import affichercandidature from './components/Candidatures/Afficher'
 
 import {
   BrowserRouter as Router,
+
+  Route,
+  Switch,
   Route
 
 } from "react-router-dom";
-import SignUp from './components/SignUp/signUp';
-import SignIn from './components/SignIn/signIn';
+import SignUp from './components/Authentification/signUp';
+import SignIn from './components/Authentification/signIn';
+import { AuthProvider } from './components/Authentification/AuthContext';
+import SignAccueil from './components/signedAccueil';
+import PrivateRoute from './components/Authentification/PrivateRoute';
+import ForgotPassword from './components/Authentification/ForgotPassword';
 
 class App extends React.Component {
 
@@ -45,10 +52,17 @@ render(){
         <div class="tab-content">
         <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
           <div class="row-9" >
-    <NavBar />
-    <Route path="/" exact component={SignUp}></Route>
-    <Route path="/signin" exact component={SignIn}></Route>
-    <Route path="/accueil" exact component={Accueil}></Route>
+
+    <AuthProvider>
+      <Switch>
+        <Route path="/signup" component={SignUp}></Route>
+        <Route path="/signin" component={SignIn}></Route>
+        <PrivateRoute path="/signedaccueil" component={SignAccueil}></PrivateRoute>
+        <Route path="/forgotpassword" Component={ForgotPassword}></Route>
+      </Switch>
+    </AuthProvider>
+ 
+    <Route path="/" exact component={Accueil}></Route>
     <Route path="/emploi" exact component={Emploi}></Route>
     <Route path="/Formations" exact component={Formations}></Route>
     <Route path="/Stages" exact component={Stages}></Route>

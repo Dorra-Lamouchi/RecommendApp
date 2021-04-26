@@ -4,7 +4,7 @@ import { MDBCol, MDBIcon } from "mdbreact";
 import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
 import dev from "../../assets/devper.jpg";
-import '../test.css'
+import '../test.css';
 
 const Affichemploi  = (id) => {
 
