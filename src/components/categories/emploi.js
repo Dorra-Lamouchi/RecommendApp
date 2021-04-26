@@ -1,5 +1,6 @@
-//import Card from '../Cards/CardsIU'
-import React, { useEffect ,useState} from 'react'
+
+import Card from '../Cards/CardsIU'
+import React, { useEffect, useState } from 'react'
 import dev from "../../assets/devper.jpg";
 import firebase from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
@@ -13,7 +14,6 @@ const Emploi = () =>  {
   const linkstyle = {
     color : 'black',
 }
-  
     const [Emplois, setEmplois] = useState([]);
     const [filtre, setfiltre] = useState("");
   
@@ -79,6 +79,10 @@ const Emploi = () =>  {
             </div>
             </>
         )
-    }
 
-export default  Emploi;
+    }
+  });
+
+}
+
+export default Emploi;

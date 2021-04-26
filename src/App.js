@@ -20,10 +20,18 @@ import Accueil from './components/accueil'
 import Affichemploi from './components/categories/afficheemploi'
 import Affichestage from './components/categories/affichestage'
 import Affichedetail from './components/categories/afficheformation'
+import addemploi from './components/Emploi/Emploi'
+import addformation from './components/Formations/Formation'
+import affichercandidature from './components/Candidatures/Afficher'
+
+
 import {
   BrowserRouter as Router,
+
   Route,
-  Switch 
+  Switch,
+  Route
+
 } from "react-router-dom";
 import SignUp from './components/Authentification/signUp';
 import SignIn from './components/Authentification/signIn';
@@ -33,6 +41,7 @@ import PrivateRoute from './components/Authentification/PrivateRoute';
 import ForgotPassword from './components/Authentification/ForgotPassword';
 
 class App extends React.Component {
+
  
 render(){
   return (
@@ -61,6 +70,10 @@ render(){
     <Route path="/afficheformation/:id" exact component={Affichedetail}></Route>
     <Route path="/affichestage/:id" exact component={Affichestage}></Route>
     <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
+    
+                  <Route path="/ajoutemploi" exact component={addemploi}></Route>
+                  <Route path="/ajoutformation" exact component={addformation}></Route>
+                  <Route path="/affichecondidature" exact component={affichercandidature}></Route>
     <Footer />
     </div>
     </div>
@@ -71,6 +84,5 @@ render(){
   );
 }
 
-}
 
 export default App;

@@ -1,0 +1,54 @@
+body, p, legend, label, input {
+font:  Roboto, sans-serif;}
+/* Forms -----------------------------------------------------------
+---------------------------- */
+
+fieldset {
+padding: 10px;
+border: 3px #0047c1 solid;
+margin: 10px;
+width: 800px;
+padding: 50px;
+margin-left: auto;
+    margin-right: auto;
+}
+legend {
+font-weight: bold;
+color: #0047c1;
+}
+form label {
+float: left;
+width: 350px;
+margin: 3px 0px 10px 0px;
+padding-top: 25px;
+}
+form input {
+margin: 3px 3px 0px 0px;
+}
+form TextField {
+margin: 3px 3px 0px 0px;
+}
+.field{
+    width: 200px;
+    padding : 2px;
+    margin:0px;
+    
+}
+.radio{
+    margin-top:-8px;
+}
+.radioitem{
+    width: 100px;
+}
+.radioitem1{
+    width: 100px;
+}
+.field2{
+    width: 200px;
+}
+.fieldemploi{
+    width: 70%;
+}
+.autocomplete{
+    width: 41em;
+} 
