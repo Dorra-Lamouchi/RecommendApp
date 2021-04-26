@@ -2,6 +2,9 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import "./style.css";
+import NavBar from "../../headers/nav"
+
 
 export default function Signup() {
   const nameRef = useRef()
@@ -20,12 +23,14 @@ export default function Signup() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
-    console.log(phoneRef.current.value.length)
-    console.log(parseInt(phoneRef.current.value))
+    
     if ((parseInt(phoneRef.current.value).toString().length !== phoneRef.current.value.length) || (phoneRef.current.value.length !== 8)) {
         return setError("Phone number invalid")
       }
 
+    if (passwordRef.current.value.length < 6) {
+      return setError("Password too short")
+    }
     try {
       setError("")
       setLoading(true)
@@ -39,6 +44,8 @@ export default function Signup() {
   }
 
   return (
+    <div>
+      <NavBar />
     <div id="container" className="d-flex " >
       <Card id="Card">
         <Card.Body>
@@ -69,13 +76,14 @@ export default function Signup() {
               Sign Up
             </Button>
             <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-      </div>
+              Already have an account? <Link to="/signin">Log In</Link>
+            </div>
           </Form>
          
         </Card.Body>
       </Card>
       
+    </div>
     </div>
   )
 }

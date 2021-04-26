@@ -5,7 +5,10 @@ import firebase from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import NavBar from '../../headers/nav';
+
+
 const Emploi = () =>  {
   const linkstyle = {
     color : 'black',
@@ -31,6 +34,7 @@ const Emploi = () =>  {
     });
         return (
             <>
+            <NavBar />
              <MDBCol md="6" className="search-marg">
       <div className="input-group md-form form-sm form-1 pl-0">
         <div className="input-group-prepend">

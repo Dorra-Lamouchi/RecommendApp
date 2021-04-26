@@ -6,6 +6,9 @@ import './test.css'
 import {Link} from 'react-router-dom'
 import Card from './Cards/CardsIU'
 import "mdbreact/dist/css/mdb.css";
+//import NavBar from "../headers/nav";
+
+
 const Accueil = () => {
   const stylelink = {
     textDecoration : 'none',
@@ -50,7 +53,8 @@ const Accueil = () => {
   });
         return (
             <>
-             <MDBCol md="6" className="search-marg">
+            
+      <MDBCol md="6" className="search-marg">
       <div className="input-group md-form form-sm form-1 pl-0">
         <div className="input-group-prepend">
           <span className="input-group-text blue lighten-3" id="basic-text1">
