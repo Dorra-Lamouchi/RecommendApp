@@ -32,6 +32,7 @@ import {
   Switch,
   Route
 
+
 } from "react-router-dom";
 import SignUp from './components/Authentification/signUp';
 import SignIn from './components/Authentification/signIn';
@@ -71,18 +72,19 @@ render(){
     <Route path="/affichestage/:id" exact component={Affichestage}></Route>
     <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
     
+
                   <Route path="/ajoutemploi" exact component={addemploi}></Route>
                   <Route path="/ajoutformation" exact component={addformation}></Route>
                   <Route path="/affichecondidature" exact component={affichercandidature}></Route>
-    <Footer />
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-  </Router>
-  );
+                  <Footer />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Router>
+    );
+  }
 }
-
 
 export default App;

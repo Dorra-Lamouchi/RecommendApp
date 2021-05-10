@@ -1,23 +1,25 @@
 //import Card from '../Cards/CardsIU'
-import {Link} from 'react-router-dom'
-import React, { useEffect ,useState} from 'react'
+import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import dev from "../../assets/dev.jpg";
 import firebase from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
+
 import NavBar from '../../headers/nav';
 
 const Formations = () =>  {
+
   const stylelink = {
-    textDecoration : 'none',
-    color : 'white ',
- 
+    textDecoration: 'none',
+    color: 'white ',
+
   }
   const linkstyle = {
-      color : 'black',
+    color: 'black',
   }
-    
+
     const [formations, setformations] = useState([]);
     const [filtre, setfiltre] = useState("");
     useEffect(() => {
@@ -71,18 +73,16 @@ const Formations = () =>  {
              })}
             </p>
             <p className="card-text"></p>
-           
-           
-        </div>
-    </div>
-                     {/*  <Card key={data.id} title={data.Title} lien="afficheformation" img={dev} description={data.Domaine} formateur={data.formateur}  nombreplace={data.nombreplace} id={data.id} date={new Date(data.DateDebut.seconds * 1000).toLocaleDateString()}/>*/} 
+                  </div>
                 </div>
-                   );
-               })} 
-               </div>
-            </div>
-            </>
-        )
-    }
+                {/*  <Card key={data.id} title={data.Title} lien="afficheformation" img={dev} description={data.Domaine} formateur={data.formateur}  nombreplace={data.nombreplace} id={data.id} date={new Date(data.DateDebut.seconds * 1000).toLocaleDateString()}/>*/}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
 
-export default  Formations;
+export default Formations;

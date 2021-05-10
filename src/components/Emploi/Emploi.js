@@ -13,10 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import firebaseDb from "../../firebase";
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
-import EditIcon from '@material-ui/icons/Edit';
 import "../Formations/Formation.css";
 
 function Emploi(props) {
@@ -39,10 +36,10 @@ function Emploi(props) {
     const classes = useStyles();
     const top100Films = [
         { title: 'Artificial Intelligence', year: 1994 },
-        { title: 'The Godfather', year: 1972 },
-        { title: 'offres job', year: 1974 },
-        { title: 'employee', year: 2008 },
-        { title: '12 Angry Men', year: 1957 },
+        { title: 'Mecaniq', year: 1972 },
+        { title: 'Formation', year: 1974 },
+        { title: 'training', year: 2008 },
+        { title: 'fixer', year: 1957 },
         { title: "Schindler's List", year: 1993 },
         { title: 'Pulp Fiction', year: 1994 },
         { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
@@ -113,7 +110,6 @@ function Emploi(props) {
         { title: 'Star Wars: Episode VI - Return of the Jedi', year: 1983 },
         { title: 'Reservoir Dogs', year: 1992 },
         { title: 'Braveheart', year: 1995 },
-        { title: 'M', year: 1931 },
         { title: 'Requiem for a Dream', year: 2000 },
         { title: 'Amélie', year: 2001 },
         { title: 'A Clockwork Orange', year: 1971 },
@@ -135,9 +131,9 @@ function Emploi(props) {
         { title: 'Bicycle Thieves', year: 1948 },
         { title: 'The Kid', year: 1921 },
         { title: 'Inglourious Basterds', year: 2009 },
-        { title: 'Snatch', year: 2000 },
-        { title: 'JOB', year: 2009 },
-        { title: 'Employee', year: 1975 },
+        { title: 'JOB', year: 2000 },
+        { title: '3 Idiots', year: 2009 },
+        { title: 'Monty Python and the Holy Grail', year: 1975 },
     ];
     const initialFieldValues = {
         Nom: '',
@@ -245,8 +241,6 @@ function Emploi(props) {
                     }
                     else return top100Films[3].title;
                 });
-                //  console.log(max)
-                //  console.log(max2)
                 setValues({
                     ...Values,
                     [name]: value,
@@ -262,38 +256,30 @@ function Emploi(props) {
 
 
     }
+    const [file, setfile] = useState(null)
 
-    const [OffrId, setOffrId] = useState('')
+    const handleFileChange = e => {
+        setfile(e.target.files[0]);
+        const f = e.target.files[0].name;
+        setValues({
+            ...Values,
+            Image: f,
+        })
+    }
 
     const addOrEditemploi = obj => {
-        if (OffrId === '') {
-            // firebaseDb.child('OffresEmploi').push(
-            //     obj,
-            //     err => {
-            //         if (err) {
-            //             console.log(err)
-            //         } else {
-            //             setOffrId('')
-            //         }
-            //     }
-            // )
-            const db = firebaseDb.firestore();
-            db.collection("OffresEmploi").add({
-                obj,
-            });
-        } else {
-            firebaseDb.child(`OffresEmploi/${OffrId}`).set(
-                obj,
-                err => {
-                    if (err) {
-                        console.log(err)
-                    }
-                    else {
-                        setOffrId('')
-                    }
-                }
-            )
-        }
+        const filename = Values.Image;
+        const storageRef = firebaseDb.storage().ref("images Offres Travaille");
+        const fileRef = storageRef.child(filename);
+        console.log("uploading..");
+        fileRef.put(file).then(() => {
+            console.log("uploaded successfuly");
+        });
+        const db = firebaseDb.firestore();
+        db.collection("OffresEmploi").add({
+            obj,
+        });
+
 
     }
     function handleFormSubmit(e) {
@@ -308,66 +294,8 @@ function Emploi(props) {
             Tags: values
         });
     }
-    const [Offres, setOffres] = useState({});
-
-    // useEffect(() => {
-    //     firebaseDb.child('OffresEmploi').on('value', snapshot => {
-
-    //         if (snapshot.val() != null) {
-    //             setOffres({
-    //                 ...snapshot.val()
-    //             })
-
-    //         }
-    //         else setOffres({
-
-    //         })
-
-    //     })
-    //     // console.log(Offres)
 
 
-    // }, [])
-    const OnDelete = id => {
-
-        if (window.confirm("etes vous sure de supprimer ce item?")) {
-            firebaseDb.child(`OffresEmploi/${id}`).remove(
-                err => {
-                    if (err)
-                        console.log(err)
-                    else
-                        setOffrId('')
-                }
-            )
-            setOffres({
-
-            })
-        }
-    }
-    const [btnValue, setbtnValue] = useState("Postuler")
-
-    const OnUpdateEmploi = id => {
-        console.log(Offres[id].Type)
-        setOffrId(id)
-        setbtnValue("Editer")
-        // Offres[id].Tags.map(num=>console.log(num.title))
-        console.log(Offres[id].Tags[0].title)
-        setValues({
-            ...Values,
-            Nom: Offres[id].Nom,
-            Domaine: Offres[id].Domaine,
-            Type: Offres[id].Type,
-            // Image: Formations[id].Image,
-            Experience: Offres[id].Experience,
-            Contrat: Offres[id].Contrat,
-            DateDebut: Offres[id].DateDebut,
-            TypeTravail: Offres[id].TypeTravail,
-            others: Offres[id].others,
-            Tags: Object.assign({}, Offres[id].Tags)
-
-        })
-
-    }
     return (
         <div >
             <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} >
@@ -428,20 +356,23 @@ function Emploi(props) {
                                 <Grid item xs={3} >
                                     <label>Importer une image:</label>
                                 </Grid>
-                                <Grid item xs={7}>
-                                    <TextField
+                                <Grid item xs={7} style={{ 'paddingTop': '25px' }}>
+
+                                    <input
                                         required
-                                        focused
-                                        name="Image"
-                                        type="file"
+                                        // focused
                                         label="image"
-                                        value={Values.Image}
-                                        onChange={handleInputChange}
+                                        type="file"
+                                        accept="image/*"
+                                        name="Image"
+                                        onChange={handleFileChange}
+
+
+
                                     />
 
                                 </Grid>
                             </Grid>
-
                         </Grid>
                     </fieldset>
                     <fieldset>
@@ -533,7 +464,7 @@ function Emploi(props) {
                                         <Autocomplete
 
                                             multiple
-                                            limitTags={2}
+                                            // limitTags={2}
                                             id="multiple-limit-tags"
                                             name="Tags"
                                             options={top100Films}
@@ -544,7 +475,7 @@ function Emploi(props) {
                                             getOptionLabel={(option) => option.title}
                                             value={Object.values(Values.Tags)}
                                             renderInput={(params) => (
-                                                <TextField required={Object.values(Values.Tags).length === 0} {...params} label="Tags" placeholder="Ajouter Tags" style={{ "width": '400px' }} />
+                                                <TextField required={Object.values(Values.Tags).length === 0} value={Object.values(Values.Tags)} {...params} label="Tags" placeholder="Ajouter Tags" style={{ "width": '400px' }} />
                                             )}
 
                                         />
@@ -555,7 +486,7 @@ function Emploi(props) {
                             <Grid item container justify="space-evenly" alignItems="center" >
                                 <Grid item xs={4} >
                                     <Button variant="contained" style={{ 'marginTop': '50px', 'backgroundColor': "#0047c1", 'color': 'white' }} type="submit" >
-                                        {btnValue}  <AiOutlineSend fontSize="large" className='icon' style={{ 'marginLeft': '10px' }} />
+                                        Postuler <AiOutlineSend fontSize="large" className='icon' style={{ 'marginLeft': '10px' }} />
                                     </Button>
                                 </Grid>
 
@@ -564,167 +495,7 @@ function Emploi(props) {
                     </fieldset>
                 </Grid>
             </form>
-            {/* <fieldset style={{ "width": '100%', 'padding': '10px', 'border': '1px black' }}>
-                <h1>Liste Des Offres de stages et d'emploi</h1>
-                <Grid container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "backgroundColor": 'red', 'color': 'white' }}>
 
-                    <Grid item container xs={1} justify="space-evenly" alignItems="center" >
-                        <Grid item xs={12} >
-                            <h3  >Nom</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12}>
-                            <h3 >Domaine</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Type</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Date Debut</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Experience requise</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Type de Travail</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 style={{ 'padding': '0px' }}>Contrat</h3>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Image</h3>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item container xs={2} >
-                        <Grid item xs={12} >
-                            <h3 style={{ "textAlign": "center" }}>Tags</h3>
-                        </Grid>
-                    </Grid>
-
-                    <Grid item container xs={1} justify="space-evenly">
-                        <Grid item xs={12} >
-                            <h3 >Actions</h3>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                {
-                    Object.keys(Offres).map(id => {
-                        return (
-                            <Grid key={id} container direction='row' spacing={1} alignItems="center" justify="space-evenly" style={{ "marginTop": '10px' }}>
-
-                                <Grid item container xs={1} justify="space-evenly" alignItems="center" >
-                                    <Grid item xs={12} >
-                                        <h4 >{Offres[id].Nom}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12}>
-                                        <h4 >{Offres[id].Domaine}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Offres[id].Type}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Offres[id].DateDebut}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Offres[id].Experience}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Offres[id].TypeTravail}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <h4 >{Offres[id].Contrat}</h4>
-                                    </Grid>
-                                </Grid>
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item xs={12} >
-                                        <GridList className={classes.gridList} cols={1} cellHeight={30}>
-                                            <h4 >{Offres[id].Image}</h4>
-                                        </GridList>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid item container xs={2} justify="space-evenly" >
-
-                                    <Grid item container direction='column' xs={12}>
-                                        <GridList cellHeight={30} cols={1}>
-
-                                            {Offres[id].Tags.map(num => {
-                                                return (
-                                                    <Grid item xs={12} key={num.id}>
-                                                        <h4 style={{ "textAlign": "center" }}>{num.title}</h4>
-                                                    </Grid>
-                                                )
-                                            })}
-                                        </GridList>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid item container xs={1} justify="space-evenly">
-                                    <Grid item spacing={1} container justify="space-evenly" alignItems="center">
-                                        <Grid item  >
-                                            <Button
-                                                onClick={() => { OnUpdateEmploi(id) }}
-                                                size='large'
-                                                variant="outlined"
-                                                color='default'
-                                                className={classes.button2}
-                                                startIcon={<EditIcon />}
-                                            >
-
-                                            </Button>
-                                        </Grid>
-                                        <Grid item  >
-                                            <Button
-                                                onClick={() => { OnDelete(id) }}
-                                                size='large'
-                                                variant="outlined"
-                                                color="secondary"
-                                                className={classes.button}
-                                                style={{ 'fontSize': '30px' }}
-                                                startIcon={<DeleteIcon />}
-                                            >
-
-                                            </Button>
-                                        </Grid>
-
-
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-
-                        )
-
-
-                    })
-                }
-
-            </fieldset> */}
         </div>
     )
 }
