@@ -6,22 +6,28 @@ import firebase from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
-import { Link } from 'react-router-dom'
-const Emploi = () => {
-  const linkstyle = {
-    color: 'black',
-  }
-  const [Emplois, setEmplois] = useState([]);
-  const [filtre, setfiltre] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const db = firebase.firestore();
-      const data = await db.collection("publication").where('typecontrat', '!=', 'stage').get();
-      setEmplois(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-    };
-    fetchData();
-  }, []);
+import {Link} from 'react-router-dom';
+import NavBar from '../../headers/nav';
+
+
+const Emploi = () =>  {
+  const linkstyle = {
+    color : 'black',
+}
+    const [Emplois, setEmplois] = useState([]);
+    const [filtre, setfiltre] = useState("");
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        const db = firebase.firestore();
+        const data = await db.collection("publication").where('typecontrat' , '!=' , 'stage').get();
+        setEmplois(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+      };
+      fetchData();
+    }, []);
+    
+
 
   const filterrst = Emplois.filter((flt) => {
     if (filtre === "") { return flt; }

@@ -1,0 +1,28 @@
+#container  {
+    background-image: url("./../../assets/back.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 110vh;
+    padding-left: 150px;
+    padding-top: 20px;
+  }
+#Card {
+  min-width: 320px;
+  height: 670px;
+}
+
+#Card2 {
+  min-width: 320px;
+  height: 420px;
+}
+
+#Form{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#Button{
+  position: relative;
+  margin-left: 80px;
+}
