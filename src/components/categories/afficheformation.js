@@ -27,22 +27,22 @@ import { useHistory } from 'react-router-dom'
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
            t = setTimeout(() => {
-
-            firebaseDb.firestore().collection('user').doc('1').get().then((d) => {
+             console.log("helo")
+            firebaseDb.firestore().collection('user').doc('g4Gkeh6ULAVIU1IvOqlwNE7CcMp2').get().then((d) => {
              var s = d.data().Preferences;
              doc.data().obj.Tags.forEach(element => {
                if(s.includes(element.title)){
                  s_index = s.lastIndexOf(element.title);
                  s.splice(s_index,1)
                 s.unshift(element.title);
-                //console.log("*s", s)
+                console.log("*s", s)
                }else{
                 s.unshift(element.title);
                }
 
               });
 
-              firebaseDb.firestore().collection('user').doc('1').update({
+              firebaseDb.firestore().collection('user').doc('g4Gkeh6ULAVIU1IvOqlwNE7CcMp2').update({
                 Preferences: s,
               });
             });
