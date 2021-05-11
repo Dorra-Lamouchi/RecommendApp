@@ -23,6 +23,7 @@ import { useHistory } from 'react-router-dom'
     useEffect(() => {
       firebaseDb.firestore().collection("Formations").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
+
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
            t = setTimeout(() => {
@@ -38,13 +39,14 @@ import { useHistory } from 'react-router-dom'
                }else{
                 s.unshift(element.title);
                }
+
               });
 
               firebaseDb.firestore().collection('user').doc('1').update({
                 Preferences: s,
               });
             });
-            
+
           }, 3000);
         }
       });
