@@ -8,15 +8,13 @@ const NavBar = () => {
   const stylelink = {
     textDecoration: 'none',
     color: 'white ',
-
-
  }
     return(
 <div>
   <Navbar bg="dark" variant="dark"  >
     <Navbar.Brand href="#home">Mayfoutek~Chay</Navbar.Brand>
     <Nav className="mr-auto" >
-      <Nav.Link ><Link style={stylelink} to="/">Accueil</Link></Nav.Link>
+      <Nav.Link ><Link style={stylelink} to="/accueil">Accueil</Link></Nav.Link>
       <Nav.Link><Link style={stylelink} to="/Stages">Stages</Link></Nav.Link>
       <Nav.Link><Link style={stylelink} to="/formations">Formations</Link></Nav.Link>
       <Nav.Link ><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></Nav.Link>

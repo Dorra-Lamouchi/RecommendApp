@@ -40,6 +40,8 @@ import { AuthProvider } from './components/Authentification/AuthContext';
 import SignAccueil from './components/signedAccueil';
 import PrivateRoute from './components/Authentification/PrivateRoute';
 import ForgotPassword from './components/Authentification/ForgotPassword';
+import Preference from "./components/categories/Preferences";
+
 
 class App extends React.Component {
 
@@ -76,15 +78,17 @@ render(){
                   <Route path="/ajoutemploi" exact component={addemploi}></Route>
                   <Route path="/ajoutformation" exact component={addformation}></Route>
                   <Route path="/affichecondidature" exact component={affichercandidature}></Route>
-                  <Footer />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Router>
-    );
-  }
+                  <Route path="/preference" exact component={Preference}></Route>
+    <Footer />
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </Router>
+  );
+}
+
 }
 
 export default App;
