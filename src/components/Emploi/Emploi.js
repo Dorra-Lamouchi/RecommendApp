@@ -143,6 +143,7 @@ function Emploi(props) {
         Experience: '',
         Contrat: '',
         DateDebut: '',
+        DatePost: '',
         TypeTravail: 'Complet',
         Description: '',
         others: '',
@@ -165,9 +166,11 @@ function Emploi(props) {
     const handleInputChange = e => {
         var { name, value } = e.target
         if (e.target === 'DateDebut') {
+            const d = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(value);
+
             setValues({
                 ...Values,
-                [name]: value.toString()
+                [name]: d
             })
         }
 
@@ -261,9 +264,12 @@ function Emploi(props) {
     const handleFileChange = e => {
         setfile(e.target.files[0]);
         const f = e.target.files[0].name;
+        const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
+
         setValues({
             ...Values,
             Image: f,
+            DatePost: d,
         })
     }
 
@@ -418,6 +424,8 @@ function Emploi(props) {
                                             <MenuItem value={"CUI – Contrat unique d’insertion"}>CUI – Contrat unique d’insertion</MenuItem>
                                             <MenuItem value={"CAE - Contrat d’accompagnement dans l’emploi"}>CAE - Contrat d’accompagnement dans l’emploi</MenuItem>
                                             <MenuItem value={"CIE - Contrat initiative emploi"}>CIE - Contrat initiative emploi</MenuItem>
+                                            <MenuItem value={"CIE - Contrat initiative emploi"}>Stage</MenuItem>
+
                                         </Select>
                                         <FormHelperText>selectionner une type</FormHelperText>
                                     </FormControl>

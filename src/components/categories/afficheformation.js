@@ -52,10 +52,11 @@ const Affichedetail = (id) => {
 
           // eslint-disable-next-line react-hooks/exhaustive-deps
           t = setTimeout(() => {
-
-
             db.collection('user').doc('1').get().then((d) => {
-             var s = d.data().Preferences
+              var s = d.data().Preferences
+
+              // console.log(new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebase.firestore.Timestamp.now().toDate()));
+
               console.log("tags", doc.data().tags);
               console.log("*s", s)
 
@@ -69,7 +70,7 @@ const Affichedetail = (id) => {
                 Preferences: s
               });
             });
-            
+
           }, 3000);
         } else {
           // doc.data() will be undefined in this case
