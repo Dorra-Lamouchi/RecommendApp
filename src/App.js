@@ -22,6 +22,9 @@ import {
   Route
  
 } from "react-router-dom";
+import SignUp from './components/SignUp/signUp';
+import SignIn from './components/SignIn/signIn';
+import Preference from "./components/categories/Preferences";
 
 class App extends React.Component {
  
@@ -43,6 +46,12 @@ render(){
     <Route path="/afficheformation/:id" exact component={Affichedetail}></Route>
     <Route path="/affichestage/:id" exact component={Affichestage}></Route>
     <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
+    
+                  <Route path="/ajoutemploi" exact component={addemploi}></Route>
+                  <Route path="/ajoutformation" exact component={addformation}></Route>
+                  <Route path="/affichecondidature" exact component={affichercandidature}></Route>
+                  <Route path="/preference" exact component={Preference}></Route>
+    <Footer />
     </div>
     </div>
     </div>

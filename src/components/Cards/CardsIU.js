@@ -4,11 +4,11 @@ import voir from "../../assets/voir.png";
 //import Affichedetail from './../categories/afficheformation'
 import {Link} from 'react-router-dom'
 const Card = props => {
-    const stylelink = {
-        textDecoration : 'none',
-        color : 'white ',
+    // const stylelink = {
+    //     textDecoration : 'none',
+    //     color : 'white ',
      
-      }
+    //   }
       const linkstyle = {
           color : 'black',
       }
