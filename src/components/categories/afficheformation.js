@@ -1,9 +1,13 @@
+
 import React , {useState , useEffect} from 'react'
 import firebaseDb from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
 import '../test.css'
+import { ClickAwayListener } from '@material-ui/core';
+import { Sync } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom'
  const Affichedetail = (id) => {
     const stylecol = {
         marginTop : 50,
@@ -11,20 +15,44 @@ import '../test.css'
         fontFamily: "Arial, Helvetica, sans-serif",
         textDecoration : 'Bold',
         fontSize: '20px',
-        
-     
-     
       }
     const [tags, settags] = useState([]);
     const [formation, setformation] = useState({});
+    var t;
+    var s_index;
     useEffect(() => {
       firebaseDb.firestore().collection("Formations").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
+           t = setTimeout(() => {
+
+            firebaseDb.firestore().collection('user').doc('1').get().then((d) => {
+             var s = d.data().Preferences;
+             doc.data().obj.Tags.forEach(element => {
+               if(s.includes(element.title)){
+                 s_index = s.lastIndexOf(element.title);
+                 s.splice(s_index,1)
+                s.unshift(element.title);
+                //console.log("*s", s)
+               }else{
+                s.unshift(element.title);
+               }
+              });
+
+              firebaseDb.firestore().collection('user').doc('1').update({
+                Preferences: s,
+              });
+            });
+            
+          }, 3000);
         }
       });
     }, []);
+    const history = useHistory()
+    history.listen((location) => {
+      clearTimeout(t);
+    })
       return(
         <div >
             <MDBCol md="6" className="search-marg">
@@ -79,5 +107,6 @@ import '../test.css'
         </div>
         </div>
     )
+
 }
-export default Affichedetail ;
+export default Affichedetail;

@@ -1,12 +1,24 @@
+
 import Card from '../Cards/CardsIU'
 import React, { useEffect ,useState} from 'react'
 import firebaseDb from "../../firebase";
+import { Link } from 'react-router-dom'
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
+import NavBar from '../../headers/nav';
+
 const Formations = () =>  {
-    
-    
+
+  const stylelink = {
+    textDecoration: 'none',
+    color: 'white ',
+
+  }
+  const linkstyle = {
+    color: 'black',
+  }
+
     const [formations, setformations] = useState([]);
     const [filtre, setfiltre] = useState("");
     const [pic, setpic] = useState("");
@@ -51,9 +63,9 @@ const Formations = () =>  {
       }).catch(error => console.log(error))
 
   }, [])
-   
         return (
             <>
+            <NavBar />
              <MDBCol md="6" className="search-marg">
       <div className="input-group md-form form-sm form-1 pl-0">
         <div className="input-group-prepend">
@@ -93,14 +105,13 @@ const Formations = () =>  {
            
         </div>
     </div>
-                    
                 </div>
-                   );
-               })} 
-               </div>
-            </div>
-            </>
-        )
-    }
+            );
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
 
-export default  Formations;
+export default Formations;

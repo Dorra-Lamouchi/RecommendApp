@@ -2,7 +2,7 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './nav.css'
 const NavBar = () => {
   const stylelink = {
@@ -19,14 +19,19 @@ const NavBar = () => {
       <Nav.Link><Link style={stylelink} to="/formations">Formations</Link></Nav.Link>
       <Nav.Link ><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></Nav.Link>
       <Nav.Link><Link  style={stylelink} to="/contact">Contact</Link></Nav.Link>
+       <Nav.Link><Link style={stylelink} to="/ajoutemploi">Ajouter Offre de travail</Link></Nav.Link>
+          <Nav.Link><Link style={stylelink} to="/ajoutformation">Ajouter Formation</Link></Nav.Link>
+          <Nav.Link><Link style={stylelink} to="/affichecondidature">Afficher les candidatures</Link></Nav.Link>
     </Nav>
     <Form inline>
-      <button className="btnn " >Se connecter</button> &nbsp;
-      <button className="btn2 " >S'inscrire</button>
+      <Nav.Link ><Link style={stylelink} to="/signin"><button className="btnn "> Se connecter</button></Link></Nav.Link> &nbsp;
+      <Nav.Link ><Link style={stylelink} to="/signup"><button className="btn2 "> S'inscrire </button></Link></Nav.Link>
     </Form>
   </Navbar>
  </div>
 
-    );
+  );
 }
+
 export default NavBar; 
+

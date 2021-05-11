@@ -1,6 +1,7 @@
 import React, { useState , useEffect , useRef } from 'react'
 import firebaseDb from "../firebase";
 import './test.css'
+import {Link} from 'react-router-dom'
 import Card from './Cards/CardsIU'
 import "mdbreact/dist/css/mdb.css";
 import { useLocation } from "react-router-dom";
@@ -60,6 +61,11 @@ var filtreformation=[];
         })
         
       }
+
+//import NavBar from "../headers/nav";
+
+
+
     
       const fetchData = async () => { firebaseDb.firestore()
       .collection("OffresEmploi")
@@ -402,6 +408,7 @@ Object.keys(formtag).map(p =>{
            </div>
   
        );
+
                 
                })
             

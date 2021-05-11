@@ -24,6 +24,7 @@ const Affichemploi  = (id) => {
         }
       });
     }, []);
+
       return(
         <div >
             <MDBCol md="6" className="search-marg">
@@ -80,5 +81,6 @@ const Affichemploi  = (id) => {
         </div>
         </div>
     )
+
 }
 export default Affichemploi;
