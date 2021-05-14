@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
+import {useAuth} from '../components/Authentification/AuthContext'
+import './nav.css'
 
 const SignedInLinks = () => {
   const stylelink = {
@@ -7,9 +9,22 @@ const SignedInLinks = () => {
     color : 'white ', 
   }
 
+  const { logout } = useAuth()
+  const history = useHistory()
+
+  async function handleLogout() {
+    
+    try {
+      await logout()
+      history.push("/signin")
+    } catch {
+      
+    }
+  }
+
   return (
     <div>
-      <ul className="left">
+      <ul id="menuLeft">
         <li><Link style={stylelink} to="/">Accueil</Link></li>
         <li><Link style={stylelink} to="/Stages">Stages</Link></li>  
         <li><Link style={stylelink} to="/formations">Formations</Link></li>  
@@ -17,7 +32,7 @@ const SignedInLinks = () => {
         <li><Link  style={stylelink} to="/contact">Contact</Link></li>
       </ul>
       <ul className="right">
-        <li><NavLink variant="link" to="/">Log Out</NavLink></li>
+        <li><NavLink variant="link" to="/signin" onClick={handleLogout}>Log Out</NavLink></li>
         <li><NavLink to='/' className="btn-floating pink lighten-1 text-center">NN</NavLink></li>
       </ul>
     </div>

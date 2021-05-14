@@ -3,7 +3,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./style.css";
-import NavBar from "../../headers/nav"
 import db from "../../firebase"
 
 export default function RecruterSignup() {
@@ -18,7 +17,7 @@ export default function RecruterSignup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-  const form = document.querySelector('#FormRecruter');
+  const form = document.querySelector('#Form');
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -45,7 +44,7 @@ export default function RecruterSignup() {
     setLoading(false)
   }
 
-  form.addEventListener('submit',(e) => {
+  /*form.addEventListener('submit',(e) => {
     e.preventDefault();
     db.collection('recruter').add({
       nom: form.nameRef.value,
@@ -54,17 +53,16 @@ export default function RecruterSignup() {
       domaine: form.domaineRef.value,
       societe: form.companyRef.value
     })
-  })
+  })*/
 
   return (
     <div>
-      <NavBar />
-    <div id="container" className="d-flex " >
-      <Card id="Card">
+    <div id="container2" className="d-flex " >
+      <Card id="CardRecruter">
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Sign Up Recruter</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form id="FormRecruter" onSubmit={handleSubmit}>
+          <Form id="Form" onSubmit={handleSubmit}>
             <Form.Group id="name">
               <Form.Label>Full Name</Form.Label>
               <Form.Control type="text" ref={nameRef} required />
@@ -98,6 +96,9 @@ export default function RecruterSignup() {
             </Button>
             <div className="w-100 text-center mt-2">
               Already have an account? <Link to="/signin">Log In</Link>
+            </div>
+            <div className="w-100 text-center mt-2">
+              You want a regular user account? <Link to="/signup">Regular Version</Link>
             </div>
           </Form>
          

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import './nav.css'
 
 const SignedOutLinks = () => {
     const stylelink = {
@@ -9,7 +10,7 @@ const SignedOutLinks = () => {
     
   return (
     <div>
-      <ul className="left">
+      <ul id="menuLeft">
         <li><Link style={stylelink} to="/">Accueil</Link></li>
         <li><Link style={stylelink} to="/Stages">Stages</Link></li>  
         <li><Link style={stylelink} to="/formations">Formations</Link></li>  

@@ -76,11 +76,7 @@ const Emploi = () =>  {
                </div>
             </div>
             </>
-        )
 
-    }
-  });
-
-}
+  )}
 
 export default Emploi;

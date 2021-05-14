@@ -59,9 +59,9 @@ export default function Signup() {
     <div id="container" className="d-flex " >
       <Card id="Card">
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+          <h2 className="text-center mb-4">Sign Up User</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form id="FormUser" onSubmit={handleSubmit}>
+          <Form id="Form" onSubmit={handleSubmit}>
             <Form.Group id="name">
               <Form.Label>Full Name</Form.Label>
               <Form.Control type="text" ref={nameRef} required />
@@ -89,7 +89,7 @@ export default function Signup() {
               Already have an account? <Link to="/signin">Log In</Link>
             </div>
             <div className="w-100 text-center mt-2">
-              You want a professional account? <Link to="/recrutersignin">Pro Version</Link>
+              You want a professional account? <Link to="/recrutersignup">Pro Version</Link>
             </div>
           </Form>
          

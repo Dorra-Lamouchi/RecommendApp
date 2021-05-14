@@ -22,4 +22,7 @@
    background-color: rgb(74, 141, 141);
 }
 
- 
+#menuLeft{
+   padding-top: 50px; 
+   height: 50px;
+}

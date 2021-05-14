@@ -19,7 +19,7 @@ import '../test.css'
     const [formation, setformation] = useState({});
     const [like, setLike]= useState(0);
    
-    function incrementLike() {
+    function handleLike() {
         setLike(prevLike => prevLike + 1)
       }
 
@@ -103,7 +103,7 @@ import '../test.css'
         
         <Col>
         <button className="inscription-btn"><i class="fas fa-eye"></i>Rejoindre</button>
-        <button className="like-btn" onClick={() => this.handleLike()}> 
+        <button className="like-btn" onClick={() => this.handleLike}> 
           <span className="span-text">
             {like}
           </span>
