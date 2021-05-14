@@ -1,34 +1,20 @@
-
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import './nav.css'
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
+
 const NavBar = () => {
- const stylelink = {
-   textDecoration : 'none',
-   color : 'white ',
-
- }
-    return(
-<div>
-  <Navbar bg="dark" variant="dark"  >
-    <Navbar.Brand href="#home">Mayfoutek~Chay</Navbar.Brand>
-    <Nav className="mr-auto" >
-      <Nav.Link ><Link style={stylelink} to="/">Accueil</Link></Nav.Link>
-      <Nav.Link><Link style={stylelink} to="/Stages">Stages</Link></Nav.Link>
-      <Nav.Link><Link style={stylelink} to="/formations">Formations</Link></Nav.Link>
-      <Nav.Link ><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></Nav.Link>
-      <Nav.Link><Link  style={stylelink} to="/contact">Contact</Link></Nav.Link>
-    </Nav>
-    <Form inline>
-      <Nav.Link ><Link style={stylelink} to="/signin"><button className="btnn "> Se connecter</button></Link></Nav.Link> &nbsp;
-      <Nav.Link ><Link style={stylelink} to="/signup"><button className="btn2 "> S'inscrire </button></Link></Nav.Link>
-    </Form>
-  </Navbar>
- </div>
-
-    );
+ 
+  return (
+    <nav className="navbar-custom nav-wrapper grey darken-3">
+      <div className="container">
+        <Link to="/" className="brand-logo left">Mayfoutek~Chay</Link>
+        <SignedInLinks />
+        <SignedOutLinks />
+      </div>
+    </nav>
+  )
 }
-export default NavBar; 
 
+export default NavBar

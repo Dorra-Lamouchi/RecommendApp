@@ -17,6 +17,12 @@ import '../test.css'
     const [tags, settags] = useState([]);
     const [datedeb, setdatedeb] = useState()
     const [formation, setformation] = useState({});
+    const [like, setLike]= useState(0);
+   
+    function incrementLike() {
+        setLike(prevLike => prevLike + 1)
+      }
+
     useEffect(() => {
     const fetchData = async () => {
         const db = firebase.firestore();
@@ -97,7 +103,13 @@ import '../test.css'
         
         <Col>
         <button className="inscription-btn"><i class="fas fa-eye"></i>Rejoindre</button>
-        
+        <button className="like-btn" onClick={() => this.handleLike()}> 
+          <span className="span-text">
+            {like}
+          </span>
+        </button>
+    
+
         </Col>
 
     

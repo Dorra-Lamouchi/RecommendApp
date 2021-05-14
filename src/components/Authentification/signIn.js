@@ -3,7 +3,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./style.css";
-import NavBar from '../../headers/nav'
 
 
 export default function Signin() {
@@ -29,9 +28,7 @@ export default function Signin() {
     setLoading(false)
   }
 
-  return (
-    <div> 
-      <NavBar />
+  return ( 
     <div id="container" className="d-flex " >
       <Card id="Card2">
         <Card.Body>
@@ -58,7 +55,6 @@ export default function Signin() {
           </Form> 
         </Card.Body>
       </Card>   
-    </div>
     </div>
   )
 }

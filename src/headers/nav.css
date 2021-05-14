@@ -1,4 +1,6 @@
-
+.navbar-custom {
+   height: 130px;
+ }
 .stylelink:hover {
    color: yellowgreen;
     }

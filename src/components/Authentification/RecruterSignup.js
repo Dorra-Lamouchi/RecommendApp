@@ -3,12 +3,14 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./style.css";
-import firebase from "../../firebase";
+import NavBar from "../../headers/nav"
+import db from "../../firebase"
 
-
-export default function Signup() {
+export default function RecruterSignup() {
   const nameRef = useRef()
   const phoneRef = useRef()
+  const domaineRef = useRef()
+  const companyRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
@@ -16,8 +18,7 @@ export default function Signup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-  const form = document.querySelector('#FormUser');
- 
+  const form = document.querySelector('#FormRecruter');
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -42,26 +43,28 @@ export default function Signup() {
     }
 
     setLoading(false)
-  
-  if (form){
-    form.addEventListener('submit',(e) => {
+  }
+
+  form.addEventListener('submit',(e) => {
     e.preventDefault();
-    const db = firebase.firestore; 
-    db.collection('User').add({
+    db.collection('recruter').add({
       nom: form.nameRef.value,
       email: form.emailRef.value,
-      tel: form.phoneRef.value
+      tel: form.phoneRef.value,
+      domaine: form.domaineRef.value,
+      societe: form.companyRef.value
     })
-    })
-  }
-}
+  })
+
   return (
+    <div>
+      <NavBar />
     <div id="container" className="d-flex " >
       <Card id="Card">
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form id="FormUser" onSubmit={handleSubmit}>
+          <Form id="FormRecruter" onSubmit={handleSubmit}>
             <Form.Group id="name">
               <Form.Label>Full Name</Form.Label>
               <Form.Control type="text" ref={nameRef} required />
@@ -69,6 +72,14 @@ export default function Signup() {
             <Form.Group id="phone">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control type="text" ref={phoneRef} required />
+            </Form.Group>
+            <Form.Group id="domaine">
+              <Form.Label>Field</Form.Label>
+              <Form.Control type="text" ref={domaineRef} required />
+            </Form.Group>
+            <Form.Group id="societe">
+              <Form.Label>Company</Form.Label>
+              <Form.Control type="text" ref={companyRef} required />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
@@ -88,14 +99,12 @@ export default function Signup() {
             <div className="w-100 text-center mt-2">
               Already have an account? <Link to="/signin">Log In</Link>
             </div>
-            <div className="w-100 text-center mt-2">
-              You want a professional account? <Link to="/recrutersignin">Pro Version</Link>
-            </div>
           </Form>
          
         </Card.Body>
       </Card>
       
+    </div>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
 import dev from "../../assets/devper.jpg";
 import '../test.css'
+import c from "classnames";
 
 const Affichestage  = (id) => {
 
@@ -15,9 +16,9 @@ const Affichestage  = (id) => {
         fontFamily: "Arial, Helvetica, sans-serif",
         textDecoration : 'Bold',
         fontSize: '20px',
-    
-     
       }
+     
+    
     //const [tags, settags] = useState({});
     const [formation, setformation] = useState({});
     const [datedeb, setdatedeb] = useState();
@@ -95,8 +96,7 @@ const Affichestage  = (id) => {
         <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button>
         
         </Col>
-
-    
+        
     </Row>
   
 </Container>
