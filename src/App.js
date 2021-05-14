@@ -88,6 +88,6 @@ render(){
 }
 }
 
-}
+
 
 export default App;
