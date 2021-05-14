@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './nav.css'
+
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import {useAuth} from './../components/Authentification/AuthContext'
@@ -16,6 +17,7 @@ const NavBar = () => {
       </div>
     </nav>
   )
+
 }
 
 export default NavBar

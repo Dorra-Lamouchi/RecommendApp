@@ -1,40 +1,68 @@
-//import Card from '../Cards/CardsIU'
-import {Link} from 'react-router-dom'
+
+import Card from '../Cards/CardsIU'
 import React, { useEffect ,useState} from 'react'
-import dev from "../../assets/dev.jpg";
-import firebase from "../../firebase";
+import firebaseDb from "../../firebase";
+import { Link } from 'react-router-dom'
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
 
 const Formations = () =>  {
+
   const stylelink = {
-    textDecoration : 'none',
-    color : 'white ',
- 
+    textDecoration: 'none',
+    color: 'white ',
+
   }
   const linkstyle = {
-      color : 'black',
+    color: 'black',
   }
-    
+
     const [formations, setformations] = useState([]);
     const [filtre, setfiltre] = useState("");
+    const [pic, setpic] = useState("");
 
     useEffect(() => {
-      const fetchData = async () => {
-        const db = firebase.firestore();
-        const data = await db.collection("Formation").get();
-        setformations(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-      };
-      fetchData();
-    }, []);
-    const filterrst = formations.filter((flt)=>{
-        if(filtre === "")
-        {return flt;}
-        else if(flt.tags[0].toLowerCase().includes(filtre.toLowerCase())){
-       return flt ;}
-       else if(flt.Domaine.toLowerCase().includes(filtre.toLowerCase())){return flt ;}
-    });
+      var tab = []
+
+      firebaseDb.firestore().collection("Formations").get().then(snapshot => {
+
+          if (snapshot.empty) {
+              // console.log("empty")
+              setformations({
+              })
+          } else {
+              // console.log(snapshot)
+              var dat;
+              snapshot.forEach(doc => {
+                  dat = {...doc.data(), id: doc.id};
+                  let storageRef = firebaseDb.storage().ref("images Formations/"+dat.obj.Image);
+                  storageRef.getDownloadURL()
+                      .then(url => {setpic(url) 
+                      })
+                      .catch(e=>{console.log(e);})
+                  tab = [
+                      ...tab,
+                      dat,
+                      
+                  ]
+
+                  
+              });
+             
+              setformations(
+                  {
+                      ...formations,
+                      tab: tab
+                  }
+              )
+          }
+      
+
+
+      }).catch(error => console.log(error))
+
+  }, [])
         return (
             <>
              <MDBCol md="6" className="search-marg">
@@ -51,38 +79,41 @@ const Formations = () =>  {
     </MDBCol>
             <div className="container-fluid d-flex justify-content-center">
                <div className="row">
-               { filterrst.map(data => { 
+               {  Object.entries(Object.assign({}, formations.tab)).map((key, value) => { 
                    return(
-               <div className="col-md-6" key={data.id}>
+               <div className="col-md-6" key={key[1].id}>
                  <div className="card text-center shadow" >
         <div className="overflow">
-        <Link to={"/afficheformation/"+data.id} ><img src={dev} alt="logo" className="card-img-top" /></Link>
+        <Link to={"/afficheformation/"+key[1].id} ><img height="190"
+         src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Formations%2F"+key[1].obj.Image+"?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"} 
+        alt="logo" className="card-img-top" /></Link>
         </div>
         <div className="card-body text-dark">
-            <h4 className="card-title"> <Link to={"/afficheformation/"+data.id} style={linkstyle}>{data.Title}</Link></h4>
+            <h4 className="card-title"> <Link to={"/afficheformation/"+key[1].id} style={linkstyle}>{key[1].obj.Domaine}</Link></h4>
             <p className="card-text text-dark">
-             {data.formateur}<br/>
-             {data.nombreplace}<br/>
-             {new Date(data.DateDebut.seconds * 1000).toLocaleDateString()}<br/>
-             {data.tags.map(t =>{
+             {key[1].obj.Nom}<br/>
+             {key[1].obj.DateDebut}<br/>
+             <hr/>
+             { Object.keys(key[1].obj.Tags).map(num => {
                return (
-                 <input type="button" className="myinput" value={'#'+t} key={t.id} />);
+                 <input key={key[1].obj.Tags[num].id} type="button" className="myinput" value={'#'+key[1].obj.Tags[num].title}  />);
              })}
 
             </p>
             <p className="card-text"></p>
-          
-           </div>
-           </div>
-                     {/*  <Card key={data.id} title={data.Title} lien="afficheformation" img={dev} description={data.Domaine} formateur={data.formateur}  nombreplace={data.nombreplace} id={data.id} date={new Date(data.DateDebut.seconds * 1000).toLocaleDateString()}/>*/} 
-                </div>
-                
-                   );
-               })} 
-               </div>
-            </div>
-            </>
-        )
-    }
 
-export default  Formations;
+           
+           
+        </div>
+    </div>
+                </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
+
+
+export default Formations;

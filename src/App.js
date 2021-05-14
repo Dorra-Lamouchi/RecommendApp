@@ -34,6 +34,7 @@ import SignUp from './components/Authentification/signUp';
 import SignIn from './components/Authentification/signIn';
 import { AuthProvider } from './components/Authentification/AuthContext';
 import PrivateRoute from './components/Authentification/PrivateRoute';
+import Preference from "./components/categories/Preferences";
 import RecruterSignup from "./components/Authentification/RecruterSignup";
 
 class App extends React.Component {
@@ -71,6 +72,10 @@ render(){
     <Route path="/ajoutemploi" exact component={addemploi}></Route>
     <Route path="/ajoutformation" exact component={addformation}></Route>
     <Route path="/affichecondidature" exact component={affichercandidature}></Route>
+
+
+
+
     <Footer />
     </div>
     </div>
@@ -83,5 +88,6 @@ render(){
 }
 }
 
+}
 
 export default App;

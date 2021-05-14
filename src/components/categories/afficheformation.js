@@ -1,11 +1,13 @@
+
 import React , {useState , useEffect} from 'react'
-import firebase from "../../firebase";
+import firebaseDb from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
-import dev from "../../assets/devper.jpg";
 import '../test.css'
-//import { getByPlaceholderText } from '@testing-library/dom';
+import { ClickAwayListener } from '@material-ui/core';
+import { Sync } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom'
  const Affichedetail = (id) => {
     const stylecol = {
         marginTop : 50,
@@ -15,46 +17,52 @@ import '../test.css'
         fontSize: '20px',
       }
     const [tags, settags] = useState([]);
-    const [datedeb, setdatedeb] = useState()
     const [formation, setformation] = useState({});
+
     const [like, setLike]= useState(0);
    
     function handleLike() {
         setLike(prevLike => prevLike + 1)
       }
 
+    var t;
+    var s_index;
+
     useEffect(() => {
-    const fetchData = async () => {
-        const db = firebase.firestore();
-        const data = db.collection("Formation").doc(id.match.params.id);
-        var messageRef = db.collection("Formation").doc(id.match.params.id)
-                .collection('tags').get();
-        console.log("le message du tags:", messageRef);
-        data.get().then((doc) => {
-            if (doc.exists) {
-                setformation(doc.data());
-                //console(formation.tags[0]);
-                //settags(doc.data().tags.map(tag => ({ ...tag.data()})));
-                //settags(doc.data().tags);
-                
-                console.log("Document data:", doc.data());
-                console.log(doc.data());
-                console.log('le date est:' ,new Date(doc.data().DateDebut.seconds * 1000).toLocaleDateString());
-                setdatedeb(new Date(doc.data().DateDebut.seconds * 1000).toLocaleDateString());
-                //console.log("Document image:", doc.data().getDownloadURL())
-          
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-      
-      };
-      fetchData();
+      firebaseDb.firestore().collection("Formations").doc(id.match.params.id).get().then(doc => {
+        if (doc.exists) {
+
+          setformation(doc.data().obj);
+          settags(doc.data().obj.Tags);
+           t = setTimeout(() => {
+
+            firebaseDb.firestore().collection('user').doc('1').get().then((d) => {
+             var s = d.data().Preferences;
+             doc.data().obj.Tags.forEach(element => {
+               if(s.includes(element.title)){
+                 s_index = s.lastIndexOf(element.title);
+                 s.splice(s_index,1)
+                s.unshift(element.title);
+                //console.log("*s", s)
+               }else{
+                s.unshift(element.title);
+               }
+
+              });
+
+              firebaseDb.firestore().collection('user').doc('1').update({
+                Preferences: s,
+              });
+            });
+
+          }, 3000);
+        }
+      });
     }, []);
-    
+    const history = useHistory()
+    history.listen((location) => {
+      clearTimeout(t);
+    })
       return(
         <div >
             <MDBCol md="6" className="search-marg">
@@ -67,42 +75,42 @@ import '../test.css'
         <input className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
      </div>
     </MDBCol>
-   
     <Container>
   <Row>
     <Col xs={6} md={4}>
-     <label className="title"><strong>{formation.Title}</strong></label>
-      <Image src={dev} thumbnail  />
+     <label className="title"><strong>{formation.Nom}</strong></label>
+      <Image 
+       src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Formations%2F"+formation.Image+"?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"} 
+       thumbnail  />
         <br/>
         <label className="mylabel"> Domaine: </label> <strong>{formation.Domaine}</strong>
-        <br/>
+        {/* <br/>
         <label className="mylabel"> Entreprise : </label> <strong>{formation.entreprise}</strong>
         <br/>
-        <label className="mylabel"> Formateur : </label> <strong>{formation.formateur}</strong>
+        <label className="mylabel"> Formateur : </label> <strong>{formation.formateur}</strong> */}
         <br/>
-        <label className="mylabel"> Date : </label> <strong>{datedeb}</strong>
+        <label className="mylabel"> Date : </label> <strong>{formation.DateDebut}</strong>
         <br/>
-        <label className="mylabel"> Durée : </label> <strong>{formation.duree}</strong>
+        <label className="mylabel"> Durée : </label> <strong>{formation.Duree}</strong>
         <br/>
-        <label className="mylabel"> Nombre de place Disponible : </label> <strong>{formation.nombreplace}</strong>
+        <label className="mylabel"> Nombre de place Disponible : </label> <strong>{formation.NbPlaces}</strong>
         <br/>
-        <label className="mylabel"> Prix : </label> <strong>{formation.prix}</strong><br/>
+        <label className="mylabel"> Prix : </label> <strong>{formation.Prix}</strong><br/>
         <label className="mylabel">Tags </label> 
-        <input type="button" className="myinput" value={formation.tags}  />
-        {/*tags.map((tag) => 
-        <input type="button" className="myinput" value={'#'+tag} key={tag.id} />
+        {Object.keys(tags).map((tag) => 
+        <input  key={tag.id} type="button" className="myinput" value={'#'+tags[tag].title}/>
         )}
-        {/*console.log('hi :',formation.tags[0])*/}
-   
     </Col>
     <Col style={stylecol}>
           <label className="mylabel">Description</label><br/>
-         <strong> {formation.description}</strong>
-          
+         <strong> {formation.Description}</strong>
+         <br/>
+        <label className="mylabel">Informations Supplémentaires:</label><br/>
+         <strong> {formation.others}</strong>
         </Col>
-        
         <Col>
         <button className="inscription-btn"><i class="fas fa-eye"></i>Rejoindre</button>
+
         <button className="like-btn" onClick={() => this.handleLike}> 
           <span className="span-text">
             {like}
@@ -110,19 +118,14 @@ import '../test.css'
         </button>
     
 
-        </Col>
 
-    
+        </Col>
     </Row>
-  
 </Container>
         <div>
-          
         </div>
-              
-           
-  
         </div>
     )
+
 }
-export default Affichedetail ;
+export default Affichedetail;
