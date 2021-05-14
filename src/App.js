@@ -27,57 +27,55 @@ import affichercandidature from './components/Candidatures/Afficher'
 
 import {
   BrowserRouter as Router,
-
   Route,
   Switch
-
-
 } from "react-router-dom";
 import SignUp from './components/Authentification/signUp';
 import SignIn from './components/Authentification/signIn';
 import { AuthProvider } from './components/Authentification/AuthContext';
-import SignAccueil from './components/signedAccueil';
 import PrivateRoute from './components/Authentification/PrivateRoute';
-import ForgotPassword from './components/Authentification/ForgotPassword';
 import Preference from "./components/categories/Preferences";
-
+import RecruterSignup from "./components/Authentification/RecruterSignup";
 
 class App extends React.Component {
 
+ 
+render(){
+  return (
+    <AuthProvider>
+    <Router>
+    <div className="App">
+       <div class="app-main__outer">
+        <div class="app-main__inner"></div>
+        <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+          <div class="row-9" >
 
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <div class="app-main__outer">
-            <div class="app-main__inner"></div>
-            <div class="tab-content">
-              <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
-                <div class="row-9" >
-
-                  <AuthProvider>
-                    <Switch>
-                      <Route path="/signup" component={SignUp}></Route>
-                      <Route path="/signin" component={SignIn}></Route>
-                      <PrivateRoute path="/signedaccueil" component={SignAccueil}></PrivateRoute>
-                      <Route path="/forgotpassword" Component={ForgotPassword}></Route>
-                    </Switch>
-                  </AuthProvider>
-
-                  <Route path="/" exact component={Accueil}></Route>
-                  <Route path="/emploi" exact component={Emploi}></Route>
-                  <Route path="/Formations" exact component={Formations}></Route>
-                  <Route path="/Stages" exact component={Stages}></Route>
-                  <Route path="/contact" exact component={Contact}></Route>
-                  <Route path="/afficheformation/:id" exact component={Affichedetail}></Route>
-                  <Route path="/affichestage/:id" exact component={Affichestage}></Route>
-                  <Route path="/afficheemploi/:id" exact component={Affichemploi}></Route>
+    <NavBar/>
+    
+      <Switch>
+        <Route path="/signup" component={SignUp}></Route>
+        <Route path="/recrutersignup" component={RecruterSignup}></Route>
+        <Route path="/signin" component={SignIn}></Route>
+      </Switch>
+    
+ 
+    <Route path="/" exact component={Accueil}></Route>
+    <Route path="/emploi" exact component={Emploi}></Route>
+    <Route path="/Formations" exact component={Formations}></Route>
+    <Route path="/Stages" exact component={Stages}></Route>
+    <Route path="/contact" exact component={Contact}></Route>
+    <PrivateRoute path="/afficheformation/:id" exact component={Affichedetail}></PrivateRoute>
+    <PrivateRoute path="/affichestage/:id" exact component={Affichestage}></PrivateRoute>
+    <PrivateRoute path="/afficheemploi/:id" exact component={Affichemploi}></PrivateRoute>
+    
+    <Route path="/ajoutemploi" exact component={addemploi}></Route>
+    <Route path="/ajoutformation" exact component={addformation}></Route>
+    <Route path="/affichecondidature" exact component={affichercandidature}></Route>
 
 
-                  <Route path="/ajoutemploi" exact component={addemploi}></Route>
-                  <Route path="/ajoutformation" exact component={addformation}></Route>
-                  <Route path="/affichecondidature" exact component={affichercandidature}></Route>
-                  <Route path="/preference" exact component={Preference}></Route>
+
+
     <Footer />
     </div>
     </div>
@@ -85,7 +83,9 @@ class App extends React.Component {
     </div>
     </div>
   </Router>
+  </AuthProvider>
   );
+}
 }
 
 }

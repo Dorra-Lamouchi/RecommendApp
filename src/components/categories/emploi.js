@@ -6,7 +6,7 @@ import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
 import {Link} from 'react-router-dom';
-import NavBar from '../../headers/nav';
+
 const Emploi = () =>  {
   const linkstyle = {
     color : 'black',
@@ -102,6 +102,8 @@ const Emploi = () =>  {
                </div>
             </div>
             </>
+
         )
     }
+
 export default Emploi;

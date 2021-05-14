@@ -3,20 +3,35 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    height: 110vh;
+    height: 120vh;
     padding-left: 150px;
     padding-top: 20px;
   }
+  #container2  {
+    background-image: url("./../../assets/back.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 180vh;
+    padding-left: 150px;
+    padding-top: 20px;
+  }
+#container3 {
+  height: 120vh;
+}
 #Card {
   min-width: 320px;
-  height: 670px;
+  height: 750px;
 }
 
 #Card2 {
   min-width: 320px;
   height: 420px;
 }
-
+#CardRecruter{
+  min-width: 320px;
+  height: 1000px;
+}
 #Form{
   padding-left: 10px;
   padding-right: 10px;

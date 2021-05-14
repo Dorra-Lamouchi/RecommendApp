@@ -18,8 +18,16 @@ import { useHistory } from 'react-router-dom'
       }
     const [tags, settags] = useState([]);
     const [formation, setformation] = useState({});
+
+    const [like, setLike]= useState(0);
+   
+    function handleLike() {
+        setLike(prevLike => prevLike + 1)
+      }
+
     var t;
     var s_index;
+
     useEffect(() => {
       firebaseDb.firestore().collection("Formations").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
@@ -102,6 +110,15 @@ import { useHistory } from 'react-router-dom'
         </Col>
         <Col>
         <button className="inscription-btn"><i class="fas fa-eye"></i>Rejoindre</button>
+
+        <button className="like-btn" onClick={() => this.handleLike}> 
+          <span className="span-text">
+            {like}
+          </span>
+        </button>
+    
+
+
         </Col>
     </Row>
 </Container>

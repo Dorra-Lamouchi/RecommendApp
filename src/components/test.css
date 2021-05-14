@@ -79,6 +79,29 @@ border-radius: 2rem;
     
 }
 
+
+.like-btn{
+    width: 60px;
+    height: 60px;
+    margin: 1rem;
+    background-image: url('../assets/like.ico');
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center center;
+}
+
+
+.like-btn:active{
+    border: 1px solid blue;
+  background-color: cornsilk;
+}
+
+.span-text {
+    color:aliceblue;
+    font-family: sans-serif;
+    text-align: center;
+}
+
 .stylelink:hover{
     text-decoration: underline;
 
@@ -175,3 +198,4 @@ button i {
 .results ul li:hover {
   background: #ececec
 }
+

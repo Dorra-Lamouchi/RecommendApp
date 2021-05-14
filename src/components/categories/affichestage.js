@@ -5,6 +5,7 @@ import { MDBCol, MDBIcon } from "mdbreact";
 import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
 import '../test.css'
+import c from "classnames";
 
 const Affichestage  = (id) => {
     const stylecol = {
@@ -14,8 +15,16 @@ const Affichestage  = (id) => {
         textDecoration : 'Bold',
         fontSize: '20px',
       }
+
+     
+    
+    //const [tags, settags] = useState({});
+    const [formation, setformation] = useState({});
+    const [datedeb, setdatedeb] = useState();
+
     const [emploi, setemploi] = useState({});
     const [tags, settags] = useState({});
+
     useEffect(() => {
       firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
@@ -69,6 +78,7 @@ const Affichestage  = (id) => {
         <Col>
         <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button>
         </Col>
+
     </Row>
 </Container>
         <div>

@@ -3,7 +3,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./style.css";
-import NavBar from '../../headers/nav'
 
 
 export default function Signin() {
@@ -13,7 +12,8 @@ export default function Signin() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-
+  const { currentUser } = useAuth()
+  
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -21,7 +21,8 @@ export default function Signin() {
       setError("")
       setLoading(true)
       await signin(emailRef.current.value, passwordRef.current.value)
-      history.push("/signedaccueil")
+      history.push("/")
+      console.log(currentUser.email)
     } catch {
       setError("Failed to login")
     }
@@ -29,9 +30,7 @@ export default function Signin() {
     setLoading(false)
   }
 
-  return (
-    <div> 
-      <NavBar />
+  return ( 
     <div id="container" className="d-flex " >
       <Card id="Card2">
         <Card.Body>
@@ -49,16 +48,13 @@ export default function Signin() {
             <Button id="Button" disabled={loading} className="w-50" type="submit">
               Sign In
             </Button>
-            <div className="w-100 text-center mt-3">
-              <Link to="/forgotpassword">Forgot Password?</Link>
-            </div>
+            
             <div className="w-100 text-center mt-2">
                 You need an account? <Link to="/signup">Sign Up</Link>
             </div>
           </Form> 
         </Card.Body>
       </Card>   
-    </div>
     </div>
   )
 }
