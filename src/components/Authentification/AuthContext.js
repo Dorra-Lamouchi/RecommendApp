@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react"
-import { auth } from "../../firebase"
+import firebaseDb,{ auth } from "../../firebase"
 
 const AuthContext = React.createContext()
-
+const db= firebaseDb.firestore()
 export function useAuth() {
   return useContext(AuthContext)
 }
@@ -11,10 +11,29 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
+  async function signup(newUser) {
+    return auth.createUserWithEmailAndPassword(newUser.Email, newUser.Password).then(resp => {
+      return db.collection('User').doc(resp.user.uid).set({
+        nom: newUser.Nom,
+        tel: newUser.Phone,
+        email: newUser.Email,
+        status: newUser.Status
+      });
+    })
   }
 
+  async function signupRec(newUser) {
+    return auth.createUserWithEmailAndPassword(newUser.Email, newUser.Password).then(resp => {
+      return db.collection('recruter').doc(resp.user.uid).set({
+        nom: newUser.Nom,
+        tel: newUser.Phone,
+        email: newUser.Email,
+        status: newUser.Status,
+        societe: newUser.Company,
+        domaine: newUser.Field
+      });
+    })
+  }
   function signin(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
   }
@@ -51,8 +70,8 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+    const unsubscribe = auth.onAuthStateChanged(newUser => {
+      setCurrentUser(newUser)
       setLoading(false)
     })
 
@@ -63,6 +82,7 @@ export function AuthProvider({ children }) {
     currentUser,
     signin,
     signup,
+    signupRec,
     logout,
     resetPassword,
     updateEmail,

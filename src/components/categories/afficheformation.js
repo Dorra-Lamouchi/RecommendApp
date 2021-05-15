@@ -1,4 +1,3 @@
-
 import React , {useState , useEffect} from 'react'
 import firebaseDb from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
@@ -8,7 +7,14 @@ import '../test.css'
 import { ClickAwayListener } from '@material-ui/core';
 import { Sync } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom'
- const Affichedetail = (id) => {
+import StripeCheckout from "react-stripe-checkout";
+import Modal from 'react-modal';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
+
+const Affichedetail = (id) => {
     const stylecol = {
         marginTop : 50,
         color : 'black ',
@@ -16,14 +22,33 @@ import { useHistory } from 'react-router-dom'
         textDecoration : 'Bold',
         fontSize: '20px',
       }
+
     const [tags, settags] = useState([]);
     const [formation, setformation] = useState({});
+    const nblike=0;
+    const [like, setLike]=useState(nblike)
+    const [liked, setLiked]= useState(true)
+    
+    function handleClick(){
+      setLiked(liked => !liked)
+      setLike (liked ? prevLike => prevLike + 1 : prevLike => prevLike - 1)
+    }
+    async function handleToken(token) {
+      console.log({token})      
+      toast("Success! Check email for details", { type: "success" });
+      setModalIsOpenToFalse()
+    }
 
-    const [like, setLike]= useState(0);
-   
-    function handleLike() {
-        setLike(prevLike => prevLike + 1)
-      }
+    const [modalIsOpen,setModalIsOpen] = useState(false);
+
+    const setModalIsOpenToTrue =()=>{
+        setModalIsOpen(true)
+        
+    }
+
+    const setModalIsOpenToFalse =()=>{
+        setModalIsOpen(false)
+    }
 
     var t;
     var s_index;
@@ -109,15 +134,22 @@ import { useHistory } from 'react-router-dom'
          <strong> {formation.others}</strong>
         </Col>
         <Col>
-        <button className="inscription-btn"><i class="fas fa-eye"></i>Rejoindre</button>
-
-        <button className="like-btn" onClick={() => this.handleLike}> 
+        
+        <button className="inscription-btn" onClick={setModalIsOpenToTrue}><i class="fas fa-eye"></i>Rejoindre</button>
+        <Modal className="Modal" isOpen={modalIsOpen} onRequestClose={()=> setModalIsOpen(false)}>
+                <button onClick={setModalIsOpenToFalse}>x</button>
+                <h4><center> Paiement </center></h4>
+                <p> êtes-vous sûr de vouloir rejoindre cette formation ?</p>
+                <StripeCheckout
+                stripeKey="pk_test_51Ir81fBlXB6unawPCVVOLK5nakA3m6vVH6HUwErRzDnA2TO4Y5RN6w9ALLTcceon3Ku89LlmoA5mRSocerzzZ3Qq00SlIFiZIx"
+                token={handleToken}
+                />  
+        </Modal>
+        <button className="like-btn" onClick={handleClick}> 
           <span className="span-text">
             {like}
           </span>
         </button>
-    
-
 
         </Col>
     </Row>

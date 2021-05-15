@@ -16,6 +16,15 @@ const Affichemploi  = (id) => {
       }
     const [tags, settags] = useState({});
     const [emploi, setemploi] = useState({});
+    const nblike=0;
+    const [like, setLike]=useState(nblike)
+    const [liked, setLiked]= useState(true)
+    
+    function handleClick(){
+      setLiked(liked => !liked)
+      setLike (liked ? prevLike => prevLike + 1 : prevLike => prevLike - 1)
+    }
+
     useEffect(() => {
       firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
@@ -74,6 +83,11 @@ const Affichemploi  = (id) => {
         </Col>
         <Col>
         <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button> 
+        <button className="like-btn" onClick={handleClick}> 
+          <span className="span-text">
+            {like}
+          </span>
+        </button>
         </Col>
     </Row>
 </Container>
