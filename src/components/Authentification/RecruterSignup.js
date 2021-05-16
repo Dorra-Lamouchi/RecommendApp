@@ -4,14 +4,15 @@ import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./style.css";
 
-
-export default function Signup() {
+export default function RecruterSignup() {
   const nameRef = useRef()
   const phoneRef = useRef()
+  const domaineRef = useRef()
+  const companyRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
+  const {signupRec} = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -20,7 +21,9 @@ export default function Signup() {
     Phone:'',
     Email: '',
     Password: '',
-    Status: 'user',
+    Field: '',
+    Company: '',
+    Status: 'recruter',
     Preferences:[]
     }
   const [Values, setValues] = useState(initialFieldValues)
@@ -30,17 +33,18 @@ export default function Signup() {
             ...Values,
             [name]: value
         })
-}
+      }
+
   async function handleSubmit(e) {
     e.preventDefault()
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
-
+    
     if ((parseInt(phoneRef.current.value).toString().length !== phoneRef.current.value.length) || (phoneRef.current.value.length !== 8)) {
-      return setError("Phone number invalid")
-    }
+        return setError("Phone number invalid")
+      }
 
     if (passwordRef.current.value.length < 6) {
       return setError("Password too short")
@@ -48,26 +52,23 @@ export default function Signup() {
     try {
       setError("")
       setLoading(true)
-      await signup(Values)
+      await signupRec(Values)
       history.push("/")
     } catch {
       setError("Failed to create an account")
     }
 
     setLoading(false)
-  
-  console.log(Values)
-  
-  
-}
-  return (
+  }
 
-    <div id="container" className="d-flex " >
-      <Card id="Card">
+  return (
+    <div>
+    <div id="container2" className="d-flex " >
+      <Card id="CardRecruter">
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up User</h2>
+          <h2 className="text-center mb-4">Sign Up Recruter</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form id="Form" onSubmit={e => handleSubmit(e)}>
+          <Form id="Form" onSubmit={handleSubmit}>
             <Form.Group id="name">
               <Form.Label>Full Name</Form.Label>
               <Form.Control type="text" ref={nameRef} name='Nom' onChange={handleInputChange} required />
@@ -75,6 +76,14 @@ export default function Signup() {
             <Form.Group id="phone">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control type="text" ref={phoneRef} name='Phone' onChange={handleInputChange} required />
+            </Form.Group>
+            <Form.Group id="domaine">
+              <Form.Label>Field</Form.Label>
+              <Form.Control type="text" ref={domaineRef} name='Field' onChange={handleInputChange} required />
+            </Form.Group>
+            <Form.Group id="societe">
+              <Form.Label>Company</Form.Label>
+              <Form.Control type="text" ref={companyRef} name='Company' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
@@ -95,13 +104,14 @@ export default function Signup() {
               Already have an account? <Link to="/signin">Log In</Link>
             </div>
             <div className="w-100 text-center mt-2">
-              You want a professional account? <Link to="/recrutersignup">Pro Version</Link>
+              You want a regular user account? <Link to="/signup">Regular Version</Link>
             </div>
           </Form>
          
         </Card.Body>
       </Card>
-
+      
+    </div>
     </div>
   )
-}
+  }

@@ -27,31 +27,109 @@ var filtreformation=[];
    var i;
    var pos;
    const ListTags = [
-    'Artificial Intelligence',
-    'Finance',
-    'offres job',
-    'employee',
-    'gestion',
-   "informatique",
-   'react',
-   'nodejs', 
-   'Angular',
-   'Mecanique', 
-   'electronique', 
-  'developer', 
-   'Inception',
-   'investisement',
-   "banque", 
-   'manager',
-    'web', 
-   'android', 
-  'JOB', 
-  'Employee', 
+    'Artificial Intelligence', 
+   'design', 
+  'Formation', 
+  'training',
+   'technical', 
+   "marketing", 
+ 'reporting', 
+  'research', 
+ 'analytics', 
+  'Fengineering', 
+  'finance', 
+  'project management', 
+ 'health', 
+  'customer service', 
+  'safety', 
+"certification",
+   'legal', 
+ 'database',
+  'coaching', 
+   'logistics', 
+   'mobile', 
+   'C (programming language)',
+ 'human resources', 
+   "recruitment", 
+'management experience', 
+  'programming', 
+  'agile',
+ 'business development', 
+  'audit',
+  'architecture',
+'governance', 
+'continuous improvement',
+ 'product development', 
+   'networking', 
+  'CRM', 
+   'computer science',
+  'SQL', 
+  'video', 
+ 'installation', 
+ 'data analysis', 
+ 'statistics',
+ 'coding', 
+'Microsoft Office', 
+'frameworks',
+  'BI', 
+  'HTML', 
+  'internship',
+  'Stage',
+  'software development',
+   'oracle', 
+  'Alien', 
+'Java', 
+ 'teaching', 
+'ERP', 
+'Javascript', 
+  'Tdigital marketing', 
+  'Linux', 
+  'SaaS', 
+ 'mathematics', 
+  'project management skills',
+  'mechanical engineering', 
+ 'android',
+ 'Adobe',
+  'ISO',
+   'C++',
+   'scrum',
+  'e-commerce' ,
+  'user experience',
+  'Python',
+ 'technical skills',
+  'electrical engineering',
+  'Microsoft Word',
+  'C#',
+  'UX',
+   'physics',
+   'leadership development',
+  'AWS',
+ 'UI',
+  'front-end',
+   '.NET',
+  'MATLAB',
+  'API',
+  'photography',
+ 'internal communications',
+'chemicals',
+  'OS',
+  'ETL',
+  'telecom',
+ 'research projects',
+  'big data',
+  'VMware',
+  "statistical analysis",
+  'SolidWorks',
+  'datasets',
+   'Unix',
+  'information system',
+ 'SQL server',
+  'machine learning',
+   'DNS' ,
 ];
 
     useEffect(() => {
       var tab1 = [];
-      var tabtags=[];
       const listepreferences = () =>{
        firebaseDb.firestore()
         .collection("user")
@@ -79,7 +157,6 @@ var filtreformation=[];
           } else {
               // console.log(snapshot)
               var dat;
-              var mytags;
               snapshot.forEach(doc => {
                   dat = { ...doc.data(), id: doc.id };
                   tab1 = [
@@ -217,7 +294,7 @@ var filtreformation=[];
       {
         params: {
           q: e,
-          target: 'fr',
+          target: 'en',
           key: 'AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM'
         }
       }
@@ -385,9 +462,9 @@ Object.keys(formtag).map(p =>{
                 }
                </h4>
                      <p className="card-text text-dark">
-                      {formtag[p].obj.Nom}<br/>
+                      {formtag[p].obj.Domaine}<br/>
                       {formtag[p].obj.Description}<br/>
-                     <HiClock></HiClock><label style={{color : 'grey'}}>Publié le:</label> {new Date(formtag[p].obj.DatePost.seconds * 1000).toLocaleDateString()}
+                     <HiClock></HiClock><label style={{color : 'grey'}}>Publié le:</label> {formtag[p].obj.DatePost}
                       <hr/>
                       
                       {Object.keys(formtag[p].obj.Tags).map(num => {
@@ -475,9 +552,9 @@ Object.keys(tabfiltre).map(p =>{
               }
              </h4>
                    <p className="card-text text-dark">
-                    {tabfiltre[p].obj.Nom}<br/>
+                    {tabfiltre[p].obj.Domaine}<br/>
                     {tabfiltre[p].obj.Description}<br/>
-                   <HiClock></HiClock><label style={{color : 'grey'}}>Publié le:</label> {new Date(tabfiltre[p].obj.DatePost.seconds * 1000).toLocaleDateString()}
+                   <HiClock></HiClock><label style={{color : 'grey'}}>Publié le:</label> {tabfiltre[p].obj.DatePost}
                     <hr/>
                     
                     {Object.keys(tabfiltre[p].obj.Tags).map(num => {

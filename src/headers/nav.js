@@ -1,37 +1,42 @@
-
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom'
+import React ,{ useState } from 'react'
+import {Link} from 'react-router-dom'
 import './nav.css'
-const NavBar = () => {
-  const stylelink = {
-    textDecoration: 'none',
-    color: 'white ',
- }
-    return(
-<div>
-  <Navbar bg="dark" variant="dark"  >
-    <Navbar.Brand href="#home">Mayfoutek~Chay</Navbar.Brand>
-    <Nav className="mr-auto" >
-      <Nav.Link ><Link style={stylelink} to="/accueil">Accueil</Link></Nav.Link>
-      <Nav.Link><Link style={stylelink} to="/Stages">Stages</Link></Nav.Link>
-      <Nav.Link><Link style={stylelink} to="/formations">Formations</Link></Nav.Link>
-      <Nav.Link ><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></Nav.Link>
-      <Nav.Link><Link  style={stylelink} to="/contact">Contact</Link></Nav.Link>
-       <Nav.Link><Link style={stylelink} to="/ajoutemploi">Ajouter Offre de travail</Link></Nav.Link>
-          <Nav.Link><Link style={stylelink} to="/ajoutformation">Ajouter Formation</Link></Nav.Link>
-          <Nav.Link><Link style={stylelink} to="/affichecondidature">Afficher les candidatures</Link></Nav.Link>
-    </Nav>
-    <Form inline>
-      <Nav.Link ><Link style={stylelink} to="/signin"><button className="btnn "> Se connecter</button></Link></Nav.Link> &nbsp;
-      <Nav.Link ><Link style={stylelink} to="/signup"><button className="btn2 "> S'inscrire </button></Link></Nav.Link>
-    </Form>
-  </Navbar>
- </div>
+import SignedInLinksRec from './SignedInLinksRec'
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
+import {useAuth} from './../components/Authentification/AuthContext'
+import firebaseDb from '../firebase'
 
-  );
+
+const NavBar = () => {
+  const [Status, setStatus] = useState('')
+  const { currentUser } = useAuth()
+if (currentUser){
+  var userRef = firebaseDb.firestore().collection('recruter').doc(currentUser.uid);
+  var userRef2 = firebaseDb.firestore().collection('User').doc(currentUser.uid);
+  userRef.get().then(function(doc) {
+    if (doc.exists) {
+        //console.log("Users status is:", doc.data().status);
+        setStatus(doc.data().status) 
+    } else {
+      userRef2.get().then(function(doc) {
+        if (doc.exists) {
+          setStatus(doc.data().status) 
+        } 
+    })
+  }
+})
+}
+  const links = currentUser ? (Status === 'recruter' ? <SignedInLinksRec /> : <SignedInLinks />) : <SignedOutLinks />
+  return (
+    <nav className="navbar-custom nav-wrapper grey darken-3">
+      <div className="container">
+        <Link to="/" className="brand-logo left">Mayfoutek~Chay</Link>
+        {links}
+      </div>
+    </nav>
+  )
+
 }
 
-export default NavBar; 
-
+export default NavBar
