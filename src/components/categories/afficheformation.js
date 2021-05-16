@@ -129,8 +129,10 @@ const Affichedetail = (id) => {
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
            t = setTimeout(() => {
+
             
             firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
+
              var s = d.data().Preferences;
              console.log(s)
             doc.data().obj.Tags.forEach(element => {
@@ -139,14 +141,15 @@ const Affichedetail = (id) => {
                  s.splice(s_index,1)
                 s.unshift(element.title);
 
-                //console.log("*s", s)
                }else{
                 s.unshift(element.title);
                }
 
               });
+
               console.log("new s :", s)
                firebaseDb.firestore().collection('User').doc(currentUser.uid).update({
+
                 Preferences: s,
               });
             });

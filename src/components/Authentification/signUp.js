@@ -11,7 +11,7 @@ export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const {signup} = useAuth()
+  const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -37,10 +37,10 @@ export default function Signup() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
-    
+
     if ((parseInt(phoneRef.current.value).toString().length !== phoneRef.current.value.length) || (phoneRef.current.value.length !== 8)) {
-        return setError("Phone number invalid")
-      }
+      return setError("Phone number invalid")
+    }
 
     if (passwordRef.current.value.length < 6) {
       return setError("Password too short")
@@ -61,6 +61,7 @@ export default function Signup() {
   
 }
   return (
+
     <div id="container" className="d-flex " >
       <Card id="Card">
         <Card.Body>
@@ -100,7 +101,7 @@ export default function Signup() {
          
         </Card.Body>
       </Card>
-      
+
     </div>
   )
 }
