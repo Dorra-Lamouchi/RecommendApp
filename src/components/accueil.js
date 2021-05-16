@@ -8,9 +8,10 @@ import { useLocation } from "react-router-dom";
 import { VscSearch } from "react-icons/vsc";
 import { HiTranslate, HiClock, HiViewGridAdd, HiOutlineViewList, HiOutlineTag } from "react-icons/hi";
 import axios from 'axios';
+import { useAuth } from "../components/Authentification/AuthContext"
+
 const Accueil = () => {
   const location = useLocation();
-  const [userid, setuserid] = useState('g4Gkeh6ULAVIU1IvOqlwNE7CcMp2')
   var tabg = [];
   let formtag = [];
   var tabfiltre = [];
@@ -18,6 +19,9 @@ const Accueil = () => {
   const linkstyle = {
     color: 'black',
   }
+  const { currentUser } = useAuth()
+  const [userid, setuserid] = useState(currentUser.uid)
+
   const [showpost, setshowpost] = useState(true)
   const [formations, setformations] = useState([]);
   const [Emplois, setEmplois] = useState([]);
@@ -132,7 +136,7 @@ const Accueil = () => {
     var tab1 = [];
     const listepreferences = () => {
       firebaseDb.firestore()
-        .collection("user")
+        .collection("User")
         .doc(userid)
         .get().then((snap) => {
           setlistperferences(snap.data().Preferences);
@@ -147,37 +151,37 @@ const Accueil = () => {
 
     const fetchData = async () => {
       firebaseDb.firestore()
-      .collection("OffresEmploi")
-      .get()
-      .then(snapshot => {
+        .collection("OffresEmploi")
+        .get()
+        .then(snapshot => {
 
-        if (snapshot.empty) {
-          //console.log("empty snap")
-          setEmplois({
-          })
-        } else {
-          // console.log(snapshot)
-          var dat;
-          snapshot.forEach(doc => {
-            dat = { ...doc.data(), id: doc.id };
-            tab1 = [
-              ...tab1,
-              dat,
-            ]
+          if (snapshot.empty) {
+            //console.log("empty snap")
+            setEmplois({
+            })
+          } else {
+            // console.log(snapshot)
+            var dat;
+            snapshot.forEach(doc => {
+              dat = { ...doc.data(), id: doc.id };
+              tab1 = [
+                ...tab1,
+                dat,
+              ]
 
-          });
+            });
 
-          setformations(
-            {
-              ...formations,
-              tab1: tab1,
+            setformations(
+              {
+                ...formations,
+                tab1: tab1,
 
-            }
-          )
+              }
+            )
 
-        }
+          }
 
-      }).catch(error => console.log(error));
+        }).catch(error => console.log(error));
     }
     const fetchDataFormations = async () => {
       firebaseDb.firestore()
