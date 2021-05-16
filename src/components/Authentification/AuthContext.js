@@ -17,7 +17,8 @@ export function AuthProvider({ children }) {
         nom: newUser.Nom,
         tel: newUser.Phone,
         email: newUser.Email,
-        status: newUser.Status
+        status: newUser.Status,
+        Preferences: newUser.Preferences,
       });
     })
   }
@@ -30,7 +31,8 @@ export function AuthProvider({ children }) {
         email: newUser.Email,
         status: newUser.Status,
         societe: newUser.Company,
-        domaine: newUser.Field
+        domaine: newUser.Field,
+        Preferences: newUser.Preferences,
       });
     })
   }

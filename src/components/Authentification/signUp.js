@@ -21,7 +21,7 @@ export default function Signup() {
     Email: '',
     Password: '',
     Status: 'user',
-    Preferences:''
+    Preferences:[]
     }
   const [Values, setValues] = useState(initialFieldValues)
   const handleInputChange = e => {

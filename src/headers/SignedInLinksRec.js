@@ -29,10 +29,10 @@ const SignedInLinksRec = () => {
         <li><Link style={stylelink} to="/Stages">Stages</Link></li>  
         <li><Link style={stylelink} to="/formations">Formations</Link></li>  
         <li><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></li>  
-        <li><Link  style={stylelink} to="/contact">Contact</Link></li>
         <li><Link style={stylelink} to="/ajoutemploi"> Ajouter emploi</Link></li>
         <li><Link style={stylelink} to="/ajoutformation"> Ajouter Formation </Link></li>
         <li><Link style={stylelink} to="/affichecondidature"> Candidatures </Link></li>
+        <li><Link  style={stylelink} to="/contact">Contact</Link></li>
       </ul>
       <ul className="right">
         <li><NavLink variant="link" to="/signin" onClick={handleLogout}>Log Out</NavLink></li>

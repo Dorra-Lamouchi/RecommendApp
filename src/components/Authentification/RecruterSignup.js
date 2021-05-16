@@ -24,7 +24,7 @@ export default function RecruterSignup() {
     Field: '',
     Company: '',
     Status: 'recruter',
-    Preferences:''
+    Preferences:[]
     }
   const [Values, setValues] = useState(initialFieldValues)
   const handleInputChange = e => {
