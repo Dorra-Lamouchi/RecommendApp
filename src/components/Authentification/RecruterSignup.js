@@ -3,7 +3,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import "./style.css";
-import db from "../../firebase"
 
 export default function RecruterSignup() {
   const nameRef = useRef()
@@ -13,11 +12,29 @@ export default function RecruterSignup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const {signup} = useAuth()
+  const {signupRec} = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-  const form = document.querySelector('#Form');
+  const initialFieldValues = {
+    Nom: '',
+    Phone:'',
+    Email: '',
+    Password: '',
+    Field: '',
+    Company: '',
+    Status: 'recruter',
+    Preferences:[]
+    }
+  const [Values, setValues] = useState(initialFieldValues)
+  const handleInputChange = e => {
+    var { name, value } = e.target
+    setValues({
+            ...Values,
+            [name]: value
+        })
+      }
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -35,7 +52,7 @@ export default function RecruterSignup() {
     try {
       setError("")
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await signupRec(Values)
       history.push("/")
     } catch {
       setError("Failed to create an account")
@@ -43,17 +60,6 @@ export default function RecruterSignup() {
 
     setLoading(false)
   }
-
-  /*form.addEventListener('submit',(e) => {
-    e.preventDefault();
-    db.collection('recruter').add({
-      nom: form.nameRef.value,
-      email: form.emailRef.value,
-      tel: form.phoneRef.value,
-      domaine: form.domaineRef.value,
-      societe: form.companyRef.value
-    })
-  })*/
 
   return (
     <div>
@@ -65,27 +71,27 @@ export default function RecruterSignup() {
           <Form id="Form" onSubmit={handleSubmit}>
             <Form.Group id="name">
               <Form.Label>Full Name</Form.Label>
-              <Form.Control type="text" ref={nameRef} required />
+              <Form.Control type="text" ref={nameRef} name='Nom' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="phone">
               <Form.Label>Phone Number</Form.Label>
-              <Form.Control type="text" ref={phoneRef} required />
+              <Form.Control type="text" ref={phoneRef} name='Phone' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="domaine">
               <Form.Label>Field</Form.Label>
-              <Form.Control type="text" ref={domaineRef} required />
+              <Form.Control type="text" ref={domaineRef} name='Field' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="societe">
               <Form.Label>Company</Form.Label>
-              <Form.Control type="text" ref={companyRef} required />
+              <Form.Control type="text" ref={companyRef} name='Company' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control type="email" ref={emailRef} name='Email' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control type="password" ref={passwordRef} name='Password' onChange={handleInputChange} required />
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>Password Confirmation</Form.Label>
@@ -108,4 +114,4 @@ export default function RecruterSignup() {
     </div>
     </div>
   )
-}
+  }

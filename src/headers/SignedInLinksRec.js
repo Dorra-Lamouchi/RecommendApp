@@ -3,7 +3,7 @@ import { Link, NavLink, useHistory } from 'react-router-dom'
 import {useAuth} from '../components/Authentification/AuthContext'
 import './nav.css'
 
-const SignedInLinks = () => {
+const SignedInLinksRec = () => {
   const stylelink = {
     textDecoration : 'none',
     color : 'white ', 
@@ -29,6 +29,9 @@ const SignedInLinks = () => {
         <li><Link style={stylelink} to="/Stages">Stages</Link></li>  
         <li><Link style={stylelink} to="/formations">Formations</Link></li>  
         <li><Link  style={stylelink} to="/emploi">Offres d'Emplois</Link></li>  
+        <li><Link style={stylelink} to="/ajoutemploi"> Ajouter emploi</Link></li>
+        <li><Link style={stylelink} to="/ajoutformation"> Ajouter Formation </Link></li>
+        <li><Link style={stylelink} to="/affichecondidature"> Candidatures </Link></li>
         <li><Link  style={stylelink} to="/contact">Contact</Link></li>
       </ul>
       <ul className="right">
@@ -39,4 +42,4 @@ const SignedInLinks = () => {
   )
 }
 
-export default SignedInLinks
+export default SignedInLinksRec
