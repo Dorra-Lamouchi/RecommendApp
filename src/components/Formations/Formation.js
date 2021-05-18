@@ -77,7 +77,7 @@ function Formation(props) {
         { title: 'statistics' },
         { title: 'coding' },
         { title: 'Microsoft Office' },
-        { title: 'frameworks' },
+        { title: 'framework' },
         { title: 'BI' },
         { title: 'HTML' },
         { title: 'internship' },
@@ -98,7 +98,11 @@ function Formation(props) {
         { title: 'android' },
         { title: 'Adobe' },
         { title: 'ISO' },
-        { title: 'C' },
+        { title: 'langage ' },
+        { title: 'programme ' },
+        { title: 'étudiante ' },
+        { title: 'étudiant ' },
+        { title: 'student ' },
         { title: 'scrum' },
         { title: 'e-commerce' },
         { title: 'user experience' },
@@ -142,6 +146,7 @@ function Formation(props) {
         Duree: '',
         NbPlaces: '',
         DateDebut: '',
+        DatePost: '',
         Prix: '',
         Description: '',
         others: '',
@@ -184,12 +189,15 @@ function Formation(props) {
     const handleFileChange = e => {
         var { name, value } = e.target
 
+        const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
 
         setfile(e.target.files[0]);
         const f = e.target.files[0].name;
         setValues({
             ...Values,
             Image: f,
+            DatePost: d,
+
         })
     }
 
@@ -275,6 +283,7 @@ function Formation(props) {
 
     }
     const addOrEdit = obj => {
+        const nblike = 0;
         const filename = Values.Image;
         const storageRef = firebaseDb.storage().ref("images Formations");
         const fileRef = storageRef.child(filename);
@@ -284,6 +293,7 @@ function Formation(props) {
         });
         const db = firebaseDb.firestore();
         db.collection("Formations").add({
+            nblike,
             obj,
         });
 
@@ -303,15 +313,15 @@ function Formation(props) {
 
     return (
         <div >
-            <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} >
+            <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} className="myform">
 
                 <Grid container spacing={2} direction='column' alignItems="center" justify="space-evenly">
-                    <fieldset>
-                        <legend>Informations Publication</legend>
+                    <fieldset className="fieldset">
+                        <legend className="legend">Informations Publication</legend>
                         <Grid item container spacing={2} justify="space-evenly" alignItems="center" >
                             <Grid item container spacing={0} justify="space-evenly"  >
                                 <Grid item xs={3} >
-                                    <label>Nom de publication : </label>
+                                    <label className="label">Nom de publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Nom" value={Values.Nom} name="Nom" className="field" onChange={handleInputChange} />
@@ -319,7 +329,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Domaine publication : </label>
+                                    <label className="label">Domaine publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className="field">
@@ -347,7 +357,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Type de  publication: </label>
+                                    <label className="label">Type de  publication: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="Type" value={Values.Type} onChange={handleInputChange}>
@@ -360,7 +370,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Importer une image:</label>
+                                    <label className="label">Importer une image:</label>
                                 </Grid>
                                 <Grid item xs={7} style={{ 'paddingTop': '25px' }}>
 
@@ -382,13 +392,13 @@ function Formation(props) {
 
                         </Grid>
                     </fieldset>
-                    <fieldset>
-                        <legend>Formation</legend>
+                    <fieldset className="fieldset">
+                        <legend className="legend">Formation</legend>
                         <Grid item container spacing={2} justify="space-evenly">
 
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label>Le durée de la formation :   </label>
+                                    <label className="label" className="label">Le durée de la formation :   </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Durée" name="Duree" className="field" value={Values.Duree} type="number" onChange={handleInputChange} />
@@ -396,7 +406,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Le nombre des places :  </label>
+                                    <label className="label" >Le nombre des places :  </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Nombre des places" value={Values.NbPlaces} name="NbPlaces" className="field" type="number" onChange={handleInputChange} />
@@ -404,7 +414,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Quel est la date de debut<br /> de la formation: </label>
+                                    <label className="label" >Quel est la date de debut<br /> de la formation: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required name="DateDebut" label="date" value={Values.DateDebut} className="field" type="date" onChange={handleInputChange} focused style={{ "marginTop": '0px' }} />
@@ -412,7 +422,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Le prix:</label>
+                                    <label className="label" >Le prix:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Prix" name="Prix" value={Values.Prix} className="field" type="number" onChange={handleInputChange} />
@@ -420,7 +430,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Description</label>
+                                    <label className="label" >Description</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     {/* <TextField required label="Prix" name="Prix" value={Values.Prix} className="field" type="number" onChange={handleInputChange} /> */}
@@ -439,7 +449,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
+                                    <label className="label" >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <div className="autocomplete" style={{ "marginTop": '23px' }}>
@@ -467,7 +477,7 @@ function Formation(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" alignItems="center" >
                                 <Grid item xs={4} >
-                                    <Button variant="contained" color="primary" style={{ 'marginTop': '50px' }} type="submit" value='Postuler' title="Postuler" >
+                                    <Button variant="contained" style={{ 'marginTop': '50px', 'backgroundColor': "#0047c1", 'color': 'white' }} type="submit" >
                                         Postuler <AiOutlineSend fontSize="large" className='icon' style={{ 'marginLeft': '10px' }} />
                                     </Button>
                                 </Grid>

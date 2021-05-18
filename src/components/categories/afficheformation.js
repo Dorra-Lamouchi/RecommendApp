@@ -68,14 +68,15 @@ const Affichedetail = (id) => {
       //setLike (liked ? like => like + 1 : like => like - 1)
       firebaseDb.firestore().collection('Formations').doc(id.match.params.id).update({
         nblike: nb,
-    })
+      })
 
-    if (liked){
+     if (liked){
       firebaseDb.firestore().collection("Formations").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
 
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
+        
             firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
              var s = d.data().Preferences;
              doc.data().obj.Tags.forEach(element => {

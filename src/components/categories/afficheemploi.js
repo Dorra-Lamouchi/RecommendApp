@@ -5,7 +5,8 @@ import Image from 'react-bootstrap/Image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useAuth } from "../Authentification/AuthContext"
 import '../test.css'
-import {useAuth} from '../Authentification/AuthContext'
+import { useHistory } from 'react-router-dom'
+
 
 const Affichemploi = (id) => {
 
@@ -16,6 +17,7 @@ const Affichemploi = (id) => {
     textDecoration: 'Bold',
     fontSize: '20px',
   }
+
   const { currentUser } = useAuth()
   const [tags, settags] = useState({});
   const [emploi, setemploi] = useState({});
@@ -32,84 +34,36 @@ const Affichemploi = (id) => {
         console.log("like1", like)
         return data;
       }
+    })
+  }
 
-    const {currentUser}= useAuth()
-    const [tags, settags] = useState({});
-    const [emploi, setemploi] = useState({});
-    const [like, setLike]=useState(0)
-    const [liked, setLiked]= useState(true)
-    
-    async function getPost() {
-      firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc =>{
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        const data= doc.data().nblike;
-        setLike(data);
-        console.log("like1",like)
-        return data;
-      }
-    })}
-      
 
-    function handleClick(){
-      if (liked) {
-        setLiked(false)
-      } else {
-        setLiked(true)
-      }
-      var nb
-      //setLiked(liked => !liked)
-      if (liked) {
-         nb= like + 1
-        setLike(nb )
-        console.log('nb', nb)
-        console.log('liked', like)
-      } else {
-        nb= like - 1
-        setLike(nb )
-        console.log('nb2', nb)
-        console.log('disliked', like)
-      }
-      
-      //setLike (liked ? like => like + 1 : like => like - 1)
-      firebaseDb.firestore().collection('OffresEmploi').doc(id.match.params.id).update({
-        nblike: nb,
+  function handleClick() {
+    if (liked) {
+      setLiked(false)
+    } else {
+      setLiked(true)
+    }
+    var nb
+    //setLiked(liked => !liked)
+    if (liked) {
+      nb = like + 1
+      setLike(nb)
+      console.log('nb', nb)
+      console.log('liked', like)
+    } else {
+      nb = like - 1
+      setLike(nb)
+      console.log('nb2', nb)
+      console.log('disliked', like)
+    }
+
+    //setLike (liked ? like => like + 1 : like => like - 1)
+    firebaseDb.firestore().collection('OffresEmploi').doc(id.match.params.id).update({
+      nblike: nb,
     })
 
-    if (liked){
-      firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
-        if (doc.exists) {
-
-          setemploi(doc.data().obj);
-          settags(doc.data().obj.Tags);
-            firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
-             var s = d.data().Preferences;
-             doc.data().obj.Tags.forEach(element => {
-               if(s.includes(element.title)){
-                 s_index = s.lastIndexOf(element.title);
-                 s.splice(s_index,1)
-                s.unshift(element.title);
-                //console.log("*s", s)
-               }else{
-                s.unshift(element.title);
-               }
-
-              });
-
-              firebaseDb.firestore().collection('User').doc(currentUser.uid).update({
-                Preferences: s,
-              });
-            });
-        }
-      
-      });
-    }
-    }
-    var s_index;
-    useEffect(() => {
-      const l=getPost()
-
+    if (liked) {
       firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
 
@@ -138,9 +92,11 @@ const Affichemploi = (id) => {
       });
     }
   }
+
   var t;
   var s_index;
   useEffect(() => {
+    const l = getPost()
     firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
       if (doc.exists) {
         setemploi(doc.data().obj);
@@ -171,11 +127,14 @@ const Affichemploi = (id) => {
             });
           });
 
-        }, 10000);
+        }, 3000);
       }
     });
   }, []);
-
+  const history = useHistory()
+  history.listen((location) => {
+    clearTimeout(t);
+  })
   return (
     <div >
       <MDBCol md="6" className="search-marg">

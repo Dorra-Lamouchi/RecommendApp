@@ -40,6 +40,7 @@ function Emploi(props) {
         { title: 'Formation' },
         { title: 'training' },
         { title: 'technical' },
+        { title: 'job' },
         { title: "marketing" },
         { title: 'reporting' },
         { title: 'research' },
@@ -274,6 +275,7 @@ function Emploi(props) {
     }
 
     const addOrEditemploi = obj => {
+        const nblike = 0;
         const filename = Values.Image;
         const storageRef = firebaseDb.storage().ref("images Offres Travaille");
         const fileRef = storageRef.child(filename);
@@ -283,6 +285,7 @@ function Emploi(props) {
         });
         const db = firebaseDb.firestore();
         db.collection("OffresEmploi").add({
+            nblike,
             obj,
         });
 
@@ -304,15 +307,15 @@ function Emploi(props) {
 
     return (
         <div >
-            <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} >
+            <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} className="myform">
 
                 <Grid container spacing={2} direction='column' alignItems="center" justify="space-evenly">
-                    <fieldset>
-                        <legend>Informations Publication</legend>
+                    <fieldset className="fieldset">
+                        <legend className="legend">Informations Publication</legend>
                         <Grid item container spacing={2} justify="space-evenly" alignItems="center" >
                             <Grid item container spacing={0} justify="space-evenly"  >
                                 <Grid item xs={3} >
-                                    <label>Nom de publication : </label>
+                                   <label className="label">Nom de publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Nom" value={Values.Nom} name="Nom" className="field" onChange={handleInputChange} />
@@ -320,7 +323,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Domaine publication : </label>
+                                   <label className="label">Domaine publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className="field">
@@ -347,7 +350,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Type de  publication: </label>
+                                   <label className="label">Type de  publication: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="Type" value={Values.Type} onChange={handleInputChange}>
@@ -360,7 +363,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Importer une image:</label>
+                                   <label className="label">Importer une image:</label>
                                 </Grid>
                                 <Grid item xs={7} style={{ 'paddingTop': '25px' }}>
 
@@ -381,13 +384,13 @@ function Emploi(props) {
                             </Grid>
                         </Grid>
                     </fieldset>
-                    <fieldset>
-                        <legend>Offre d'emploi</legend>
+                    <fieldset className="fieldset">
+                        <legend className="legend">Offre d'emploi</legend>
                         <Grid item container spacing={2} justify="space-evenly">
 
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >L'experience requise : </label>
+                                   <label className="label" >L'experience requise : </label>
                                 </Grid>
                                 <Grid item xs={7}>
 
@@ -396,7 +399,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >La date de debut : </label>
+                                   <label className="label" >La date de debut : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required name="DateDebut" label="date" value={Values.DateDebut} className="field" type="date" onChange={handleInputChange} focused style={{ "marginTop": '0px' }} />
@@ -404,7 +407,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Type de contrat: </label>
+                                   <label className="label" >Type de contrat: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className={classes.formControl}>
@@ -434,7 +437,7 @@ function Emploi(props) {
 
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label>Type de travail:</label>
+                                   <label className="label">Type de travail:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="TypeTravail" value={Values.TypeTravail} onChange={handleInputChange}>
@@ -447,7 +450,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Description</label>
+                                   <label className="label" >Description</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField
@@ -465,7 +468,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
+                                   <label className="label" >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <div className="autocomplete" style={{ "marginTop": '23px' }}>
