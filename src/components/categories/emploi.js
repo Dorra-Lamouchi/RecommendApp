@@ -1,12 +1,17 @@
+
 import Card from '../Cards/CardsIU'
 import React, { useEffect, useState } from 'react'
 import firebaseDb from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
+import {Link} from 'react-router-dom';
+import { HiClock } from "react-icons/hi";
+
 const Emploi = () =>  {
-    
-  
+  const linkstyle = {
+    color : 'black',
+}
     const [Emplois, setEmplois] = useState([]);
     const [pic, setpic] = useState("");
     const [filtre, setfiltre] = useState("");
@@ -61,7 +66,7 @@ const Emploi = () =>  {
     }}/>
      </div>
     </MDBCol>
-            <div className="container-fluid d-flex justify-content-center">
+            <div className="container-fluid">
                <div className="row">
                {  Object.entries(Object.assign({}, Emplois.tab)).map((key, value) => { 
                  if(key[1].obj.Contrat !== 'stage'){
@@ -78,6 +83,7 @@ const Emploi = () =>  {
             <h4 className="card-title"> <Link to={"/affichestage/"+key[1].id} style={linkstyle}>{key[1].obj.Nom.toUpperCase()}</Link></h4>
             <p className="card-text text-dark">
             <strong>{key[1].obj.Domaine}</strong><br/>
+            <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label>{key[1].obj.DatePost}
             <hr/>
              { Object.keys(key[1].obj.Tags).map(num => {
                return (
@@ -98,7 +104,8 @@ const Emploi = () =>  {
                </div>
             </div>
             </>
+
         )
     }
 
-export default  Emploi;
+export default Emploi;

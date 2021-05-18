@@ -11,6 +11,7 @@ import { Autocomplete } from '@material-ui/lab';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { useAuth } from "../Authentification/AuthContext"
 const Preference = () =>  {
  const opensweetalert = () =>
   {
@@ -23,43 +24,123 @@ const Preference = () =>  {
   }
   const history = useHistory()
   const faireRedirection = () =>{ 
-    let url = "/accueil";
+    let url = "/";
     history.push(url);
   
   }
 
 const initialFieldValues = {
 }
-const [userid, setuserid] = useState('1')
+const { currentUser } = useAuth()
+const [userid, setuserid] = useState(currentUser.uid)
 const [Values, setValues] = useState(initialFieldValues)
 const [btnValue, setbtnValue] = useState("Confirmer")
-const ListTags = [
-     'Artificial Intelligence',
-     'Finance',
-     'offres job',
-     'employee',
-     'gestion',
-    "informatique",
-    'react',
-    'nodejs', 
-    'Angular',
-    'Mecanique', 
-    'electronique', 
-   'developer', 
-    'Inception',
-    'investisement',
-    "banque", 
-    'manager',
-     'web', 
-    'android', 
-   'JOB', 
-   'Employee', 
+const Alltags = [
+ 'Artificial Intelligence', 
+   'design', 
+  'Formation', 
+  'training',
+   'technical', 
+   "marketing", 
+ 'reporting', 
+  'research', 
+ 'analytics', 
+  'Fengineering', 
+  'finance', 
+  'project management', 
+ 'health', 
+  'customer service', 
+  'safety', 
+"certification",
+   'legal', 
+ 'database',
+  'coaching', 
+   'logistics', 
+   'mobile', 
+   'C (programming language)',
+ 'human resources', 
+   "recruitment", 
+'management experience', 
+  'programming', 
+  'agile',
+ 'business development', 
+  'audit',
+  'architecture',
+'governance', 
+'continuous improvement',
+ 'product development', 
+   'networking', 
+  'CRM', 
+   'computer science',
+  'SQL', 
+  'video', 
+ 'installation', 
+ 'data analysis', 
+ 'statistics',
+ 'coding', 
+'Microsoft Office', 
+'frameworks',
+  'BI', 
+  'HTML', 
+  'internship',
+  'Stage',
+  'software development',
+   'oracle', 
+  'Alien', 
+'Java', 
+ 'teaching', 
+'ERP', 
+'Javascript', 
+  'Tdigital marketing', 
+  'Linux', 
+  'SaaS', 
+ 'mathematics', 
+  'project management skills',
+  'mechanical engineering', 
+ 'android',
+ 'Adobe',
+  'ISO',
+   'C++',
+   'scrum',
+  'e-commerce' ,
+  'user experience',
+  'Python',
+ 'technical skills',
+  'electrical engineering',
+  'Microsoft Word',
+  'C#',
+  'UX',
+   'physics',
+   'leadership development',
+  'AWS',
+ 'UI',
+  'front-end',
+   '.NET',
+  'MATLAB',
+  'API',
+  'photography',
+ 'internal communications',
+'chemicals',
+  'OS',
+  'ETL',
+  'telecom',
+ 'research projects',
+  'big data',
+  'VMware',
+  "statistical analysis",
+  'SolidWorks',
+  'datasets',
+   'Unix',
+  'information system',
+ 'SQL server',
+  'machine learning',
+   'DNS' ,
 ];
 var tab;
 var value;
 const addOrEditemploi = tab => {
   tab.map((t) =>{
-    firebaseDb.firestore().collection(`user`).doc(userid).update({
+    firebaseDb.firestore().collection(`User`).doc(userid).update({
       Preferences:firebaseDb.firestore.FieldValue.arrayUnion(t),
     }
      )
@@ -110,11 +191,11 @@ return (
          <h4 className="card-title"></h4>
          <p className="card-text">
          <Autocomplete
-        options={ListTags}
+        options={Alltags}
         onChange={onTagsChange}
          multiple
          style={{width: 500}}
-         defaultValue={[ListTags[1], ListTags[2]]}
+         defaultValue={[Alltags[1], Alltags[2]]}
          getOptionLabel={(option) => option}
          renderInput={(params) => (
            <TextField

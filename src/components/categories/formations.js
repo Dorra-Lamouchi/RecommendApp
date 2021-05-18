@@ -1,15 +1,27 @@
+
 import Card from '../Cards/CardsIU'
 import React, { useEffect ,useState} from 'react'
 import firebaseDb from "../../firebase";
+import { Link } from 'react-router-dom'
 import { MDBCol, MDBIcon } from "mdbreact";
 import '../test.css'
 import "mdbreact/dist/css/mdb.css";
+import { HiClock } from "react-icons/hi";
 const Formations = () =>  {
-    
-    
+
+  const stylelink = {
+    textDecoration: 'none',
+    color: 'white ',
+
+  }
+  const linkstyle = {
+    color: 'black',
+  }
+
     const [formations, setformations] = useState([]);
     const [filtre, setfiltre] = useState("");
     const [pic, setpic] = useState("");
+
     useEffect(() => {
       var tab = []
 
@@ -51,7 +63,6 @@ const Formations = () =>  {
       }).catch(error => console.log(error))
 
   }, [])
-   
         return (
             <>
              <MDBCol md="6" className="search-marg">
@@ -66,11 +77,11 @@ const Formations = () =>  {
     }}/>
      </div>
     </MDBCol>
-            <div className="container-fluid d-flex justify-content-center">
+            <div className="container-fluid">
                <div className="row">
                {  Object.entries(Object.assign({}, formations.tab)).map((key, value) => { 
                    return(
-               <div className="col-md-6" key={key[1].id}>
+               <div className="col-md-4" key={key[1].id}>
                  <div className="card text-center shadow" >
         <div className="overflow">
         <Link to={"/afficheformation/"+key[1].id} ><img height="190"
@@ -81,26 +92,28 @@ const Formations = () =>  {
             <h4 className="card-title"> <Link to={"/afficheformation/"+key[1].id} style={linkstyle}>{key[1].obj.Domaine}</Link></h4>
             <p className="card-text text-dark">
              {key[1].obj.Nom}<br/>
-             {key[1].obj.DateDebut}<br/>
+             <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {key[1].obj.DatePost}
              <hr/>
              { Object.keys(key[1].obj.Tags).map(num => {
                return (
                  <input key={key[1].obj.Tags[num].id} type="button" className="myinput" value={'#'+key[1].obj.Tags[num].title}  />);
              })}
+
             </p>
             <p className="card-text"></p>
+
            
            
         </div>
     </div>
-                    
                 </div>
-                   );
-               })} 
-               </div>
-            </div>
-            </>
-        )
-    }
+            );
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
 
-export default  Formations;
+
+export default Formations;
