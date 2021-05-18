@@ -5,36 +5,159 @@ import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
 import '../test.css'
 
+
 const Affichemploi  = (id) => {
 
-    const stylecol = {
-        marginTop : 50,
-        color : 'black ',
-        fontFamily: "Arial, Helvetica, sans-serif",
-        textDecoration : 'Bold',
-        fontSize: '20px',
+  const stylecol = {
+    marginTop: 50,
+    color: 'black ',
+    fontFamily: "Arial, Helvetica, sans-serif",
+    textDecoration: 'Bold',
+    fontSize: '20px',
+  }
+  const { currentUser } = useAuth()
+  const [tags, settags] = useState({});
+  const [emploi, setemploi] = useState({});
+  const [like, setLike] = useState(0);
+  const [liked, setLiked] = useState(true);
+
+  async function getPost() {
+    firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        const data = doc.data().nblike;
+        setLike(data);
+        console.log("like1", like)
+        return data;
       }
-    const [tags, settags] = useState({});
-    const [emploi, setemploi] = useState({});
-    useEffect(() => {
+    })
+  }
+    // const {currentUser}= useAuth()
+    // const [tags, settags] = useState({});
+    // const [emploi, setemploi] = useState({});
+    // const [like, setLike]=useState(0)
+    // const [liked, setLiked]= useState(true)
+    
+    // async function getPost() {
+    //   firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc =>{
+    //   if (!doc.exists) {
+    //     console.log('No such document!');
+    //   } else {
+    //     const data= doc.data().nblike;
+    //     setLike(data);
+    //     console.log("like1",like)
+    //     return data;
+    //   }
+    // })}
+      
+
+    function handleClick(){
+      if (liked) {
+        setLiked(false)
+      } else {
+        setLiked(true)
+      }
+      var nb
+      //setLiked(liked => !liked)
+      if (liked) {
+         nb= like + 1
+        setLike(nb )
+        console.log('nb', nb)
+        console.log('liked', like)
+      } else {
+        nb= like - 1
+        setLike(nb )
+        console.log('nb2', nb)
+        console.log('disliked', like)
+      }
+      
+      //setLike (liked ? like => like + 1 : like => like - 1)
+      firebaseDb.firestore().collection('OffresEmploi').doc(id.match.params.id).update({
+        nblike: nb,
+    })
+
+    if (liked){
       firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
+
           setemploi(doc.data().obj);
           settags(doc.data().obj.Tags);
+            firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
+             var s = d.data().Preferences;
+             doc.data().obj.Tags.forEach(element => {
+               if(s.includes(element.title)){
+                 s_index = s.lastIndexOf(element.title);
+                 s.splice(s_index,1)
+                s.unshift(element.title);
+                //console.log("*s", s)
+               }else{
+                s.unshift(element.title);
+               }
+
+              });
+
+              firebaseDb.firestore().collection('User').doc(currentUser.uid).update({
+                Preferences: s,
+              });
+            });
         }
+      
       });
-    }, []);
-      return(
-        <div >
-            <MDBCol md="6" className="search-marg">
-      <div className="input-group md-form form-sm form-1 pl-0">
-        <div className="input-group-prepend">
-          <span className="input-group-text blue lighten-3" id="basic-text1">
-            <MDBIcon className="text-white" icon="search" />
-          </span>
+    }
+    }
+   
+  var t;
+  var s_index;
+  useEffect(() => {
+    firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
+      if (doc.exists) {
+        setemploi(doc.data().obj);
+        settags(doc.data().obj.Tags);
+        t = setTimeout(() => {
+
+
+          firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
+
+            var s = d.data().Preferences;
+            console.log(s)
+            doc.data().obj.Tags.forEach(element => {
+              if (s.includes(element.title)) {
+                s_index = s.lastIndexOf(element.title);
+                s.splice(s_index, 1)
+                s.unshift(element.title);
+
+              } else {
+                s.unshift(element.title);
+              }
+
+            });
+
+            console.log("new s :", s)
+            firebaseDb.firestore().collection('User').doc(currentUser.uid).update({
+
+              Preferences: s,
+            });
+          });
+
+        }, 10000);
+      }
+    });
+  }, []);
+
+  return (
+    <div >
+      <MDBCol md="6" className="search-marg">
+        <div className="input-group md-form form-sm form-1 pl-0">
+          <div className="input-group-prepend">
+            <span className="input-group-text blue lighten-3" id="basic-text1">
+              <MDBIcon className="text-white" icon="search" />
+            </span>
+          </div>
+          <input className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
+
         </div>
         <input className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
-     </div>
     </MDBCol>
     <Container>
   <Row>
