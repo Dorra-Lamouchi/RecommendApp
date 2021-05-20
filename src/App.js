@@ -72,6 +72,7 @@ render(){
     <Route path="/ajoutemploi" exact component={addemploi}></Route>
     <Route path="/ajoutformation" exact component={addformation}></Route>
     <Route path="/affichecondidature" exact component={affichercandidature}></Route>
+    <Route path="/preference" exact component={Preference}></Route>
 
 
 
