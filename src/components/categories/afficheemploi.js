@@ -5,7 +5,6 @@ import Image from 'react-bootstrap/Image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useAuth } from "../Authentification/AuthContext"
 import '../test.css'
-import {useAuth} from '../Authentification/AuthContext'
 
 
 const Affichemploi = (id) => {
