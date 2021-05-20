@@ -145,6 +145,7 @@ const Accueil = () => {
           if(snap.data() != undefined){
           setlistperferences(snap.data().Preferences);
           }
+
         })
 
     }
@@ -260,7 +261,6 @@ const Accueil = () => {
   }
   const addOrEditemploi = opt => {
     if (opt != "") {
-
       firebaseDb.firestore().collection('User').doc(userid).get().then((d) => {
         var P = d.data().Preferences;
         if (!P.includes(opt)) {
@@ -315,9 +315,6 @@ const Accueil = () => {
       });
     document.getElementById("search").value = convertedText;
   }
- // const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
-
-
   return (
     <>
 
@@ -529,7 +526,6 @@ const Accueil = () => {
             })
             }
 
-
             {
 
               Object.keys(tabfiltre).map(p => {
@@ -679,6 +675,7 @@ const Accueil = () => {
          </div>
 }
        </>
+
 
   )
 }
