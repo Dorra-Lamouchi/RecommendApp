@@ -6,13 +6,16 @@ import Card from './Cards/CardsIU'
 import "mdbreact/dist/css/mdb.css";
 import { useLocation } from "react-router-dom";
 import { VscSearch } from "react-icons/vsc";
-import { HiTranslate, HiClock, HiViewGridAdd, HiOutlineViewList, HiOutlineTag } from "react-icons/hi";
+import { HiTranslate, HiClock, HiViewGridAdd, HiOutlineViewList } from "react-icons/hi";
 import axios from 'axios';
 import { useAuth } from "../components/Authentification/AuthContext"
 
 const Accueil = () => {
   const location = useLocation();
+   const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
   var tabg = [];
+  var  sp;
+  var datenow;
   let formtag = [];
   var tabfiltre = [];
   var filtreformation = [];
@@ -40,7 +43,7 @@ const Accueil = () => {
     'reporting',
     'research',
     'analytics',
-    'Fengineering',
+    'engineering',
     'finance',
     'project management',
     'health',
@@ -139,14 +142,15 @@ const Accueil = () => {
         .collection("User")
         .doc(userid)
         .get().then((snap) => {
+          if(snap.data() != undefined){
           setlistperferences(snap.data().Preferences);
+          }
+
         })
 
     }
 
     //import NavBar from "../headers/nav";
-
-
 
 
     const fetchData = async () => {
@@ -257,8 +261,7 @@ const Accueil = () => {
   }
   const addOrEditemploi = opt => {
     if (opt != "") {
-
-      firebaseDb.firestore().collection('user').doc('1').get().then((d) => {
+      firebaseDb.firestore().collection('User').doc(userid).get().then((d) => {
         var P = d.data().Preferences;
         if (!P.includes(opt)) {
           P.unshift(opt);
@@ -267,7 +270,7 @@ const Accueil = () => {
           P.splice(pos, 1)
           P.unshift(opt)
         }
-        firebaseDb.firestore().collection('user').doc('1').update({
+        firebaseDb.firestore().collection('User').doc(userid).update({
           Preferences: P
         });
       });
@@ -312,8 +315,6 @@ const Accueil = () => {
       });
     document.getElementById("search").value = convertedText;
   }
-
-
   return (
     <>
 
@@ -360,7 +361,7 @@ const Accueil = () => {
 
       <hr />
       {showpost &&
-        <div className="container-fluid d-flex justify-content-center">
+        <div className="container-fluid">
           <div className="row">
             {
 
@@ -461,7 +462,7 @@ const Accueil = () => {
                       <div className="card-body text-dark">
                         <h4 className="card-title">  {
                           formtag[p].obj.NbPlaces != undefined &&
-                          <Link to={"/afficheformation/" + formtag[p].id} style={linkstyle}>{formtag[p].obj.Domaine}</Link>
+                          <Link to={"/afficheformation/" + formtag[p].id} style={linkstyle}>{formtag[p].obj.Nom.toUpperCase()}</Link>
                         }
                           {
                             formtag[p].obj.NbPlaces === undefined &&
@@ -470,7 +471,6 @@ const Accueil = () => {
                         </h4>
                         <p className="card-text text-dark">
                           {formtag[p].obj.Domaine}<br />
-                          {formtag[p].obj.Description}<br />
                           <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {formtag[p].obj.DatePost}
                           <hr />
 
@@ -497,13 +497,18 @@ const Accueil = () => {
               })
 
             }
-
+ 
             {Object.entries(Object.assign({}, formations.tab1)).map((key, value) => {
               Object.keys(key[1].obj.Tags).map(num => {
                 if (search == '') {
                   if (!formtag.includes(key[1])) {
                     if (!tabfiltre.includes(key[1])) {
+                      sp = key[1].obj.DatePost.split("à")
+                     if(d.includes(sp[0])){
+                        tabfiltre.unshift(key[1])
+                     }else{
                       tabfiltre.push(key[1])
+                     }
                     }
                   }
                 } else if (key[1].obj.Tags[num].title.toLowerCase().includes(search.toLowerCase())) {
@@ -520,7 +525,6 @@ const Accueil = () => {
               }
             })
             }
-
 
             {
 
@@ -552,7 +556,7 @@ const Accueil = () => {
                       <div className="card-body text-dark">
                         <h4 className="card-title">  {
                           tabfiltre[p].obj.NbPlaces != undefined &&
-                          <Link to={"/afficheformation/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Domaine}</Link>
+                          <Link to={"/afficheformation/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom}</Link>
                         }
                           {
                             tabfiltre[p].obj.NbPlaces === undefined &&
@@ -561,7 +565,6 @@ const Accueil = () => {
                         </h4>
                         <p className="card-text text-dark">
                           {tabfiltre[p].obj.Domaine}<br />
-                          {tabfiltre[p].obj.Description}<br />
                           <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {tabfiltre[p].obj.DatePost}
                           <hr />
 
@@ -592,7 +595,87 @@ const Accueil = () => {
 
           </div>
         </div>
-      }  </>
+      } 
+      {!showpost && 
+       <div className="container-fluid">
+       <div className="row">
+         { 
+         Object.entries(Object.assign({}, formations.tab1)).map((key, value) => {
+          sp = key[1].obj.DatePost.split("à")
+          datenow = d.split('à')
+          if(datenow[0] === sp[0]){
+            tabfiltre.unshift(key[1])
+         }
+        
+         })
+         }
+          {
+
+          Object.keys(tabfiltre).map(p => {
+
+  return (
+    <div className="col-md-4" key={tabfiltre[p].id}>
+    <div className="card text-center shadow" >
+      <div className="overflow">
+        {
+          tabfiltre[p].obj.NbPlaces != undefined &&
+          <Link to={"/afficheformation/" + tabfiltre[p].id} >
+            <img height="190"
+              src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Formations%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
+              alt="logo" className="card-img-top" />
+          </Link>
+        }
+        {
+          tabfiltre[p].obj.NbPlaces === undefined &&
+          <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
+            <img height="190"
+              src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
+              alt="logo" className="card-img-top" />
+          </Link>
+        }
+
+      </div>
+      <div className="card-body text-dark">
+        <h4 className="card-title">  {
+          tabfiltre[p].obj.NbPlaces != undefined &&
+          <Link to={"/afficheformation/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom}</Link>
+        }
+          {
+            tabfiltre[p].obj.NbPlaces === undefined &&
+            <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
+          }
+        </h4>
+        <p className="card-text text-dark">
+          {tabfiltre[p].obj.Domaine}<br />
+          <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {tabfiltre[p].obj.DatePost}
+          <hr />
+
+          {Object.keys(tabfiltre[p].obj.Tags).map(num => {
+
+            return (
+              <input key={tabfiltre[p].obj.Tags[num].id} type="button" className="myinput" value={'#' + tabfiltre[p].obj.Tags[num].title} />
+
+            );
+          })
+          }
+
+        </p>
+        <p className="card-text"></p>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  )
+  })  
+  }
+         </div>
+         </div>
+}
+       </>
+
 
   )
 }

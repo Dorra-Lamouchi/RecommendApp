@@ -7,6 +7,7 @@ import { useAuth } from "../Authentification/AuthContext"
 import '../test.css'
 import {useAuth} from '../Authentification/AuthContext'
 
+
 const Affichemploi = (id) => {
 
   const stylecol = {
@@ -16,22 +17,6 @@ const Affichemploi = (id) => {
     textDecoration: 'Bold',
     fontSize: '20px',
   }
-  const { currentUser } = useAuth()
-  const [tags, settags] = useState({});
-  const [emploi, setemploi] = useState({});
-  const [like, setLike] = useState(0)
-  const [liked, setLiked] = useState(true)
-
-  async function getPost() {
-    firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        const data = doc.data().nblike;
-        setLike(data);
-        console.log("like1", like)
-        return data;
-      }
 
     const {currentUser}= useAuth()
     const [tags, settags] = useState({});
@@ -136,8 +121,8 @@ const Affichemploi = (id) => {
         }
 
       });
-    }
-  }
+    });
+  
   var t;
   var s_index;
   useEffect(() => {
