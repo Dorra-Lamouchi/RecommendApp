@@ -27,7 +27,7 @@ function Afficher() {
     const classes = useStyles();
     const [Candidatures, setCandidatures] = useState([]);
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (id) => {
             const db = firebasedb.firestore();
             const data = await db.collection("Candidature").get();
             setCandidatures(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
@@ -35,8 +35,15 @@ function Afficher() {
 
         fetchData();
     }, []);
+    const OnDelete=async(doc) =>{
+        // console.log("id= ",doc.id)
+         const newList = Candidatures.filter((item) => item.id !== doc.id);
+        // console.log(newList)
+        firebasedb.firestore().collection("Candidature").doc(doc.id).delete();
+    setCandidatures(newList);
+    }
     const handlepdfshow = async (e) => {
-        console.log(e.target.innerText.toLowerCase())
+        // console.log(e.target.innerText.toLowerCase())
         firebasedb.storage().ref("CV").child(e.target.innerText.toLowerCase()).getDownloadURL()
             .then((url) => {
 
@@ -147,7 +154,7 @@ function Afficher() {
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Button
-                                                // onClick={() => { OnDelete(id) }}
+                                                onClick={() => { OnDelete(Candidatures[id]) }}
                                                 size='small'
                                                 className={classes.delete}
                                                 startIcon={<CancelIcon />}
