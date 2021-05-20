@@ -49,7 +49,7 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(Values)
-      history.push("/")
+      history.push("/preference")
     } catch {
       setError("Failed to create an account")
     }
