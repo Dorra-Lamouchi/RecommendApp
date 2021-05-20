@@ -74,13 +74,13 @@ const Emploi = () =>  {
                <div  key={key[1].id} className="col-md-4">
                   <div className="card text-center shadow" >
         <div className="overflow">
-        <Link to={"/affichestage/"+key[1].id} ><img height="190"
+        <Link to={"/afficheemploi/"+key[1].id} ><img height="190"
          src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F"+key[1].obj.Image+"?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"} 
          alt="logo"
          className="card-img-top" /></Link>
         </div>
         <div className="card-body text-dark">
-            <h4 className="card-title"> <Link to={"/affichestage/"+key[1].id} style={linkstyle}>{key[1].obj.Nom.toUpperCase()}</Link></h4>
+            <h4 className="card-title"> <Link to={"/afficheemploi/"+key[1].id} style={linkstyle}>{key[1].obj.Nom.toUpperCase()}</Link></h4>
             <p className="card-text text-dark">
             <strong>{key[1].obj.Domaine}</strong><br/>
             <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label>{key[1].obj.DatePost}
