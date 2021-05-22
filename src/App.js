@@ -80,7 +80,7 @@ render(){
     <Route path="/affichecondidature" exact component={affichercandidature}></Route>
     <Route path="/preference" exact component={Preference}></Route>
   <Route path="/formcandidature/:id" exact component={FormCandidature}></Route>
-   <Route path="/Testaffichage/:id" exact component={TestAffichage}></Route>
+   <Route path="/Testaffichage/:id" exact component={Testaffichage}></Route>
 
 
     <Footer />
