@@ -4,13 +4,17 @@ import '../test.css'
 import firebaseDb from "../../firebase";
 import { MDBCol, MDBIcon } from "mdbreact";
 import "mdbreact/dist/css/mdb.css";
+import {Link} from 'react-router-dom';
+
 const Stages = () =>  {
   const linkstyle = {
       color : 'black',
   }
+
   const [Emplois, setEmplois] = useState([]);
   const [pic, setpic] = useState("");
   const [filtre, setfiltre] = useState("");
+
     useEffect(() => {
       var tab = [];
       firebaseDb.firestore()

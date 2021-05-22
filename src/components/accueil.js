@@ -4,6 +4,7 @@ import './test.css'
 import { Link } from 'react-router-dom'
 import Card from './Cards/CardsIU'
 import "mdbreact/dist/css/mdb.css";
+
 import { useLocation } from "react-router-dom";
 import { VscSearch } from "react-icons/vsc";
 import { HiTranslate, HiClock, HiViewGridAdd, HiOutlineViewList } from "react-icons/hi";
@@ -145,6 +146,7 @@ const Accueil = () => {
           if(snap.data() != undefined){
           setlistperferences(snap.data().Preferences);
           }
+
         })
 
     }
@@ -260,7 +262,6 @@ const Accueil = () => {
   }
   const addOrEditemploi = opt => {
     if (opt != "") {
-
       firebaseDb.firestore().collection('User').doc(userid).get().then((d) => {
         var P = d.data().Preferences;
         if (!P.includes(opt)) {
@@ -315,9 +316,6 @@ const Accueil = () => {
       });
     document.getElementById("search").value = convertedText;
   }
- // const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
-
-
   return (
     <>
 
@@ -529,7 +527,6 @@ const Accueil = () => {
             })
             }
 
-
             {
 
               Object.keys(tabfiltre).map(p => {
@@ -679,6 +676,7 @@ const Accueil = () => {
          </div>
 }
        </>
+
 
   )
 }

@@ -1,6 +1,6 @@
 //import React, { Component } from 'react'
 import './card-style.css'
-import voir from "../../assets/voir.png";
+//import voir from "../../assets/voir.png";
 //import Affichedetail from './../categories/afficheformation'
 import {Link} from 'react-router-dom'
 const Card = props => {
@@ -22,10 +22,10 @@ return(
             <p className="card-text">
             {props.description}<br/>
              {props.formateur}<br/>
-             {props.nombreplace}
-              
+             {props.nombreplace}<br/>
+             {props.date}
             </p>
-            <p className="card-text">{props.date}</p>
+            <p className="card-text"></p>
            
            
         </div>

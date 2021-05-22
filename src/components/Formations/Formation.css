@@ -1,0 +1,50 @@
+    body, p, .legend, .label, .field {
+    font:  Roboto, sans-serif;}
+/* .myforms -----------------------------------------------------------
+---------------------------- */
+.label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    color: #0047c1;
+}
+.fieldset {
+padding: 10px;
+border: 3px #0047c1 solid;
+margin: 10px;
+width: 800px;
+padding: 50px;
+margin-left: auto;
+margin-right: auto;
+}
+.legend {
+font-weight: bold;
+color: #0047c1;
+}
+.myform .label {
+float: left;
+width: 350px;
+margin: 3px 0px 10px 0px;
+padding-top: 25px;
+}
+.myform input {
+margin: 3px 3px 0px 0px;
+}
+.myform TextField {
+margin: 3px 3px 0px 0px;
+}
+.field{
+    width: 300px;
+    padding : 2px;
+    margin:0px;
+    
+    
+}
+.radio{
+    margin-top:17px;
+}
+.radioitem{
+    width: 100px;
+}
+.autocomplete{
+    /* width: 41em; */
+} 
