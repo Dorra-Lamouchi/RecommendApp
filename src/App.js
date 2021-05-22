@@ -25,6 +25,7 @@ import {
 import SignUp from './components/SignUp/signUp';
 import SignIn from './components/SignIn/signIn';
 import Preference from "./components/categories/Preferences";
+import Testaffichage from "./components/categories/testaffichage"
 
 class App extends React.Component {
  
@@ -51,6 +52,7 @@ render(){
                   <Route path="/ajoutformation" exact component={addformation}></Route>
                   <Route path="/affichecondidature" exact component={affichercandidature}></Route>
                   <Route path="/preference" exact component={Preference}></Route>
+                  <Route path="/Testaffichage/:id" exact component={TestAffichage}></Route>
     <Footer />
     </div>
     </div>

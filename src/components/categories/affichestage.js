@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 import React , {useState , useEffect} from 'react'
 import firebaseDb from "../../firebase";
@@ -6,8 +6,11 @@ import { MDBCol, MDBIcon } from "mdbreact";
 import Image from 'react-bootstrap/Image'
 import {Container , Row , Col }from 'react-bootstrap'
 import '../test.css'
-
+import {Link} from 'react-router-dom';
 const Affichestage  = (id) => {
+  const linkstyle = {
+    color : 'black',
+}
     const stylecol = {
         marginTop : 50,
         color : 'black ',
@@ -68,7 +71,7 @@ const Affichestage  = (id) => {
          <strong> {emploi.others}</strong>
         </Col>
         <Col>
-        <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button>
+        <Link to={"/Testaffichage/"+id.match.params.id} style={linkstyle}>  <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button></Link>
         </Col>
     </Row>
 </Container>
