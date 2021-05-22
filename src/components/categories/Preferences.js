@@ -11,6 +11,7 @@ import { Autocomplete } from '@material-ui/lab';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { useAuth } from "../Authentification/AuthContext"
 const Preference = () =>  {
  const opensweetalert = () =>
   {
@@ -23,14 +24,15 @@ const Preference = () =>  {
   }
   const history = useHistory()
   const faireRedirection = () =>{ 
-    let url = "/accueil";
+    let url = "/";
     history.push(url);
   
   }
 
 const initialFieldValues = {
 }
-const [userid, setuserid] = useState('1')
+const { currentUser } = useAuth()
+const [userid, setuserid] = useState(currentUser.uid)
 const [Values, setValues] = useState(initialFieldValues)
 const [btnValue, setbtnValue] = useState("Confirmer")
 const Alltags = [
@@ -138,7 +140,7 @@ var tab;
 var value;
 const addOrEditemploi = tab => {
   tab.map((t) =>{
-    firebaseDb.firestore().collection(`user`).doc(userid).update({
+    firebaseDb.firestore().collection(`User`).doc(userid).update({
       Preferences:firebaseDb.firestore.FieldValue.arrayUnion(t),
     }
      )

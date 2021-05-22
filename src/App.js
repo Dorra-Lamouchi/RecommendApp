@@ -42,54 +42,55 @@ import RecruterSignup from "./components/Authentification/RecruterSignup";
 class App extends React.Component {
 
 
-  render() {
-    return (
-      <AuthProvider>
-        <Router>
-          <div className="App">
-            <div class="app-main__outer">
-              <div class="app-main__inner"></div>
-              <div class="tab-content">
-                <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
-                  <div class="row-9" >
+ 
+render(){
+  return (
+    <AuthProvider>
+    <Router>
+    <div className="App">
+       <div class="app-main__outer">
+        <div class="app-main__inner"></div>
+        <div class="tab-content">
+        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+          <div class="row-9" >
 
-                    <NavBar />
-
-                    <Switch>
-                      <Route path="/signup" component={SignUp}></Route>
-                      <Route path="/recrutersignup" component={RecruterSignup}></Route>
-                      <Route path="/signin" component={SignIn}></Route>
-                    </Switch>
-
-
-                    <Route path="/" exact component={Accueil}></Route>
-                    <Route path="/emploi" exact component={Emploi}></Route>
-                    <Route path="/Formations" exact component={Formations}></Route>
-                    <Route path="/Stages" exact component={Stages}></Route>
-                    <Route path="/contact" exact component={Contact}></Route>
-                    <PrivateRoute path="/afficheformation/:id" exact component={Affichedetail}></PrivateRoute>
-                    <PrivateRoute path="/affichestage/:id" exact component={Affichestage}></PrivateRoute>
-                    <PrivateRoute path="/afficheemploi/:id" exact component={Affichemploi}></PrivateRoute>
-
-                    <Route path="/ajoutemploi" exact component={addemploi}></Route>
-                    <Route path="/ajoutformation" exact component={addformation}></Route>
-                    <Route path="/affichecondidature" exact component={affichercandidature}></Route>
-                    <Route path="/formcandidature/:id" exact component={FormCandidature}></Route>
-
-
-
+    <NavBar/>
+    
+      <Switch>
+        <Route path="/signup" component={SignUp}></Route>
+        <Route path="/recrutersignup" component={RecruterSignup}></Route>
+        <Route path="/signin" component={SignIn}></Route>
+      </Switch>
+    
+ 
+    <Route path="/" exact component={Accueil}></Route>
+    <Route path="/emploi" exact component={Emploi}></Route>
+    <Route path="/Formations" exact component={Formations}></Route>
+    <Route path="/Stages" exact component={Stages}></Route>
+    <Route path="/contact" exact component={Contact}></Route>
+    <PrivateRoute path="/afficheformation/:id" exact component={Affichedetail}></PrivateRoute>
+    <PrivateRoute path="/affichestage/:id" exact component={Affichestage}></PrivateRoute>
+    <PrivateRoute path="/afficheemploi/:id" exact component={Affichemploi}></PrivateRoute>
+    
+    <Route path="/ajoutemploi" exact component={addemploi}></Route>
+    <Route path="/ajoutformation" exact component={addformation}></Route>
+    <Route path="/affichecondidature" exact component={affichercandidature}></Route>
+    <Route path="/preference" exact component={Preference}></Route>
+  <Route path="/formcandidature/:id" exact component={FormCandidature}></Route>
 
 
-                    <Footer />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Router>
-      </AuthProvider>
-    );
-  }
+
+    <Footer />
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </Router>
+  </AuthProvider>
+  );
+}
+
 }
 
 
