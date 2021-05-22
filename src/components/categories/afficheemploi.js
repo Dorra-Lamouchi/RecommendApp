@@ -92,7 +92,11 @@ const Affichemploi = (id) => {
       nblike: nb,
     })
 
+
+
+
     if (liked) {
+
       firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
 
