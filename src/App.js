@@ -22,6 +22,7 @@ import Affichedetail from './components/categories/afficheformation'
 import addemploi from './components/Emploi/Emploi'
 import addformation from './components/Formations/Formation'
 import affichercandidature from './components/Candidatures/Afficher'
+import FormCandidature from './components/Candidatures/FormCandidature'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -73,6 +74,8 @@ class App extends React.Component {
                     <Route path="/ajoutemploi" exact component={addemploi}></Route>
                     <Route path="/ajoutformation" exact component={addformation}></Route>
                     <Route path="/affichecondidature" exact component={affichercandidature}></Route>
+                    <Route path="/formcandidature/:id" exact component={FormCandidature}></Route>
+
 
 
 
