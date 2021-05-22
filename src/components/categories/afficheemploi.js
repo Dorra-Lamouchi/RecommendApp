@@ -124,7 +124,7 @@ const Affichemploi = (id) => {
 
       });
 
-    });
+    }}
   
 
   var t;
