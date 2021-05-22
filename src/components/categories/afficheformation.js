@@ -68,14 +68,15 @@ const Affichedetail = (id) => {
       //setLike (liked ? like => like + 1 : like => like - 1)
       firebaseDb.firestore().collection('Formations').doc(id.match.params.id).update({
         nblike: nb,
-    })
+      })
 
-    if (liked){
+     if (liked){
       firebaseDb.firestore().collection("Formations").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
 
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
+        
             firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
              var s = d.data().Preferences;
              doc.data().obj.Tags.forEach(element => {
@@ -129,8 +130,10 @@ const Affichedetail = (id) => {
           setformation(doc.data().obj);
           settags(doc.data().obj.Tags);
            t = setTimeout(() => {
+
             
             firebaseDb.firestore().collection('User').doc(currentUser.uid).get().then((d) => {
+
              var s = d.data().Preferences;
              console.log(s)
             doc.data().obj.Tags.forEach(element => {
@@ -139,14 +142,15 @@ const Affichedetail = (id) => {
                  s.splice(s_index,1)
                 s.unshift(element.title);
 
-                //console.log("*s", s)
                }else{
                 s.unshift(element.title);
                }
 
               });
+
               console.log("new s :", s)
                firebaseDb.firestore().collection('User').doc(currentUser.uid).update({
+
                 Preferences: s,
               });
             });
@@ -161,16 +165,6 @@ const Affichedetail = (id) => {
     })
       return(
         <div >
-            <MDBCol md="6" className="search-marg">
-      <div className="input-group md-form form-sm form-1 pl-0">
-        <div className="input-group-prepend">
-          <span className="input-group-text blue lighten-3" id="basic-text1">
-            <MDBIcon className="text-white" icon="search" />
-          </span>
-        </div>
-        <input className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
-     </div>
-    </MDBCol>
     <Container>
   <Row>
     <Col xs={6} md={4}>

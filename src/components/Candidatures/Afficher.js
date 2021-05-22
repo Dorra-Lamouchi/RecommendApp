@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 function Afficher() {
     const useStyles = makeStyles((theme) => ({
@@ -27,7 +29,7 @@ function Afficher() {
     const classes = useStyles();
     const [Candidatures, setCandidatures] = useState([]);
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (id) => {
             const db = firebasedb.firestore();
             const data = await db.collection("Candidature").get();
             setCandidatures(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
@@ -35,8 +37,22 @@ function Afficher() {
 
         fetchData();
     }, []);
+    const OnDelete = async (doc) => {
+        // console.log("id= ",doc.id)
+        const newList = Candidatures.filter((item) => item.id !== doc.id);
+        // console.log(newList)
+        firebasedb.firestore().collection("Candidature").doc(doc.id).delete();
+        setCandidatures(newList);
+    }
+    const OnAccept = async (doc) => {
+        console.log("id candidature= ", doc.id)
+        let path = "/formcandidature";
+        let history = useHistory();
+        history.push(path);
+
+    }
     const handlepdfshow = async (e) => {
-        console.log(e.target.innerText.toLowerCase())
+        // console.log(e.target.innerText.toLowerCase())
         firebasedb.storage().ref("CV").child(e.target.innerText.toLowerCase()).getDownloadURL()
             .then((url) => {
 
@@ -135,19 +151,32 @@ function Afficher() {
                                 <Grid item container xs={2} justify="space-evenly" alignItems="center">
                                     <Grid item spacing={1} container >
                                         <Grid item xs={6}>
-                                            <Button
-                                                // onClick={() => { OnUpdate(id) }}
+                                            <Link
+                                                to={"/formcandidature/" + Candidatures[id].id }
+                                            >
+                                                <Button
+                                                    size='small'
+                                                    // variant="outlined"
+                                                    className={classes.edit}
+                                                    startIcon={<CheckCircleIcon />}
+                                                >
+                                                    Accepter
+                                            </Button>
+                                            </Link>
+
+                                            {/* <Button
+                                                onClick={() => { OnAccept(Candidatures[id]) }}
                                                 size='small'
                                                 // variant="outlined"
                                                 className={classes.edit}
                                                 startIcon={<CheckCircleIcon />}
                                             >
                                                 Accepter
-                                            </Button>
+                                            </Button> */}
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Button
-                                                // onClick={() => { OnDelete(id) }}
+                                                onClick={() => { OnDelete(Candidatures[id]) }}
                                                 size='small'
                                                 className={classes.delete}
                                                 startIcon={<CancelIcon />}

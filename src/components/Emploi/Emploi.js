@@ -34,106 +34,107 @@ function Emploi(props) {
         },
     }));
     const classes = useStyles();
-    const top100Films = [
-        { title: 'Artificial Intelligence', year: 1994 },
-        { title: 'Mecaniq', year: 1972 },
-        { title: 'Formation', year: 1974 },
-        { title: 'training', year: 2008 },
-        { title: 'fixer', year: 1957 },
-        { title: "Schindler's List", year: 1993 },
-        { title: 'Pulp Fiction', year: 1994 },
-        { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-        { title: 'The Good, the Bad and the Ugly', year: 1966 },
-        { title: 'Fight Club', year: 1999 },
-        { title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001 },
-        { title: 'Star Wars: Episode V - The Empire Strikes Back', year: 1980 },
-        { title: 'Forrest Gump', year: 1994 },
-        { title: 'Inception', year: 2010 },
-        { title: 'The Lord of the Rings: The Two Towers', year: 2002 },
-        { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-        { title: 'Goodfellas', year: 1990 },
-        { title: 'The Matrix', year: 1999 },
-        { title: 'Seven Samurai', year: 1954 },
-        { title: 'Star Wars: Episode IV - A New Hope', year: 1977 },
-        { title: 'City of God', year: 2002 },
-        { title: 'Se7en', year: 1995 },
-        { title: 'The Silence of the Lambs', year: 1991 },
-        { title: "It's a Wonderful Life", year: 1946 },
-        { title: 'Life Is Beautiful', year: 1997 },
-        { title: 'The Usual Suspects', year: 1995 },
-        { title: 'Léon: The Professional', year: 1994 },
-        { title: 'Spirited Away', year: 2001 },
-        { title: 'Saving Private Ryan', year: 1998 },
-        { title: 'Once Upon a Time in the West', year: 1968 },
-        { title: 'American History X', year: 1998 },
-        { title: 'Interstellar', year: 2014 },
-        { title: 'Casablanca', year: 1942 },
-        { title: 'City Lights', year: 1931 },
-        { title: 'Psycho', year: 1960 },
-        { title: 'The Green Mile', year: 1999 },
-        { title: 'The Intouchables', year: 2011 },
-        { title: 'Modern Times', year: 1936 },
-        { title: 'Raiders of the Lost Ark', year: 1981 },
-        { title: 'Rear Window', year: 1954 },
-        { title: 'The Pianist', year: 2002 },
-        { title: 'The Departed', year: 2006 },
-        { title: 'Terminator 2: Judgment Day', year: 1991 },
-        { title: 'Back to the Future', year: 1985 },
-        { title: 'Whiplash', year: 2014 },
-        { title: 'Gladiator', year: 2000 },
-        { title: 'Memento', year: 2000 },
-        { title: 'The Prestige', year: 2006 },
-        { title: 'The Lion King', year: 1994 },
-        { title: 'Apocalypse Now', year: 1979 },
-        { title: 'Alien', year: 1979 },
-        { title: 'Sunset Boulevard', year: 1950 },
-        { title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb', year: 1964 },
-        { title: 'The Great Dictator', year: 1940 },
-        { title: 'Cinema Paradiso', year: 1988 },
-        { title: 'The Lives of Others', year: 2006 },
-        { title: 'Grave of the Fireflies', year: 1988 },
-        { title: 'Paths of Glory', year: 1957 },
-        { title: 'Django Unchained', year: 2012 },
-        { title: 'The Shining', year: 1980 },
-        { title: 'WALL·E', year: 2008 },
-        { title: 'American Beauty', year: 1999 },
-        { title: 'The Dark Knight Rises', year: 2012 },
-        { title: 'Princess Mononoke', year: 1997 },
-        { title: 'Aliens', year: 1986 },
-        { title: 'Oldboy', year: 2003 },
-        { title: 'Once Upon a Time in America', year: 1984 },
-        { title: 'Witness for the Prosecution', year: 1957 },
-        { title: 'Das Boot', year: 1981 },
-        { title: 'Citizen Kane', year: 1941 },
-        { title: 'North by Northwest', year: 1959 },
-        { title: 'Vertigo', year: 1958 },
-        { title: 'Star Wars: Episode VI - Return of the Jedi', year: 1983 },
-        { title: 'Reservoir Dogs', year: 1992 },
-        { title: 'Braveheart', year: 1995 },
-        { title: 'Requiem for a Dream', year: 2000 },
-        { title: 'Amélie', year: 2001 },
-        { title: 'A Clockwork Orange', year: 1971 },
-        { title: 'Like Stars on Earth', year: 2007 },
-        { title: 'Taxi Driver', year: 1976 },
-        { title: 'Lawrence of Arabia', year: 1962 },
-        { title: 'Double Indemnity', year: 1944 },
-        { title: 'Eternal Sunshine of the Spotless Mind', year: 2004 },
-        { title: 'Amadeus', year: 1984 },
-        { title: 'To Kill a Mockingbird', year: 1962 },
-        { title: 'Toy Story 3', year: 2010 },
-        { title: 'Logan', year: 2017 },
-        { title: 'Full Metal Jacket', year: 1987 },
-        { title: 'Dangal', year: 2016 },
-        { title: 'The Sting', year: 1973 },
-        { title: '2001: A Space Odyssey', year: 1968 },
-        { title: "Singin' in the Rain", year: 1952 },
-        { title: 'Toy Story', year: 1995 },
-        { title: 'Bicycle Thieves', year: 1948 },
-        { title: 'The Kid', year: 1921 },
-        { title: 'Inglourious Basterds', year: 2009 },
-        { title: 'JOB', year: 2000 },
-        { title: '3 Idiots', year: 2009 },
-        { title: 'Monty Python and the Holy Grail', year: 1975 },
+    const AllTags = [
+        { title: 'Artificial Intelligence' },
+        { title: 'design' },
+        { title: 'Formation' },
+        { title: 'training' },
+        { title: 'technical' },
+        { title: 'job' },
+        { title: "marketing" },
+        { title: 'reporting' },
+        { title: 'research' },
+        { title: 'analytics' },
+        { title: 'Fengineering' },
+        { title: 'finance' },
+        { title: 'project management' },
+        { title: 'health' },
+        { title: 'customer service' },
+        { title: 'safety' },
+        { title: "certification" },
+        { title: 'legal' },
+        { title: 'database' },
+        { title: 'coaching' },
+        { title: 'logistics' },
+        { title: 'mobile' },
+        { title: 'C programming languag' },
+        { title: 'human resources' },
+        { title: "recruitment" },
+        { title: 'management experience' },
+        { title: 'programming' },
+        { title: 'agile' },
+        { title: 'business development' },
+        { title: 'audit' },
+        { title: 'architecture' },
+        { title: 'governance' },
+        { title: 'continuous improvement' },
+        { title: 'product development' },
+        { title: 'networking' },
+        { title: 'CRM' },
+        { title: 'computer science' },
+        { title: 'SQL' },
+        { title: 'video' },
+        { title: 'installation' },
+        { title: 'data analysis' },
+        { title: 'statistics' },
+        { title: 'coding' },
+        { title: 'Microsoft Office' },
+        { title: 'frameworks' },
+        { title: 'BI' },
+        { title: 'HTML' },
+        { title: 'internship' },
+        { title: 'Satge' },
+        { title: 'software development' },
+        { title: 'oracle' },
+        { title: 'Alien' },
+        { title: 'Java' },
+        { title: 'teaching' },
+        { title: 'ERP' },
+        { title: 'Javascript' },
+        { title: 'Tdigital marketing' },
+        { title: 'Linux' },
+        { title: 'SaaS' },
+        { title: 'mathematics' },
+        { title: 'project management skills' },
+        { title: 'mechanical engineering' },
+        { title: 'android' },
+        { title: 'Adobe' },
+        { title: 'ISO' },
+        { title: 'C' },
+        { title: 'scrum' },
+        { title: 'e-commerce' },
+        { title: 'user experience' },
+        { title: 'Python' },
+        { title: 'technical skills' },
+        { title: 'electrical engineering' },
+        { title: 'Microsoft Word' },
+        { title: 'C' + '\#' },
+        { title: 'UX' },
+        { title: 'physics' },
+        { title: 'leadership development' },
+        { title: 'AWS' },
+        { title: 'UI' },
+        { title: 'front-end' },
+        { title: '.NET' },
+        { title: 'MATLAB' },
+        { title: 'API' },
+        { title: 'photography' },
+        { title: 'internal communications' },
+        { title: 'chemicals' },
+        { title: 'OS' },
+        { title: 'ETL' },
+        { title: 'telecom' },
+        { title: 'research projects' },
+        { title: 'big data' },
+        { title: 'VMware' },
+        { title: "statistical analysis" },
+        { title: 'SolidWorks' },
+        { title: 'datasets' },
+        { title: 'Unix' },
+        { title: 'information system' },
+        { title: 'SQL server' },
+        { title: 'machine learning' },
+        { title: 'DNS' },
     ];
     const initialFieldValues = {
         Nom: '',
@@ -148,15 +149,15 @@ function Emploi(props) {
         Description: '',
         others: '',
         Tags: {
-            // val1: top100Films[13],
-            // val2: top100Films[12]
+            // val1: AllTags[13],
+            // val2: AllTags[12]
         }
 
     }
     const [Values, setValues] = useState(initialFieldValues)
 
 
-    const options = top100Films.map((option) => {
+    const options = AllTags.map((option) => {
         const firstLetter = option.title[0].toUpperCase();
         return {
             firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
@@ -187,7 +188,7 @@ function Emploi(props) {
         if (div !== "" && div.length > 2) // mots de plus de 3 lettres
         {
             var obj_dico = {};
-            for (let index of top100Films) {
+            for (let index of AllTags) {
 
                 var re = new RegExp(index.title.toLocaleLowerCase(), 'g');
                 obj_dico[index.title] = (div.match(re) || []).length;
@@ -198,9 +199,9 @@ function Emploi(props) {
 
     }
     function search_index(titre) {
-        for (let index of top100Films) {
+        for (let index of AllTags) {
             if (index.title === titre) {
-                return top100Films.indexOf(index);
+                return AllTags.indexOf(index);
 
             }
 
@@ -224,7 +225,7 @@ function Emploi(props) {
                             return a;
                         } else return b;
 
-                    } else return top100Films[2].title;
+                    } else return AllTags[2].title;
                 }
                 );
                 var max2 = Object.keys(tab).reduce((a, b) => {
@@ -242,14 +243,14 @@ function Emploi(props) {
                                 return b;
 
                     }
-                    else return top100Films[3].title;
+                    else return AllTags[3].title;
                 });
                 setValues({
                     ...Values,
                     [name]: value,
                     Tags: {
-                        val: top100Films[search_index(max)],
-                        val1: top100Films[search_index(max2)],
+                        val: AllTags[search_index(max)],
+                        val1: AllTags[search_index(max2)],
                     },
 
                 })
@@ -274,6 +275,7 @@ function Emploi(props) {
     }
 
     const addOrEditemploi = obj => {
+        const nblike = 0;
         const filename = Values.Image;
         const storageRef = firebaseDb.storage().ref("images Offres Travaille");
         const fileRef = storageRef.child(filename);
@@ -283,6 +285,7 @@ function Emploi(props) {
         });
         const db = firebaseDb.firestore();
         db.collection("OffresEmploi").add({
+            nblike,
             obj,
         });
 
@@ -304,15 +307,15 @@ function Emploi(props) {
 
     return (
         <div >
-            <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} >
+            <form autoComplete='off' onSubmit={e => handleFormSubmit(e)} className="myform">
 
                 <Grid container spacing={2} direction='column' alignItems="center" justify="space-evenly">
-                    <fieldset>
-                        <legend>Informations Publication</legend>
+                    <fieldset className="fieldset">
+                        <legend className="legend">Informations Publication</legend>
                         <Grid item container spacing={2} justify="space-evenly" alignItems="center" >
                             <Grid item container spacing={0} justify="space-evenly"  >
                                 <Grid item xs={3} >
-                                    <label>Nom de publication : </label>
+                                   <label className="label">Nom de publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Nom" value={Values.Nom} name="Nom" className="field" onChange={handleInputChange} />
@@ -320,7 +323,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Domaine publication : </label>
+                                   <label className="label">Domaine publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className="field">
@@ -347,7 +350,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Type de  publication: </label>
+                                   <label className="label">Type de  publication: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="Type" value={Values.Type} onChange={handleInputChange}>
@@ -360,7 +363,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                    <label>Importer une image:</label>
+                                   <label className="label">Importer une image:</label>
                                 </Grid>
                                 <Grid item xs={7} style={{ 'paddingTop': '25px' }}>
 
@@ -381,13 +384,13 @@ function Emploi(props) {
                             </Grid>
                         </Grid>
                     </fieldset>
-                    <fieldset>
-                        <legend>Offre d'emploi</legend>
+                    <fieldset className="fieldset">
+                        <legend className="legend">Offre d'emploi</legend>
                         <Grid item container spacing={2} justify="space-evenly">
 
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >L'experience requise : </label>
+                                   <label className="label" >L'experience requise : </label>
                                 </Grid>
                                 <Grid item xs={7}>
 
@@ -396,7 +399,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >La date de debut : </label>
+                                   <label className="label" >La date de debut : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required name="DateDebut" label="date" value={Values.DateDebut} className="field" type="date" onChange={handleInputChange} focused style={{ "marginTop": '0px' }} />
@@ -404,7 +407,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Type de contrat: </label>
+                                   <label className="label" >Type de contrat: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className={classes.formControl}>
@@ -434,7 +437,7 @@ function Emploi(props) {
 
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label>Type de travail:</label>
+                                   <label className="label">Type de travail:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="TypeTravail" value={Values.TypeTravail} onChange={handleInputChange}>
@@ -447,7 +450,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Description</label>
+                                   <label className="label" >Description</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField
@@ -465,7 +468,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                    <label >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
+                                   <label className="label" >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <div className="autocomplete" style={{ "marginTop": '23px' }}>
@@ -475,7 +478,7 @@ function Emploi(props) {
                                             // limitTags={2}
                                             id="multiple-limit-tags"
                                             name="Tags"
-                                            options={top100Films}
+                                            options={AllTags}
                                             onChange={onTagsChange}
                                             // eslint-disable-next-line react/jsx-no-duplicate-props
                                             options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
