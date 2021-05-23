@@ -22,48 +22,49 @@ const Affichemploi = (id) => {
   }
 
 
-    const {currentUser}= useAuth()
-    const [tags, settags] = useState({});
-    const [emploi, setemploi] = useState({});
-    const [like, setLike]=useState(0)
-    const [liked, setLiked]= useState(true)
+  const { currentUser } = useAuth()
+  const [tags, settags] = useState({});
+  const [emploi, setemploi] = useState({});
+  const [like, setLike] = useState(0)
+  const [liked, setLiked] = useState(true)
     
-    async function getPost() {
-      firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc =>{
+  async function getPost() {
+    firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
       if (!doc.exists) {
         console.log('No such document!');
       } else {
-        const data= doc.data().nblike;
+        const data = doc.data().nblike;
         setLike(data);
-        console.log("like1",like)
+        console.log("like1", like)
         return data;
       }
-    })}
+    })
+  }
       
 
-    function handleClick(){
-      if (liked) {
-        setLiked(false)
-      } else {
-        setLiked(true)
-      }
-      var nb
-      //setLiked(liked => !liked)
-      if (liked) {
-         nb= like + 1
-        setLike(nb )
-        console.log('nb', nb)
-        console.log('liked', like)
-      } else {
-        nb= like - 1
-        setLike(nb )
-        console.log('nb2', nb)
-        console.log('disliked', like)
-      }
+  function handleClick() {
+    if (liked) {
+      setLiked(false)
+    } else {
+      setLiked(true)
+    }
+    var nb
+    //setLiked(liked => !liked)
+    if (liked) {
+      nb = like + 1
+      setLike(nb)
+      console.log('nb', nb)
+      console.log('liked', like)
+    } else {
+      nb = like - 1
+      setLike(nb)
+      console.log('nb2', nb)
+      console.log('disliked', like)
+    }
       
-      //setLike (liked ? like => like + 1 : like => like - 1)
-      firebaseDb.firestore().collection('OffresEmploi').doc(id.match.params.id).update({
-        nblike: nb,
+    //setLike (liked ? like => like + 1 : like => like - 1)
+    firebaseDb.firestore().collection('OffresEmploi').doc(id.match.params.id).update({
+      nblike: nb,
 
     })
   }
@@ -125,9 +126,11 @@ const Affichemploi = (id) => {
         }
 
       });
+    }
+  }
 
-    }}
-  
+
+
 
   var t;
   var s_index;
