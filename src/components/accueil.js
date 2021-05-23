@@ -138,7 +138,7 @@ const Accueil = () => {
   useEffect(() => {
     var tab1 = [];
     const listepreferences = () => {
-      if(userid.uid != null){
+      if(userid != null){
       firebaseDb.firestore()
         .collection("User")
         .doc(userid.uid)
