@@ -89,7 +89,7 @@ const Formations = () =>  {
         alt="logo" className="card-img-top" /></Link>
         </div>
         <div className="card-body text-dark">
-            <h4 className="card-title"> <Link to={"/afficheformation/"+key[1].id} style={linkstyle}>{key[1].obj.Nom.toLowerCase()}</Link></h4>
+            <h4 className="card-title"> <Link to={"/afficheformation/"+key[1].id} style={linkstyle}>{key[1].obj.Nom.toUpperCase()}</Link></h4>
             <p className="card-text text-dark">
              {key[1].obj.Domaine}<br/>
              <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {key[1].obj.DatePost}
