@@ -36,7 +36,10 @@ function Emploi(props) {
     const classes = useStyles();
     const AllTags = [
         { title: 'Artificial Intelligence' },
+        { title: 'Intelligence Artificielle' },
         { title: 'design' },
+        { title: 'recrutement' },
+        { title: 'recruter' },
         { title: 'Formation' },
         { title: 'training' },
         { title: 'technical' },
@@ -100,7 +103,7 @@ function Emploi(props) {
         { title: 'android' },
         { title: 'Adobe' },
         { title: 'ISO' },
-        { title: 'C' },
+        { title: 'langage C' },
         { title: 'scrum' },
         { title: 'e-commerce' },
         { title: 'user experience' },
@@ -109,11 +112,11 @@ function Emploi(props) {
         { title: 'electrical engineering' },
         { title: 'Microsoft Word' },
         { title: 'C' + '\#' },
-        { title: 'UX' },
+        { title: 'User Experience UX' },
         { title: 'physics' },
         { title: 'leadership development' },
         { title: 'AWS' },
-        { title: 'UI' },
+        { title: 'USer Interface UI' },
         { title: 'front-end' },
         { title: '.NET' },
         { title: 'MATLAB' },
@@ -121,7 +124,7 @@ function Emploi(props) {
         { title: 'photography' },
         { title: 'internal communications' },
         { title: 'chemicals' },
-        { title: 'OS' },
+        { title: 'Operating Systems OS' },
         { title: 'ETL' },
         { title: 'telecom' },
         { title: 'research projects' },
@@ -134,7 +137,7 @@ function Emploi(props) {
         { title: 'information system' },
         { title: 'SQL server' },
         { title: 'machine learning' },
-        { title: 'DNS' },
+        { title: 'domaines names Server DNS' },
     ];
     const initialFieldValues = {
         Nom: '',
@@ -315,7 +318,7 @@ function Emploi(props) {
                         <Grid item container spacing={2} justify="space-evenly" alignItems="center" >
                             <Grid item container spacing={0} justify="space-evenly"  >
                                 <Grid item xs={3} >
-                                   <label className="label">Nom de publication : </label>
+                                    <label className="label">Nom de publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required label="Nom" value={Values.Nom} name="Nom" className="field" onChange={handleInputChange} />
@@ -323,7 +326,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                   <label className="label">Domaine publication : </label>
+                                    <label className="label">Domaine publication : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className="field">
@@ -350,7 +353,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                   <label className="label">Type de  publication: </label>
+                                    <label className="label">Type de  publication: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="Type" value={Values.Type} onChange={handleInputChange}>
@@ -363,7 +366,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container spacing={0} justify="space-evenly" >
                                 <Grid item xs={3} >
-                                   <label className="label">Importer une image:</label>
+                                    <label className="label">Importer une image:</label>
                                 </Grid>
                                 <Grid item xs={7} style={{ 'paddingTop': '25px' }}>
 
@@ -390,7 +393,7 @@ function Emploi(props) {
 
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                   <label className="label" >L'experience requise : </label>
+                                    <label className="label" >L'experience requise : </label>
                                 </Grid>
                                 <Grid item xs={7}>
 
@@ -399,7 +402,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container xs={12} justify="space-evenly" >
                                 <Grid item xs={4} >
-                                   <label className="label" >La date de debut : </label>
+                                    <label className="label" >La date de debut : </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField required name="DateDebut" label="date" value={Values.DateDebut} className="field" type="date" onChange={handleInputChange} focused style={{ "marginTop": '0px' }} />
@@ -407,7 +410,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                   <label className="label" >Type de contrat: </label>
+                                    <label className="label" >Type de contrat: </label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <FormControl required className={classes.formControl}>
@@ -427,7 +430,7 @@ function Emploi(props) {
                                             <MenuItem value={"CUI – Contrat unique d’insertion"}>CUI – Contrat unique d’insertion</MenuItem>
                                             <MenuItem value={"CAE - Contrat d’accompagnement dans l’emploi"}>CAE - Contrat d’accompagnement dans l’emploi</MenuItem>
                                             <MenuItem value={"CIE - Contrat initiative emploi"}>CIE - Contrat initiative emploi</MenuItem>
-                                            <MenuItem value={"CIE - Contrat initiative emploi"}>Stage</MenuItem>
+                                            <MenuItem value={"Stage"}>Stage</MenuItem>
 
                                         </Select>
                                         <FormHelperText>selectionner une type</FormHelperText>
@@ -437,7 +440,7 @@ function Emploi(props) {
 
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                   <label className="label">Type de travail:</label>
+                                    <label className="label">Type de travail:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <RadioGroup aria-label="gender" name="TypeTravail" value={Values.TypeTravail} onChange={handleInputChange}>
@@ -450,7 +453,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                   <label className="label" >Description</label>
+                                    <label className="label" >Description</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <TextField
@@ -468,7 +471,7 @@ function Emploi(props) {
                             </Grid>
                             <Grid item container justify="space-evenly" >
                                 <Grid item xs={4} >
-                                   <label className="label" >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
+                                    <label className="label" >Ajoutez des Tags pour <br />améliorer l'indexation <br />de la recherche de votre <br />publication:</label>
                                 </Grid>
                                 <Grid item xs={7}>
                                     <div className="autocomplete" style={{ "marginTop": '23px' }}>
