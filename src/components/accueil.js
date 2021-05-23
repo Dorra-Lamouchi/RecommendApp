@@ -23,7 +23,7 @@ const Accueil = () => {
     color: 'black',
   }
   const { currentUser } = useAuth()
-  const [userid, setuserid] = useState(currentUser.uid)
+  const [userid, setuserid] = useState(currentUser)
 
   const [showpost, setshowpost] = useState(true)
   const [formations, setformations] = useState([]);
@@ -138,15 +138,16 @@ const Accueil = () => {
   useEffect(() => {
     var tab1 = [];
     const listepreferences = () => {
+      if(userid.uid != null){
       firebaseDb.firestore()
         .collection("User")
-        .doc(userid)
+        .doc(userid.uid)
         .get().then((snap) => {
           if(snap.data() != undefined){
           setlistperferences(snap.data().Preferences);
           }
         })
-
+      }
     }
 
     //import NavBar from "../headers/nav";
@@ -260,8 +261,8 @@ const Accueil = () => {
   }
   const addOrEditemploi = opt => {
     if (opt != "") {
-
-      firebaseDb.firestore().collection('User').doc(userid).get().then((d) => {
+if(userid != null){
+      firebaseDb.firestore().collection('User').doc(userid.uid).get().then((d) => {
         var P = d.data().Preferences;
         if (!P.includes(opt)) {
           P.unshift(opt);
@@ -270,11 +271,12 @@ const Accueil = () => {
           P.splice(pos, 1)
           P.unshift(opt)
         }
-        firebaseDb.firestore().collection('User').doc(userid).update({
+        firebaseDb.firestore().collection('User').doc(userid.uid).update({
           Preferences: P
         });
       });
     }
+  }
   }
 
   function add(option) {
@@ -442,7 +444,7 @@ const Accueil = () => {
                 return (
 
                   <div className="col-md-4" key={formtag[p].id}>
-                    <div className="card text-center shadow" >
+                    <div className="card text-center shadow"  style={{'width' : '320px'}}>
                       <div className="overflow">
                         {
                           formtag[p].obj.NbPlaces != undefined &&
@@ -537,7 +539,7 @@ const Accueil = () => {
                 return (
 
                   <div className="col-md-4" key={tabfiltre[p].id}>
-                    <div className="card text-center shadow" >
+                    <div className="card text-center shadow"  style={{'width' : '320px'}}>
                       <div className="overflow">
                         {
                           tabfiltre[p].obj.NbPlaces != undefined &&
@@ -619,7 +621,7 @@ const Accueil = () => {
 
   return (
     <div className="col-md-4" key={tabfiltre[p].id}>
-    <div className="card text-center shadow" >
+    <div className="card text-center shadow"  style={{'width' : '320px'}} >
       <div className="overflow">
         {
           tabfiltre[p].obj.NbPlaces != undefined &&
