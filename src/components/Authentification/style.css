@@ -1,0 +1,43 @@
+#container  {
+    background-image: url("./../../assets/back.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 120vh;
+    padding-left: 150px;
+    padding-top: 20px;
+  }
+  #container2  {
+    background-image: url("./../../assets/back.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 180vh;
+    padding-left: 150px;
+    padding-top: 20px;
+  }
+#container3 {
+  height: 120vh;
+}
+#Card {
+  min-width: 320px;
+  height: 800px;
+}
+
+#Card2 {
+  min-width: 320px;
+  height: 420px;
+}
+#CardRecruter{
+  min-width: 320px;
+  height: 1050px;
+}
+#Form{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#Button{
+  position: relative;
+  margin-left: 80px;
+}

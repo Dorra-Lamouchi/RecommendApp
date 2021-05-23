@@ -47,9 +47,12 @@ border-radius: 2rem;
     color: rgb(0, 0, 0);
     text-align-last: center;
     font-size: 15px;
-    width: 100px;
+    width:auto;
+    padding: auto;
+    padding-inline-end: 0em;
+    margin-bottom: 6px;
     border-width: 0em;
-    margin-left:5px;
+    margin-left:1px;
     text-decoration: underline;
     
 }
@@ -74,6 +77,29 @@ border-radius: 2rem;
     font-size:30px;
     font-family : Verdana, Geneva, Tahoma, sans-serif ;
     
+}
+
+
+.like-btn{
+    width: 60px;
+    height: 60px;
+    margin: 1rem;
+    background-image: url('../assets/like.ico');
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: center center;
+}
+
+
+.like-btn:active{
+    border: 1px solid blue;
+  background-color: cornsilk;
+}
+
+.span-text {
+    color:aliceblue;
+    font-family: sans-serif;
+    text-align: center;
 }
 
 .stylelink:hover{
@@ -172,3 +198,17 @@ button i {
 .results ul li:hover {
   background: #ececec
 }
+
+.Modal {
+  position: fixed;
+  bottom: 25vh;
+  background-color: #fff;
+  width: 250px;
+  height: 200px;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+  left: 690px;
+  padding: 0 12px 12px;
+  z-index: 10;
+}
+
+

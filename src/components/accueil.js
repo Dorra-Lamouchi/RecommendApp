@@ -4,6 +4,7 @@ import './test.css'
 import { Link } from 'react-router-dom'
 import Card from './Cards/CardsIU'
 import "mdbreact/dist/css/mdb.css";
+
 import { useLocation } from "react-router-dom";
 import { VscSearch } from "react-icons/vsc";
 import { HiTranslate, HiClock, HiViewGridAdd, HiOutlineViewList } from "react-icons/hi";
@@ -12,9 +13,9 @@ import { useAuth } from "../components/Authentification/AuthContext"
 
 const Accueil = () => {
   const location = useLocation();
-   const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
+  const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
   var tabg = [];
-  var  sp;
+  var sp;
   var datenow;
   let formtag = [];
   var tabfiltre = [];
@@ -22,6 +23,7 @@ const Accueil = () => {
   const linkstyle = {
     color: 'black',
   }
+
   const { currentUser } = useAuth()
   const [userid, setuserid] = useState(currentUser)
 
@@ -35,6 +37,7 @@ const Accueil = () => {
   var pos;
   const ListTags = [
     'Artificial Intelligence',
+    'intelligence artificielle',
     'design',
     'Formation',
     'training',
@@ -137,18 +140,21 @@ const Accueil = () => {
 
   useEffect(() => {
     var tab1 = [];
+
     const listepreferences = () => {
-      if(userid != null){
-      firebaseDb.firestore()
-        .collection("User")
-        .doc(userid.uid)
-        .get().then((snap) => {
-          if(snap.data() != undefined){
-          setlistperferences(snap.data().Preferences);
-          }
-        })
+      if (userid != null) {
+        firebaseDb.firestore()
+          .collection("User")
+          .doc(userid.uid)
+          .get().then((snap) => {
+            if (snap.data() != undefined) {
+              setlistperferences(snap.data().Preferences);
+            }
+
+          })
       }
     }
+
 
     //import NavBar from "../headers/nav";
 
@@ -317,9 +323,6 @@ if(userid != null){
       });
     document.getElementById("search").value = convertedText;
   }
- // const d = new Intl.DateTimeFormat('fr-GB', { dateStyle: 'full', timeStyle: 'long' }).format(firebaseDb.firestore.Timestamp.now().toDate());
-
-
   return (
     <>
 
@@ -502,18 +505,18 @@ if(userid != null){
               })
 
             }
- 
+
             {Object.entries(Object.assign({}, formations.tab1)).map((key, value) => {
               Object.keys(key[1].obj.Tags).map(num => {
                 if (search == '') {
                   if (!formtag.includes(key[1])) {
                     if (!tabfiltre.includes(key[1])) {
                       sp = key[1].obj.DatePost.split("à")
-                     if(d.includes(sp[0])){
+                      if (d.includes(sp[0])) {
                         tabfiltre.unshift(key[1])
-                     }else{
-                      tabfiltre.push(key[1])
-                     }
+                      } else {
+                        tabfiltre.push(key[1])
+                      }
                     }
                   }
                 } else if (key[1].obj.Tags[num].title.toLowerCase().includes(search.toLowerCase())) {
@@ -530,7 +533,6 @@ if(userid != null){
               }
             })
             }
-
 
             {
 
@@ -601,86 +603,87 @@ if(userid != null){
 
           </div>
         </div>
-      } 
-      {!showpost && 
-       <div className="container-fluid">
-       <div className="row">
-         { 
-         Object.entries(Object.assign({}, formations.tab1)).map((key, value) => {
-          sp = key[1].obj.DatePost.split("à")
-          datenow = d.split('à')
-          if(datenow[0] === sp[0]){
-            tabfiltre.unshift(key[1])
-         }
-        
-         })
-         }
-          {
+      }
+      {!showpost &&
+        <div className="container-fluid">
+          <div className="row">
+            {
+              Object.entries(Object.assign({}, formations.tab1)).map((key, value) => {
+                sp = key[1].obj.DatePost.split("à")
+                datenow = d.split('à')
+                if (datenow[0] === sp[0]) {
+                  tabfiltre.unshift(key[1])
+                }
 
-          Object.keys(tabfiltre).map(p => {
+              })
+            }
+            {
 
-  return (
-    <div className="col-md-4" key={tabfiltre[p].id}>
-    <div className="card text-center shadow"  style={{'width' : '320px'}} >
-      <div className="overflow">
-        {
-          tabfiltre[p].obj.NbPlaces != undefined &&
-          <Link to={"/afficheformation/" + tabfiltre[p].id} >
-            <img height="190"
-              src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Formations%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
-              alt="logo" className="card-img-top" />
-          </Link>
-        }
-        {
-          tabfiltre[p].obj.NbPlaces === undefined &&
-          <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
-            <img height="190"
-              src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
-              alt="logo" className="card-img-top" />
-          </Link>
-        }
+              Object.keys(tabfiltre).map(p => {
+                
+                return (
+                  <div className="col-md-4" key={tabfiltre[p].id}>
+                    <div className="card text-center shadow" style={{'width' : '320px'}} >
+                      <div className="overflow">
+                        {
+                          tabfiltre[p].obj.NbPlaces != undefined &&
+                          <Link to={"/afficheformation/" + tabfiltre[p].id} >
+                            <img height="190"
+                              src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Formations%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
+                              alt="logo" className="card-img-top" />
+                          </Link>
+                        }
+                        {
+                          tabfiltre[p].obj.NbPlaces === undefined &&
+                          <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
+                            <img height="190"
+                              src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
+                              alt="logo" className="card-img-top" />
+                          </Link>
+                        }
 
-      </div>
-      <div className="card-body text-dark">
-        <h4 className="card-title">  {
-          tabfiltre[p].obj.NbPlaces != undefined &&
-          <Link to={"/afficheformation/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom}</Link>
-        }
-          {
-            tabfiltre[p].obj.NbPlaces === undefined &&
-            <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
-          }
-        </h4>
-        <p className="card-text text-dark">
-          {tabfiltre[p].obj.Domaine}<br />
-          <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {tabfiltre[p].obj.DatePost}
-          <hr />
+                      </div>
+                      <div className="card-body text-dark">
+                        <h4 className="card-title">  {
+                          tabfiltre[p].obj.NbPlaces != undefined &&
+                          <Link to={"/afficheformation/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom}</Link>
+                        }
+                          {
+                            tabfiltre[p].obj.NbPlaces === undefined &&
+                            <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
+                          }
+                        </h4>
+                        <p className="card-text text-dark">
+                          {tabfiltre[p].obj.Domaine}<br />
+                          <HiClock></HiClock><label style={{ color: 'grey' }}>Publié le:</label> {tabfiltre[p].obj.DatePost}
+                          <hr />
 
-          {Object.keys(tabfiltre[p].obj.Tags).map(num => {
+                          {Object.keys(tabfiltre[p].obj.Tags).map(num => {
 
-            return (
-              <input key={tabfiltre[p].obj.Tags[num].id} type="button" className="myinput" value={'#' + tabfiltre[p].obj.Tags[num].title} />
+                            return (
+                              <input key={tabfiltre[p].obj.Tags[num].id} type="button" className="myinput" value={'#' + tabfiltre[p].obj.Tags[num].title} />
 
-            );
-          })
-          }
+                            );
+                          })
+                          }
 
-        </p>
-        <p className="card-text"></p>
-
-
-      </div>
-    </div>
-  </div>
+                        </p>
+                        <p className="card-text"></p>
 
 
-  )
-  })  
-  }
-         </div>
-         </div>
-}
-       </>
+                      </div>
+                    </div>
+                  </div>
+
+
+                )
+              })
+            }
+          </div>
+        </div>
+      }
+    </>
+
 
   )
 }
