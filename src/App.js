@@ -37,7 +37,9 @@ import SignIn from './components/Authentification/signIn';
 import { AuthProvider } from './components/Authentification/AuthContext';
 import PrivateRoute from './components/Authentification/PrivateRoute';
 import Preference from "./components/categories/Preferences";
+import Testaffichage from "./components/categories/testaffichage"
 import RecruterSignup from "./components/Authentification/RecruterSignup";
+
 
 class App extends React.Component {
 
@@ -72,12 +74,13 @@ render(){
     <PrivateRoute path="/affichestage/:id" exact component={Affichestage}></PrivateRoute>
     <PrivateRoute path="/afficheemploi/:id" exact component={Affichemploi}></PrivateRoute>
     
+
     <Route path="/ajoutemploi" exact component={addemploi}></Route>
     <Route path="/ajoutformation" exact component={addformation}></Route>
     <Route path="/affichecondidature" exact component={affichercandidature}></Route>
     <Route path="/preference" exact component={Preference}></Route>
   <Route path="/formcandidature/:id" exact component={FormCandidature}></Route>
-
+   <Route path="/Testaffichage/:id" exact component={Testaffichage}></Route>
 
 
     <Footer />

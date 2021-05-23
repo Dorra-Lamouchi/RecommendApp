@@ -6,30 +6,14 @@ const Footer = () => {
     <MDBFooter color="black" className="font-small pt-4 mt-4">
       <MDBContainer fluid className="text-center text-md-left">
         <MDBRow>
-          <MDBCol md="6">
-            <h5 className="title">Footer Content</h5>
-            <p>
-              Here you can use rows and columns here to organize your footer
-              content.
-            </p>
+          <MDBCol md="12">
+            <center>
+            <h2>
+              Made with <span style={{color:"red", width:'50px'}}>&hearts;</span> By engineering students FIA2-03
+            </h2>
+            </center>
           </MDBCol>
-          <MDBCol md="6">
-            <h5 className="title">Links</h5>
-            <ul>
-              <li className="list-unstyled">
-                <a href="#!">Link 1</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Link 2</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Link 3</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Link 4</a>
-              </li>
-            </ul>
-          </MDBCol>
+          
         </MDBRow>
       </MDBContainer>
       <div className="footer-copyright text-center py-3">

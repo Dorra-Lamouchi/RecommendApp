@@ -69,7 +69,7 @@ const Stages = () =>  {
             <div className="container-fluid d-flex justify-content-center">
                <div className="row">
                {  Object.entries(Object.assign({}, Emplois.tab)).map((key, value) => { 
-                 if(key[1].obj.Contrat === 'stage'){
+                 if(key[1].obj.Contrat === 'Stage'){
                    return(
                <div  key={key[1].id} className="col-md-4">
                   <div className="card text-center shadow" >

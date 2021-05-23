@@ -5,12 +5,14 @@ import Image from 'react-bootstrap/Image'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useAuth } from "../Authentification/AuthContext"
 import '../test.css'
+import {Link} from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 
 
-
 const Affichemploi = (id) => {
-
+  const linkstyle = {
+    color : 'black',
+}
   const stylecol = {
     marginTop: 50,
     color: 'black ',
@@ -93,7 +95,11 @@ const Affichemploi = (id) => {
       nblike: nb,
     })
 
+
+
+
     if (liked) {
+
       firebaseDb.firestore().collection("OffresEmploi").doc(id.match.params.id).get().then(doc => {
         if (doc.exists) {
 
@@ -122,6 +128,7 @@ const Affichemploi = (id) => {
       });
     }
   }
+
 
 
 
@@ -205,7 +212,7 @@ const Affichemploi = (id) => {
             <strong> {emploi.others}</strong>
           </Col>
           <Col>
-            <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button>
+          <Link to={"/Testaffichage/"+id.match.params.id} style={linkstyle}> <button className="inscription-btn"><i class="fas fa-eye"></i>Postuler</button></Link>
             <button className="like-btn" onClick={handleClick}>
               <span className="span-text">
                 {like}
