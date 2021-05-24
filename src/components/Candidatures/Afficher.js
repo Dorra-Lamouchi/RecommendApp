@@ -87,27 +87,32 @@ function Afficher() {
 
                     <Grid item container xs={2} justify="space-evenly" alignItems="center" >
                         <Grid item xs={12} >
-                            <h2  >Nom</h2>
+                             <h2  >Nom</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12}>
-                            <h2 >Prénom</h2>
+                                 <h2 >Prénom</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12} >
-                            <h2 >Niveau d'etude</h2>
+                                      <h2 >Niveau d'etude</h2>
+                        </Grid>
+                    </Grid>
+                     <Grid item container xs={2} justify="space-evenly">
+                        <Grid item xs={12} >
+                           <h2 >Poste demandée</h2>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12} >
-                            <h2 >CV</h2>
+                                        <center>  <h2 >CV</h2></center>
                         </Grid>
                     </Grid>
                     <Grid item container xs={2} justify="space-evenly">
                         <Grid item xs={12} >
-                            <h2 >Actions</h2>
+                                        <center>  <h2 >Decision</h2></center>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -129,6 +134,11 @@ function Afficher() {
                                 <Grid item container xs={2} justify="space-evenly">
                                     <Grid item xs={12} >
                                         <h3 >{Candidatures[id].Niveau}</h3>
+                                    </Grid>
+                                </Grid>
+                                  <Grid item container xs={2} justify="space-evenly">
+                                    <Grid item xs={12} >
+                                        <h3 >{Candidatures[id].NomPost}</h3>
                                     </Grid>
                                 </Grid>
                                 <Grid item container xs={2} justify="space-evenly">
