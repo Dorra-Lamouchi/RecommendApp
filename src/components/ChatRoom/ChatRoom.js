@@ -89,7 +89,23 @@ const ChatRoom = () => {
 
       <h2>4. Hangup</h2>
 
-      <button disabled={hangupButton}>Hangup</button>
+      <button
+        onClick={() => {
+          const stream = webcamVideoRef.current.srcObject;
+          const tracks = stream.getTracks();
+
+          tracks.forEach(function (track) {
+            track.stop();
+          });
+          webcamVideoRef.current.srcObject = null;
+          remoteVideoRef.current.srcObject = null;
+          localStream = null;
+          remoteStream = null;
+        }}
+        //disabled={hangupButton}
+      >
+        Hangup
+      </button>
     </div>
   );
 };

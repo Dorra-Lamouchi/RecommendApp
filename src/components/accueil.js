@@ -152,7 +152,6 @@ const Accueil = () => {
             }
 
           })
-
       }
     }
 
@@ -268,7 +267,8 @@ const Accueil = () => {
   }
   const addOrEditemploi = opt => {
     if (opt != "") {
-      firebaseDb.firestore().collection('User').doc(userid).get().then((d) => {
+if(userid != null){
+      firebaseDb.firestore().collection('User').doc(userid.uid).get().then((d) => {
         var P = d.data().Preferences;
         if (!P.includes(opt)) {
           P.unshift(opt);
@@ -277,11 +277,12 @@ const Accueil = () => {
           P.splice(pos, 1)
           P.unshift(opt)
         }
-        firebaseDb.firestore().collection('User').doc(userid).update({
+        firebaseDb.firestore().collection('User').doc(userid.uid).update({
           Preferences: P
         });
       });
     }
+  }
   }
 
   function add(option) {
@@ -446,7 +447,7 @@ const Accueil = () => {
                 return (
 
                   <div className="col-md-4" key={formtag[p].id}>
-                    <div className="card text-center shadow" >
+                    <div className="card text-center shadow"  style={{'width' : '320px'}}>
                       <div className="overflow">
                         {
                           formtag[p].obj.NbPlaces != undefined &&
@@ -458,7 +459,7 @@ const Accueil = () => {
                         }
                         {
                           formtag[p].obj.NbPlaces === undefined &&
-                          <Link to={formtag[p].obj.Contrat === 'stage' ? "/affichestage/" + formtag[p].id : "/afficheemploi/" + formtag[p].id} >
+                          <Link to={formtag[p].obj.Contrat === 'Stage' ? "/affichestage/" + formtag[p].id : "/afficheemploi/" + formtag[p].id} >
                             <img height="190"
                               src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F" + formtag[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
                               alt="logo" className="card-img-top" />
@@ -473,7 +474,7 @@ const Accueil = () => {
                         }
                           {
                             formtag[p].obj.NbPlaces === undefined &&
-                            <Link to={formtag[p].obj.Contrat === 'stage' ? "/affichestage/" + formtag[p].id : "/afficheemploi/" + formtag[p].id} style={linkstyle}>{formtag[p].obj.Nom.toUpperCase()}</Link>
+                            <Link to={formtag[p].obj.Contrat === 'Stage' ? "/affichestage/" + formtag[p].id : "/afficheemploi/" + formtag[p].id} style={linkstyle}>{formtag[p].obj.Nom.toUpperCase()}</Link>
                           }
                         </h4>
                         <p className="card-text text-dark">
@@ -540,7 +541,7 @@ const Accueil = () => {
                 return (
 
                   <div className="col-md-4" key={tabfiltre[p].id}>
-                    <div className="card text-center shadow" >
+                    <div className="card text-center shadow"  style={{'width' : '320px'}}>
                       <div className="overflow">
                         {
                           tabfiltre[p].obj.NbPlaces != undefined &&
@@ -552,7 +553,7 @@ const Accueil = () => {
                         }
                         {
                           tabfiltre[p].obj.NbPlaces === undefined &&
-                          <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
+                          <Link to={tabfiltre[p].obj.Contrat === 'Stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
                             <img height="190"
                               src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
                               alt="logo" className="card-img-top" />
@@ -567,7 +568,7 @@ const Accueil = () => {
                         }
                           {
                             tabfiltre[p].obj.NbPlaces === undefined &&
-                            <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
+                            <Link to={tabfiltre[p].obj.Contrat === 'Stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
                           }
                         </h4>
                         <p className="card-text text-dark">
@@ -619,10 +620,10 @@ const Accueil = () => {
             {
 
               Object.keys(tabfiltre).map(p => {
-
+                
                 return (
                   <div className="col-md-4" key={tabfiltre[p].id}>
-                    <div className="card text-center shadow" >
+                    <div className="card text-center shadow" style={{'width' : '320px'}} >
                       <div className="overflow">
                         {
                           tabfiltre[p].obj.NbPlaces != undefined &&
@@ -634,7 +635,7 @@ const Accueil = () => {
                         }
                         {
                           tabfiltre[p].obj.NbPlaces === undefined &&
-                          <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
+                          <Link to={tabfiltre[p].obj.Contrat === 'Stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} >
                             <img height="190"
                               src={"https://firebasestorage.googleapis.com/v0/b/firsttest-b7475.appspot.com/o/images%20Offres%20Travaille%2F" + tabfiltre[p].obj.Image + "?alt=media&token=39971314-3f2c-4b25-b0d1-7c820b12489c"}
                               alt="logo" className="card-img-top" />
@@ -649,7 +650,7 @@ const Accueil = () => {
                         }
                           {
                             tabfiltre[p].obj.NbPlaces === undefined &&
-                            <Link to={tabfiltre[p].obj.Contrat === 'stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
+                            <Link to={tabfiltre[p].obj.Contrat === 'Stage' ? "/affichestage/" + tabfiltre[p].id : "/afficheemploi/" + tabfiltre[p].id} style={linkstyle}>{tabfiltre[p].obj.Nom.toUpperCase()}</Link>
                           }
                         </h4>
                         <p className="card-text text-dark">
