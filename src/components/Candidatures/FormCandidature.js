@@ -43,6 +43,7 @@ const studyLevels = {
 };
 
 const FormCandidature = (props) => {
+
   const classes = useStyles();
 
   const resumeStorageRef = firebaseDb.storage().ref("Resume/");
@@ -144,3 +145,4 @@ const FormCandidature = (props) => {
 };
 
 export default FormCandidature;
+
