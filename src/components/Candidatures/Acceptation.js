@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import TextFieldComponent from "./FormUi/textFieldComponent";
 import { Grid, makeStyles, Container, Typography } from "@material-ui/core";
-import firebaseDb from "../..firebase";
+import firebaseDb from "../../firebase";
 import Select from "./FormUi/Select";
 import DateTimePicker from "./FormUi/dateTimePicker";
 import ButtonComponent from "./FormUi/buttonComponent";
