@@ -11,12 +11,12 @@
 // // export default FormCandidature
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import TextFieldComponent from "./FormUI/textFieldComponent";
-import ButtonComponent from "./FormUI/buttonComponent";
+import TextFieldComponent from "./FormUi/textFieldComponent";
+import ButtonComponent from "./FormUi/buttonComponent";
 import firebaseDb from "../../firebase";
 import { Grid, makeStyles, Container, Typography } from "@material-ui/core";
 import Select from "./FormUi/Select";
-import FileUploader from "./FormUI/ileUploader";
+import FileUploader from "./FormUi/fileUploader";
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
